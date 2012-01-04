@@ -1,0 +1,6 @@
+.installed.cfg
+app/lib/*
+bin/
+eggs/
+*.swp
+*.py[co]
