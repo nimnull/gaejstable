@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% set title = 'Access Denied' %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block content_title %}<h2>{{ title }}</h2>{% endblock %}
+
+{% block content %}
+{% if not g.user.is_authenticated %}
+  <p>You should <a href="{{ url_for('auth.login') }}">log in</a> in order to use this resource.</p>
+{% elif g.user.is_disabled %}
+  <p>Your account is disabled. Please contact administration for details.</p>
+{% elif not g.user.is_active %}
+  <p>Your account is waiting for approval by administration. Please be patient and try again later.</p>
+{% else %}
+  <p>You don't have the permission to access the requested resource.</p>
+{% endif %}
+{% endblock %}
