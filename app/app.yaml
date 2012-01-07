@@ -1,5 +1,5 @@
 application: gaejstable
-version: 0.1a
+version: 0-1a
 runtime: python27
 api_version: 1
 threadsafe: yes
@@ -63,7 +63,6 @@ skip_files:
 - ^(.*/)?\..*
 - ^(.*/)?.*\.so$
 - ^(.*/)?.*/.bak$
-- ^(.*/)?lib/jinja2.*
 
 libraries:
 - name: jinja2

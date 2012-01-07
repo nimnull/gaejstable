@@ -1,58 +1,61 @@
-# import logging
-from flask import Flask, render_template
+import logging
+import urllib
+from flask import Flask, render_template, request
 # from flaskext.principal import Principal
 # from flaskext.babel import Babel
-from flaskext.assets import Environment
-from core.assets import AppEngineBundle
-from core import core
-from auth import auth, set_current_user
-from auth.models import User
+# from auth.models import User
 # principal = Principal(app)
 # babel = Babel(app)
 app = Flask(__name__)
 app.config.from_object('settings')
+
+from flaskext.assets import Environment
+from core.assets import AppEngineBundle
 assets = Environment(app)
 
 css = AppEngineBundle(
-    'chosen/chosen.css',
     'stylesheets/screen.css',
-    filters=['cssrewrite', 'yui_css'],
+    filters=['yui_css'],
     output='gen/packed.css')
 assets.register('css_all', css)
 
-js = AppEngineBundle(
-    AppEngineBundle(
-        'bootstrap/bootstrap-modal.js',
-        'bootstrap/bootstrap-twipsy.js',
-        'jquery-placeholder/jquery.placeholder.js',
-        'chosen/chosen.jquery.js',
-    ),
-    AppEngineBundle(
-        'coffee/aform.coffee',
-        'coffee/scripts.coffee',
-        'coffee/commenting.coffee',
-        'coffee/voting.coffee',
-        'coffee/queries.coffee',
-        'coffee/query-create.coffee',
-        filters='coffeescript',
-    ),
-    # filters='closure_js',
-    output='gen/packed.js')
-assets.register('js_all', js)
+#js = AppEngineBundle(
+#    AppEngineBundle(
+#        'bootstrap/bootstrap-modal.js',
+#        'bootstrap/bootstrap-twipsy.js',
+#        'jquery-placeholder/jquery.placeholder.js',
+#        'chosen/chosen.jquery.js',
+#    ),
+#    AppEngineBundle(
+#        'coffee/aform.coffee',
+#        'coffee/scripts.coffee',
+#        'coffee/commenting.coffee',
+#        'coffee/voting.coffee',
+#        'coffee/queries.coffee',
+#        'coffee/query-create.coffee',
+#        filters='coffeescript',
+#    ),
+#    # filters='closure_js',
+#    output='gen/packed.js')
+# assets.register('js_all', js)
 
-
-
-
+from core import core
+from auth import auth
 app.register_blueprint(core)
 app.register_blueprint(auth)
-
-
-# @app.before_request
-# def lookup_current_user():
-#     set_current_user(User.get_current_user())
-
-
 _missing = object()
+
+logging.info(app.url_map)
+
+def url_for_other_page(page):
+    args = request.args.copy()
+    args['page'] = page
+    return '?' + urllib.urlencode(args)
+
+
+@app.context_processor
+def inject():
+    return dict(url_for_other_page=url_for_other_page)
 
 
 @app.template_filter('yesno')
