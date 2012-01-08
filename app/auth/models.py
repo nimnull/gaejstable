@@ -25,7 +25,6 @@ class User(model.Model):
     @classmethod
     def check_password(cls, username, raw_password):
         user = cls.query(cls.username == username.lower()).get()
-        logging.info(user)
         if user is None:
             return False
         algo, salt, hsh = user.password.split('$')
