@@ -1,4 +1,7 @@
 {% extends "base.html" %}
-{% set page_title = 'Sign up please' %}
-{% set page_description = 'Here you can create your account' %}
-{% block title %}{{ page_title }}{% endblock %}
+{%- set page_title = 'Sign up please' %}
+{%- set page_description = 'Here you can create your account' %}
+{% block content -%}
+  {{ form.email.label }}
+  {{ form.email() }}
+{%- endblock content %}
