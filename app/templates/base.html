@@ -1,3 +1,4 @@
+{% from "_base_macro.html" import nav_li with context -%}
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
   <head>
@@ -16,8 +17,9 @@
           {{ config.SITE_TITLE }}
         </a>
         <ul class="nav secondary-nav">
-          <li><a href="{{ url_for('auth.sign_up') }}">Sign Up</a></li>
-          <li><a href="{{ url_for('auth.sign_in') }}">Sign In</a></li>
+          {# <li><a>{{ request.endpoint }}</a></li> #}
+          {{ nav_li('auth.sign_up', 'Sign Up') }}
+          {{ nav_li('auth.sign_in', 'Sign In') }}
         </ul>
       </div>
     </div>
