@@ -9,38 +9,32 @@
     {% block css_extra %}{% endblock %}
   </head>
   <body>
-
-<div class="header">
-  <div class="header-body">
-    <ul class="main-menu">
-      <li><a href="#">Queries</a></li>
-      {#% if g.user.is_authenticated() %}
-        <li class="notifications{% if notice_unseen_count %} unseen{% endif %}">
-          <a href="#">Notices</a>
-        </li>
-      {% endif %#}
-    </ul>
-
-    <div class="userbar">
-      {#% if g.user.is_authenticated() %}
-        <a href="{{ g.user.get_absolute_url() }}" class="name">{{ g.user.name }}</a>
-        <span class="points" title="Your reputation">{{ g.user.points }}</span>
-        <a href="{{ g.user.get_logout_url() }}">logout</a>
-        {% if g.user.name == g.user.email %}
-          | <span class="update-profile">Please update your <a href="{{ g.user.get_update_profile_url() }}">profile</a></span>
-        {% endif %}
-      {% else %}
-        <a href="#">login</a>
-      {% endif %#}
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="container">
+        <a class="brand" href="{{ url_for('core.index') }}">
+          {{ config.SITE_TITLE }}
+        </a>
+        <ul class="nav secondary-nav">
+          <li><a href="{{ url_for('auth.sign_up') }}">Sign Up</a></li>
+          <li><a href="{{ url_for('auth.sign_in') }}">Sign In</a></li>
+        </ul>
+      </div>
     </div>
   </div>
-</div>
-
   <div class="content">
-    <div class="content-body">
-      {% block content_title %}{% endblock %}
-      {% block content %}{% endblock %}
+    {% block content_wrapper -%}
+    <div class="container">
+      {% block content_title -%}
+      <div class="page-header">
+        <h1>{{ page_title }} <small>{{ page_description }}</small></h1>
+      </div>
+      {% endblock -%}
+      <div class="content-body">
+        {% block content %}{% endblock %}
+      </div>
     </div>
+    {% endblock content_wrapper -%}
   </div>
 {% assets "js_all" -%}
   <script type="text/javascript" src="{{ ASSET_URL }}"></script>

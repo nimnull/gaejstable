@@ -2,25 +2,25 @@ from core.decorators import render_to
 from . import auth
 
 
-@render_to("auth/register.html")
-@auth.route('/register')
-def register():
+@auth.route('/sign_up')
+@render_to("auth/sign_up.html")
+def sign_up():
     return {}
 
 
-@render_to("auth/recover.html")
 @auth.route('/sign_in')
-def recover():
-    return {}
-
-
 @render_to("auth/sign_in.html")
-@auth.route('/sign_in')
 def sign_in():
     return {}
 
 
-@render_to("auth/sign_out.html")
 @auth.route('/sign_out')
+@render_to("auth/sign_out.html")
 def sign_out():
+    return {}
+
+
+@auth.route('/sign_in')
+@render_to("auth/recover.html")
+def recover():
     return {}
