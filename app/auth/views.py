@@ -1,9 +1,10 @@
 import logging
-from flask import flash, request, redirect, url_for
+from flask import abort, flash, g, request, redirect, url_for
 
 from core.decorators import render_to
 
 from . import auth
+from .decorators import login_required
 from .forms import SignUpForm, SignInForm
 from .models import User
 from .utils import login
@@ -35,6 +36,7 @@ def sign_in():
 
 
 @auth.route('/sign_out')
+@login_required
 @render_to()
 def sign_out():
     return {}
@@ -47,7 +49,10 @@ def recover():
 
 
 @auth.route('/profile/<key>')
+@login_required
 @render_to()
 def profile(key):
+    if key != g.user.key.urlsafe():
+        abort(403)
     user = User.get_by_urlsafe(key)
     return {'user': user}
