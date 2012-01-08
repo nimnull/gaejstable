@@ -45,7 +45,7 @@ app.register_blueprint(core)
 app.register_blueprint(auth)
 _missing = object()
 
-logging.info(app.url_map)
+# logging.info(app.url_map)
 
 def url_for_other_page(page):
     args = request.args.copy()
