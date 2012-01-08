@@ -4,8 +4,8 @@ from . import core
 from .decorators import render_to
 
 
-@login_required
 @core.route('/')
+@login_required
 @render_to()
 def index():
     return {}
