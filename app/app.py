@@ -19,25 +19,16 @@ css = AppEngineBundle(
     output='gen/packed.css')
 assets.register('css_all', css)
 
-#js = AppEngineBundle(
-#    AppEngineBundle(
-#        'bootstrap/bootstrap-modal.js',
-#        'bootstrap/bootstrap-twipsy.js',
-#        'jquery-placeholder/jquery.placeholder.js',
-#        'chosen/chosen.jquery.js',
-#    ),
-#    AppEngineBundle(
-#        'coffee/aform.coffee',
-#        'coffee/scripts.coffee',
-#        'coffee/commenting.coffee',
-#        'coffee/voting.coffee',
-#        'coffee/queries.coffee',
-#        'coffee/query-create.coffee',
-#        filters='coffeescript',
-#    ),
-#    # filters='closure_js',
-#    output='gen/packed.js')
-# assets.register('js_all', js)
+js = AppEngineBundle(
+    AppEngineBundle(
+        'javascripts/jquery-1.7.1.min.js',
+    ),
+    AppEngineBundle(
+        'javascripts/bootstrap-alerts.js',
+        filters='closure_js',
+    ),
+    output='gen/packed.js')
+assets.register('js_all', js)
 
 from core import core
 from auth import auth
