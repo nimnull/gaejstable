@@ -1,7 +1,8 @@
+import logging
 import random
-from ndb import model
+from google.appengine.ext.ndb import model
 
-from auth.utils import get_hexdigest
+from .utils import get_hexdigest
 
 
 class User(model.Model):
@@ -13,16 +14,31 @@ class User(model.Model):
 
     @classmethod
     def create(cls, username, password, first_name, last_name):
-        if cls.__is_unique(username):
-            newuser = cls(username=username, first_name=first_name,
+        if cls.is_unique(username):
+            newuser = cls(username=username.lower(), first_name=first_name,
                                                         last_name=last_name)
             newuser.set_password(password)
-            return newuser().put()
+            return newuser.put()
         else:
             return None
 
     @classmethod
-    def __is_unique(cls, username):
+    def check_password(cls, username, raw_password):
+        user = cls.query(cls.username == username.lower()).get()
+        logging.info(user)
+        if user is None:
+            return False
+        algo, salt, hsh = user.password.split('$')
+        if hsh == get_hexdigest(algo, salt, raw_password):
+            return user
+        return False
+
+    @classmethod
+    def get_by_urlsafe(self, urlsafe):
+        return model.Key(urlsafe=urlsafe).get()
+
+    @classmethod
+    def is_unique(cls, username):
         count = cls.query(cls.username == username.lower()).count()
         return count == 0
 
@@ -31,4 +47,4 @@ class User(model.Model):
         rand_str = lambda: str(random.random())
         salt = get_hexdigest(algo, rand_str(), rand_str())[:5]
         hsh = get_hexdigest(algo, salt, raw_password)
-        self.password = '%s$%s$%s' % (algo, salt, hsh)
+        self.password = '{}${}${}'.format(algo, salt, hsh)
