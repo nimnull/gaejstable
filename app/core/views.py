@@ -6,6 +6,6 @@ from .decorators import render_to
 
 @login_required
 @core.route('/')
-@render_to("core/index.html")
+@render_to()
 def index():
     return {}

@@ -3,24 +3,24 @@ from . import auth
 
 
 @auth.route('/sign_up')
-@render_to("auth/sign_up.html")
+@render_to()
 def sign_up():
     return {}
 
 
 @auth.route('/sign_in')
-@render_to("auth/sign_in.html")
+@render_to()
 def sign_in():
     return {}
 
 
 @auth.route('/sign_out')
-@render_to("auth/sign_out.html")
+@render_to()
 def sign_out():
     return {}
 
 
 @auth.route('/sign_in')
-@render_to("auth/recover.html")
+@render_to()
 def recover():
     return {}

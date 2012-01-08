@@ -1,5 +1,4 @@
 # import logging
-
 from functools import wraps
 
 from flask import request, abort, render_template
@@ -14,14 +13,20 @@ def json_required(func):
     return wrapper
 
 
-def render_to(template):
+def render_to(template=None):
     def wrapper(f):
         @wraps(f)
         def callback(*args, **kwargs):
-            response = f(*args, **kwargs)
-            if isinstance(response, dict):
-                return render_template(template, **response)
+            template_name = template
+            if template_name is None:
+                template_name = '{}.html'.format(
+                        request.endpoint.replace('.', '/'))
+            ctx = f(*args, **kwargs)
+            if ctx is None:
+                ctx = {}
+            elif isinstance(ctx, dict):
+                return render_template(template_name, **ctx)
             else:
-                return response
+                return ctx
         return callback
     return wrapper
