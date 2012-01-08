@@ -1,5 +1,5 @@
-{% extends "base.html" %}
-{% from "_base_macro.html" import render_form %}
+{%- extends "base.html" %}
+{%- from "_base_macro.html" import render_form %}
 {%- set page_title = 'Sign up please' %}
 {%- set page_description = 'Here you can create your account' %}
 {%- block content %}
@@ -11,4 +11,4 @@
     {{ render_form(form, 'auth.sign_up', 'Sign Up!', 'Cancel') }}
   </div>
 </div>
-{% endblock content -%}
+{%- endblock content -%}
