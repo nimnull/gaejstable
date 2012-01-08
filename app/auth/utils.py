@@ -1,5 +1,6 @@
 import types
 import hashlib
+from flask import session
 
 
 def get_hexdigest(algorithm, salt, raw_password):
@@ -46,3 +47,8 @@ def smart_str(s, encoding='utf-8', strings_only=False, errors='strict'):
         return s.decode('utf-8', errors).encode(encoding, errors)
     else:
         return s
+
+
+def login(user):
+    session.permanent = True
+    session['uid'] = user.key.urlsafe()
