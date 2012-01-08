@@ -1,11 +1,12 @@
 import logging
-from flask import request, redirect, url_for
+from flask import flash, request, redirect, url_for
 
 from core.decorators import render_to
 
 from . import auth
 from .forms import SignUpForm, SignInForm
 from .models import User
+from .utils import login
 
 
 @auth.route('/sign_up', methods=['GET', 'POST'])
@@ -25,10 +26,11 @@ def sign_in():
     if request.method == 'POST' and form.validate():
         user = User.check_password(**form.data)
         if user:
+            login(user)
             return redirect(url_for('core.index'))
         else:
-            # have to add flash message creation/rendering
-            pass
+            flash('There is no user with provided email or password', category='warning')
+            return redirect(url_for('auth.sign_in'))
     return {'form': form}
 
 
