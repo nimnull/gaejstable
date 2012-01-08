@@ -1,5 +1,7 @@
 .installed.cfg
 app/lib/*
+app/static/.webassets-cache/
+var/downloads/
 bin/
 eggs/
 *.swp
