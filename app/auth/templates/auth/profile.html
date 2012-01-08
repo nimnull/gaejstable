@@ -1,0 +1,3 @@
+{% extends "base.html" %}
+{%- set page_title = 'This is your profile' %}
+{%- set page_description = [user.first_name, user.last_name]|join(' ') %}

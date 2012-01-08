@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 {% from "_base_macro.html" import render_form %}
-{%- set page_title = 'Sign up please' %}
-{%- set page_description = 'Here you can create your account' %}
+{%- set page_title = 'Sign In' %}
+{%- set page_description = 'You can sign in here' %}
 {%- block content %}
 <div class="row">
   <div class="span4">
     All fields are required. Please fill the form with care.
   </div>
   <div class="span12">
-    {{ render_form(form, 'auth.sign_up', 'Sign Up!', 'Cancel') }}
+    {{ render_form(form, 'auth.sign_in', 'Sign In!') }}
   </div>
 </div>
 {% endblock content -%}

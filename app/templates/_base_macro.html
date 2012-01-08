@@ -1,8 +1,39 @@
-{% macro nav_li(endpoint, title) -%}
+{%- macro nav_li(endpoint, title) %}
   {% if request.endpoint == endpoint -%}
     {% set class = 'class=active' %}
   {% else %}
     {% set class = '' %}
   {%- endif %}
 <li {{ class }}><a href="{{ url_for(endpoint) }}">{{ title }}</a></li>
-{%- endmacro %}
+{% endmacro -%}
+
+{%- macro render_form(form, action, submit_text, reset_text) %}
+<form action="{{ url_for(action) }}" class="form-stacked" method="POST">
+  <fieldset>
+    <!-- <legend>Fill the form fields:</legend> -->
+    {% for field in form -%}
+      {% if field.type == 'HiddenField' -%}
+        {{ field() }}
+      {% else -%}
+        <div class="clearfix{% if field.errors %} error{% endif %}">
+        {{ field.label }}
+        <div class="input">
+        {%- if field.errors %}
+          {{ field(class='span5 error', placeholder=field.description) }}
+          <span class="help-inline">{{ field.errors|join(' ') }}</span>
+        {%- else %}
+          {{ field(class='span5', placeholder=field.description) }}
+        {% endif -%}
+        </div>
+      </div>
+      {%- endif %}
+    {%- endfor %}
+  </fieldset>
+  <div class="actions">
+    <input type="submit" class="btn primary" value="{{ submit_text }}" />
+    {%- if reset_text %}
+    <button type="reset" class="btn">{{ reset_text }}</button>
+    {% endif -%}
+  </div>
+</form>
+{% endmacro %}
