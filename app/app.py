@@ -14,8 +14,8 @@ from core.assets import AppEngineBundle
 assets = Environment(app)
 
 css = AppEngineBundle(
-    'stylesheets/screen.css',
-    filters=['yui_css'],
+    'sass/screen.sass',
+    filters=['compass', 'yui_css'],
     output='gen/packed.css')
 assets.register('css_all', css)
 
