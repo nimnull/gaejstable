@@ -17,8 +17,13 @@
           {{ config.SITE_TITLE }}
         </a>
         <ul class="nav secondary-nav">
+          {%- if g.user %}
+          {{ nav_li('auth.profile', 'Visit profile') }}
+          {{ nav_li('auth.sign_out', 'Sign Out') }}
+          {%- else %}
           {{ nav_li('auth.sign_up', 'Sign Up') }}
           {{ nav_li('auth.sign_in', 'Sign In') }}
+          {%- endif %}
         </ul>
       </div>
     </div>
