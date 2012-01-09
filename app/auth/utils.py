@@ -52,3 +52,8 @@ def smart_str(s, encoding='utf-8', strings_only=False, errors='strict'):
 def login(user):
     session.permanent = True
     session['uid'] = user.key.urlsafe()
+
+def logout():
+    if session.get('uid'):
+        del session['uid']
+        session.permanent = False
