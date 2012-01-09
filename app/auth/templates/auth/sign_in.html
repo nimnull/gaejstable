@@ -1,14 +1,19 @@
-{% extends "base.html" -%}
-{% from "_base_macro.html" import render_form -%}
-{% set page_title = 'Sign In' -%}
-{% set page_description = 'Site entrance is here' -%}
-{% block content -%}
+{%- extends "base.html" %}
+{%- from "_base_macro.html" import render_form %}
+{%- set page_title = 'Sign In' %}
+{%- set page_description = 'Site entrance is here' %}
+{%- block content %}
 <div class="row">
   <div class="span4">
-    All fields are required. Please fill the form with care.
+    <p>All fields are required. Please fill the form with care.</p>
+    <p>
+      If you fill yourself as been forgoten your password, proceed to
+      the <a href="{{ url_for('auth.recover') }}">password recover</a>
+      page.
+    </p>
   </div>
   <div class="span12">
-    {% for category, message in get_flashed_messages(with_categories=true) -%}
+    {%- for category, message in get_flashed_messages(with_categories=true) %}
     <div class="alert-message {{ category }} fade in" data-alert="alert">
       <a class="close" href="#">×</a>
       <p>{{ message|safe }}</p>
