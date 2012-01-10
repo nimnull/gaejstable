@@ -1,6 +1,10 @@
-import types
 import hashlib
-from flask import session
+import logging
+import types
+
+from flask import session, config
+
+from time import time
 
 
 def get_hexdigest(algorithm, salt, raw_password):
@@ -52,6 +56,7 @@ def smart_str(s, encoding='utf-8', strings_only=False, errors='strict'):
 def login(user):
     session.permanent = True
     session['uid'] = user.key.urlsafe()
+    user.update_login_time()
 
 def logout():
     if session.get('uid'):

@@ -32,10 +32,23 @@ class SignUpForm(Form):
             'password entered above')
 
     def validate_username(self, field):
-        if not User.is_unique(self.username.data):
+        if not User.is_unique(field.data):
             raise ValidationError('this email has already taken')
 
     def save(self):
         user_data = self.data
         del user_data['confirm']
         return User.create(**user_data)
+
+
+class AskRecoverForm(Form):
+    email = TextField('Email', description='enter your email to get '
+                'password reset link', validators=[Email()])
+
+    def validate_email(self, field):
+        if User.is_unique(field.data):
+            raise ValidationError('This user is not registered')
+
+    def make_token(self):
+        user = User.get_by_email(self.email.data)
+        return user.create_token()

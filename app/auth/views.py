@@ -1,11 +1,12 @@
 import logging
-from flask import flash, g, request, redirect, session, url_for
+from flask import (flash, g, request, redirect, render_template,
+    session, url_for)
 
 from core.decorators import render_to
 
 from . import auth
 from .decorators import login_required
-from .forms import SignUpForm, SignInForm
+from .forms import SignUpForm, SignInForm, AskRecoverForm
 from .models import User
 from .utils import login, logout
 
@@ -15,8 +16,9 @@ from .utils import login, logout
 def sign_up():
     form = SignUpForm(len(request.form) and request.form or None)
     if request.method == 'POST' and form.validate():
-        key = form.save()
-        return redirect(url_for('auth.profile', key=key.urlsafe()))
+        user = form.save()
+        login(user)
+        return redirect(url_for('auth.profile', key=user.key.urlsafe()))
     return {'form': form}
 
 
@@ -48,16 +50,21 @@ def sign_out():
     return redirect(url_for('core.index'))
 
 
-@auth.route('/recover')
+@auth.route('/recover', methods=['GET', 'POST'])
 @render_to()
 def recover():
-    form = object()
+    form = AskRecoverForm(len(request.form) and request.form or None)
     if request.method == 'POST' and form.validate():
-        user = User.query(User.username==form.email.data).get()
-        if user is not None:
-            user.propagate(is_active=False, recover_url='')
-            user.put()
-            return {'recover_sent': True}
+        token = form.make_token()
+        email_body = render_template('template_name', token=token)
+#    form = object()
+#    if request.method == 'POST' and form.validate():
+#        user = User.query(User.username==form.email.data).get()
+#        if user is not None:
+#            user.propagate(is_active=False, recover_url='')
+#            user.put()
+#            return {'recover_sent': True}
+#    return {'form': form}
     return {'form': form}
 
 
