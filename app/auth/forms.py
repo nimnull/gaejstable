@@ -49,6 +49,6 @@ class AskRecoverForm(Form):
         if User.is_unique(field.data):
             raise ValidationError('This user is not registered')
 
-    def make_token(self):
-        user = User.get_by_email(self.email.data)
-        return user.create_token()
+    def get_user(self):
+        return User.get_by_email(self.email.data)
+

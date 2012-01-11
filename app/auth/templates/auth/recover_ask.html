@@ -1,14 +1,23 @@
 {% extends "base.html" -%}
-{% from "_base_macro.html" import render_form -%}
+{% from "_base_macro.html" import render_form, flash_messages -%}
 {% set page_title = 'Password recovery' -%}
 {%- block content %}
 <div class="row">
+  {%- if session.get('recover_sent') %}
+  {{ flash_messages() }}
+  <div class="span16">
+    <h3>Check your email inbox or try to request password recovery a bit
+      later.</h3>
+  </div>
+  {%- else %}
   <div class="span4">
     <p>Here you can request a link for password reset.</p>
     <p>We'll send a special link to the email you provided us with at
     the signing up time.</p>
   </div>
   <div class="span12">
+    {{ render_form(form, 'auth.recover_ask', 'Confirm') }}
   </div>
+  {%- endif %}
 </div>
 {%- endblock content %}
