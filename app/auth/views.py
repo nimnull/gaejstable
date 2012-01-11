@@ -10,7 +10,8 @@ from core.decorators import render_to
 
 from . import auth
 from .decorators import login_required
-from .forms import SignUpForm, SignInForm, AskRecoverForm
+from .forms import (SignUpForm, SignInForm, AskRecoverForm,
+    PasswordResetForm)
 from .models import User
 from .utils import login, logout
 
@@ -22,7 +23,7 @@ def sign_up():
     if request.method == 'POST' and form.validate():
         user = form.save()
         login(user)
-        return redirect(url_for('auth.profile', key=user.key.urlsafe()))
+        return redirect(url_for('.profile', key=user.key.urlsafe()))
     return {'form': form}
 
 
@@ -43,7 +44,7 @@ def sign_in():
         else:
             flash('There is no user with provided email or password',
                         category='warning')
-            return redirect(url_for('auth.sign_in'))
+            return redirect(url_for('.sign_in'))
     return {'form': form}
 
 
@@ -62,31 +63,44 @@ def recover_ask():
     if request.method == 'POST' and form.validate():
         user = form.get_user()
         token = user.create_token()
+        app_id = app_identity.get_application_id()
         app_hostname = app_identity.get_default_version_hostname()
         email = {
-            'sender': "Mail robot on {} <no-reply@{}>".format(SITE_TITLE,
-                app_hostname),
+            'sender': "Mail robot on {} <no-reply@{}.appspotmail.com>".format(SITE_TITLE,
+                app_id),
             'to': user.username,
             'subject': "Password recovery for {}".format(SITE_TITLE),
             'body': render_template('auth/recover_email.html',
                 token=token, user=user,
                 hostname=app_hostname)
         }
+        logging.info(email)
         mail.send_mail(**email)
-        logging.info(email['body'])
         flash("We've just sent an email to <strong>{}</strong> with "
               "the special link for you to reset lost password.".format(
                   user.username), category='success')
         session['recover_sent'] = True
         session.permanent = False
-        return redirect(url_for('auth.recover_ask'))
+        return redirect(url_for('.recover_ask'))
     return {'form': form, }
 
 
 @auth.route('/recover/finish', methods=['GET', 'POST'])
 @render_to()
 def recover_finish():
-    logging.info(request.args)
+    token = request.args.get('token')
+    form = PasswordResetForm(len(request.form) and request.form or
+            request.args)
+    if token is not None and User.validate_token(token):
+        return {'form': form }
+    elif request.method == 'POST' and form.validate():
+        session.get('recover_sent') and session.pop('recover_sent')
+        user = form.save()
+        login(user)
+        return redirect(url_for('.profile'))
+    flash('Your didn\'t provide a token or it is no longer valid. <a '
+            'href="{}">Request password recovery</a> again please.'.format(
+                url_for('.recover_ask')), category='warning')
     return {}
 
 

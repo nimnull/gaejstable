@@ -1,11 +1,18 @@
 # import logging
 from wtforms import (Form, TextField, PasswordField, validators,
-    ValidationError)
+    ValidationError, HiddenField)
 # from wtforms.ext.csrf.session import SessionSecureForm
 
 from core.validators import Email
 
 from .models import User
+
+
+class ProfileForm(Form):
+    first_name = TextField('First Name', description='enter your first '
+            'name here', validators=[validators.Required()])
+    last_name = TextField('Last Name', description='enter your last '
+            'name here', validators=[validators.Required()])
 
 
 class SignInForm(Form):
@@ -17,11 +24,7 @@ class SignInForm(Form):
                     "password")])
 
 
-class SignUpForm(Form):
-    first_name = TextField('First Name', description='enter your first '
-            'name here', validators=[validators.Required()])
-    last_name = TextField('Last Name', description='enter your last '
-            'name here', validators=[validators.Required()])
+class SignUpForm(ProfileForm):
     username = TextField('Your Email', description='email will acts as your login',
             validators=[Email()])
     password = PasswordField('New Password', description='chose a '
@@ -52,3 +55,17 @@ class AskRecoverForm(Form):
     def get_user(self):
         return User.get_by_email(self.email.data)
 
+
+class PasswordResetForm(Form):
+    password = PasswordField('New Password', description='enter new '
+                'password', validators=[validators.Required(),
+                    validators.EqualTo('confirm')])
+    confirm = PasswordField('Confirm New Password', description='repeat '
+                'password entered above')
+    token = HiddenField(validators=[validators.Required()])
+
+    def save(self):
+        user = User.validate_token(self.token.data)
+        if user:
+            user.set_password(self.password.data).put()
+        return user

@@ -54,6 +54,7 @@ class User(model.Model):
         salt = get_hexdigest(algo, rand_str(), rand_str())[:5]
         hsh = get_hexdigest(algo, salt, raw_password)
         self.password = '{}${}${}'.format(algo, salt, hsh)
+        return self
 
     def update_login_time(self):
         """ update last logged in time with UTC ts
@@ -72,3 +73,11 @@ class User(model.Model):
         base = "{}{}".format(self.key.urlsafe(), ts)
         algo, salt, pass_hash = self.password.split('$')
         return "{}$${}".format(self.key.urlsafe(), get_hexdigest(algo, salt, base))
+
+    @classmethod
+    def validate_token(cls, token):
+        key_safe, hsh = token.split('$$')
+        user = cls.get_by_urlsafe(key_safe)
+        if token == user.create_token():
+            return user
+        return False

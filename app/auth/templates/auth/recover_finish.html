@@ -1,0 +1,17 @@
+{%- extends "base.html" %}
+{%- from "_base_macro.html" import render_form, flash_messages %}
+{%- set page_title = 'Password recovery' %}
+{%- set page_description = 'reset your password here' %}
+{%- block content %}
+<div class="row">
+  <div class="span4">
+    <p>Choose new password for your account at {{ config.SITE_TITLE }}</p>
+  </div>
+  <div class="span12">
+    {{ flash_messages() }}
+    {%- if form %}
+    {{ render_form(form, 'auth.recover_finish', 'Submit') }}
+    {% endif %}
+  </div>
+</div>
+{%- endblock content %}
