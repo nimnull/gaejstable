@@ -4,14 +4,14 @@
 {%- block content %}
 <div class="row">
   <ul class="pills">
-    <li class="active"><a href="#">View</a></li>
-    <li><a href="#">Edit</a></li>
+    <li class="active"><a href="{{ url_for('.profile') }}">View</a></li>
+    <li><a href="{{ url_for('.edit_profile') }}">Edit</a></li>
     <li><a href="#">Settings</a></li>
   </ul>
 </div>
 <div class="row">
-  <div class="span4">
-    <dl>
+  <div class="span5">
+    <dl class="profile-details">
       <dt>First name:</dt>
       <dd>{{ user.first_name }}</dd>
       <dt>Last name:</dt>

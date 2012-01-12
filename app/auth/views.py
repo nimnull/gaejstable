@@ -11,7 +11,7 @@ from core.decorators import render_to
 from . import auth
 from .decorators import login_required
 from .forms import (SignUpForm, SignInForm, AskRecoverForm,
-    PasswordResetForm)
+    PasswordResetForm, ProfileForm)
 from .models import User
 from .utils import login, logout
 
@@ -109,3 +109,15 @@ def recover_finish():
 @render_to()
 def profile():
     return {'user': g.user}
+
+
+@auth.route('/profilei/edit', methods=['GET', 'POST'])
+@login_required
+@render_to()
+def edit_profile():
+    form = ProfileForm(len(request.form) and request.form or None, obj=g.user)
+    if request.method == 'POST' and form.validate():
+        form.populate_obj(g.user)
+        g.user.put()
+        return redirect(url_for('.profile'))
+    return {'user': g.user, 'form': form}
