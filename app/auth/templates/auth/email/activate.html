@@ -1,0 +1,11 @@
+Hello, {{ user.first_name }}!
+
+You have to confirm your email address to activate your account at {{ SITE_TITLE }}.
+
+Please, follow this link: http://{{ hostname }}{{ url_for('auth.sign_up_activate', token=user.create_token()) }}
+
+Please, don't reply on this message, follow the suppor email address listed at {{ hostname }}.
+
+
+--
+Sincerely yours, {{ config.SITE_TITLE }} team.

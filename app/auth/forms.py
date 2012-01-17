@@ -67,5 +67,5 @@ class PasswordResetForm(Form):
     def save(self):
         user = User.validate_token(self.token.data)
         if user:
-            user.set_password(self.password.data).put()
+            user.set_password(self.password.data).put_async()
         return user

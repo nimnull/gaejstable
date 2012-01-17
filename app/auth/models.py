@@ -1,4 +1,4 @@
-import logging
+# import logging
 import random
 from datetime import datetime
 from google.appengine.ext.ndb import model
@@ -14,6 +14,7 @@ class User(model.Model):
     last_name = model.StringProperty(required=True)
     created_at = model.DateTimeProperty(auto_now_add=True)
     last_logged_in = model.DateTimeProperty()
+    is_active = model.BooleanProperty(default=False)
 
     @classmethod
     def create(cls, username, password, first_name, last_name):
@@ -68,16 +69,19 @@ class User(model.Model):
         urlsafe encoded user key
         """
         if self.last_logged_in is None:
+            ts_datetime = self.created_at
+        else:
             self.update_login_time()
-        ts = int(mktime(self.last_logged_in.timetuple()))
+            ts_datetime = self.last_logged_in
+        ts = int(mktime(ts_datetime.timetuple()))
         base = "{}{}".format(self.key.urlsafe(), ts)
         algo, salt, pass_hash = self.password.split('$')
         return "{}$${}".format(self.key.urlsafe(), get_hexdigest(algo, salt, base))
 
     @classmethod
     def validate_token(cls, token):
-        key_safe, hsh = token.split('$$')
-        user = cls.get_by_urlsafe(key_safe)
-        if token == user.create_token():
-            return user
+        if token is not None:
+            key_safe, hsh = token.split('$$')
+            user = cls.get_by_urlsafe(key_safe)
+            return token == user.create_token() and user
         return False
