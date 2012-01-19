@@ -36,7 +36,7 @@ def sign_up():
         email.send(rcpt=user.username,
             subject="[{}] Account activation".format(SITE_TITLE),
             template='auth/email/activate.html',
-            context={'user': user})
+            context={'user': user, 'hostname': HOSTNAME})
         return redirect(url_for('.sign_up', key=session['uuid']))
     return {'form': form}
 
