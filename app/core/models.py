@@ -1,8 +1,9 @@
-from flask import app
 from google.appengine.ext.ndb import model
 
+from app import app
 
-LANG_CHOICES = app.config.get('LANGUAGES', {'en': 'English'})
+
+LANG_CHOICES = app.config['LANGUAGES']
 # class LangModelMixin(object):
 #     langs = model.StringPropertyMixin()
 #
