@@ -1,11 +1,9 @@
-
+from flask import redirect, url_for
 from auth.decorators import login_required
 from . import core
-from .decorators import render_to
 
 
 @core.route('/')
 @login_required
-@render_to()
 def index():
-    return {}
+    return redirect(url_for('catalog.list_categories'))
