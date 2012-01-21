@@ -1,13 +1,13 @@
 # import logging
 import urllib
 from flask import Flask, render_template, request
+from flaskext.babel import Babel
 # from flaskext.principal import Principal
-# from flaskext.babel import Babel
 # from auth.models import User
 # principal = Principal(app)
-# babel = Babel(app)
 app = Flask(__name__)
 app.config.from_object('settings')
+babel = Babel(app)
 
 from flaskext.assets import Environment
 from core.assets import AppEngineBundle
@@ -35,8 +35,8 @@ from auth import auth
 from catalog import catalog
 
 
-app.register_blueprint(auth)
-app.register_blueprint(catalog)
+app.register_blueprint(auth, url_prefix='/auth')
+app.register_blueprint(catalog, url_prefix='/cat')
 app.register_blueprint(core)
 _missing = object()
 # logging.info(app.url_map)
