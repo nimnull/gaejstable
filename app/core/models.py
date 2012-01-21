@@ -2,7 +2,7 @@ from flask import app
 from google.appengine.ext.ndb import model
 
 
-LANG_CHOICES = app.config.get('LANGUAGES', ['en'])
+LANG_CHOICES = app.config.get('LANGUAGES', {'en': 'English'})
 # class LangModelMixin(object):
 #     langs = model.StringPropertyMixin()
 #
@@ -15,5 +15,15 @@ LANG_CHOICES = app.config.get('LANGUAGES', ['en'])
 
 
 class LangValue(model.Model):
-    lang = model.StringProperty(required=True, choices=LANG_CHOICES)
+    lang = model.StringProperty(required=True,
+            choices=LANG_CHOICES.keys())
     value = model.StringProperty(required=True)
+
+
+class Unique(model.Model):
+
+    @classmethod
+    def create(cls, value):
+        entity = cls(key=model.Key(cls, value))
+        txn = lambda: entity.put() if not entity.key.get() else None
+        return model.transaction(txn) or None
