@@ -21,3 +21,7 @@ class Category(model.Model):
         title = title_dict.get(app.config['DEFAULT_LANGUAGE']) or \
             title_dict.keys()[0]
         return get_unique_slug(cls, title, Unique)
+
+    @classmethod
+    def get_localized(cls, lang_code):
+        return cls.query(cls.title.lang == lang_code)
