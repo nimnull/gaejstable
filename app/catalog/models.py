@@ -12,4 +12,4 @@ class Category(model.Model):
         assert isinstance(title_dict, (dict))
         title_set = [LangValue(lang=lang_code, value=value)
             for lang_code, value in title_dict.items()]
-        return cls(title=title, title=title_set).put().get()
+        return cls(title=title_set).put().get()
