@@ -1,0 +1,14 @@
+{%- extends "base.html" %}
+{%- set page_title="Add New Category" %}
+{% from "_base_macro.html" import render_form %}
+
+{%- block content %}
+<div class="row">
+  <div class="span6">
+    <p>Please, fill the category title with care</p>
+  </div>
+  <div class="span10">
+    {{ render_form(form, 'catalog.create_category', 'Save', 'Cancel') }}
+  </div>
+</div>
+{%- endblock content %}
