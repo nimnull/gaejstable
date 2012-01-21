@@ -13,7 +13,7 @@ class User(model.Model):
     first_name = model.StringProperty(required=True)
     last_name = model.StringProperty(required=True)
     created_at = model.DateTimeProperty(auto_now_add=True)
-    last_logged_in = model.DateTimeProperty()
+    logged_at = model.DateTimeProperty()
     is_active = model.BooleanProperty(default=False)
 
     @classmethod
@@ -61,18 +61,18 @@ class User(model.Model):
         """ update last logged in time with UTC ts
         for default we'll return an updated User instance
         """
-        self.last_logged_in = datetime.utcnow()
+        self.logged_at = datetime.utcnow()
         return self.put().get()
 
     def create_token(self):
         """ creates a unique token based on user last login time and
         urlsafe encoded user key
         """
-        if self.last_logged_in is None:
+        if self.logged_at is None:
             ts_datetime = self.created_at
         else:
             self.update_login_time()
-            ts_datetime = self.last_logged_in
+            ts_datetime = self.logged_at
         ts = int(mktime(ts_datetime.timetuple()))
         base = "{}{}".format(self.key.urlsafe(), ts)
         algo, salt, pass_hash = self.password.split('$')
