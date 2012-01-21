@@ -1,12 +1,12 @@
-from flask import app
 from google.appengine.ext.ndb import model
 
+from app import app
 from core.models import LangValue, Unique
 from core.slugify import get_unique_slug
 
 
 class Category(model.Model):
-    slug = model.StringProperty(requred=True)
+    slug = model.StringProperty(required=True)
     title = model.StructuredProperty(LangValue, repeated=True)
 
     @classmethod
@@ -18,6 +18,6 @@ class Category(model.Model):
 
     @classmethod
     def __get_slug(cls, title_dict):
-        title = title_dict.get(app.config['DEFAULT_LANG']) or \
+        title = title_dict.get(app.config['DEFAULT_LANGUAGE']) or \
             title_dict.keys()[0]
         return get_unique_slug(cls, title, Unique)
