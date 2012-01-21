@@ -26,7 +26,9 @@ CLOSURE_COMPRESSOR_PATH = "/home/nimnull/bin/compiler.jar"
 COMPASS_BIN = "/usr/local/bin/compass"
 COMPASS_PLUGINS = ['compass_twitter_bootstrap']
 
-DEFAULT_LANGUAGE = 'en'
+BABEL_DEFAULT_LOCALE = 'en'
+BABEL_DEFAULT_TIMEZONE = 'UTC'
+DEFAULT_LANGUAGE = BABEL_DEFAULT_LOCALE
 LANGUAGES = {
         'en': 'English',
         'ru': 'Russian'
