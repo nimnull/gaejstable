@@ -1,4 +1,4 @@
-import logging
+# import logging
 import urllib
 from flask import Flask, render_template, request
 # from flaskext.principal import Principal
@@ -32,11 +32,15 @@ assets.register('js_all', js)
 
 from core import core
 from auth import auth
-app.register_blueprint(core)
-app.register_blueprint(auth)
-_missing = object()
+from catalog import catalog
 
+
+app.register_blueprint(auth)
+app.register_blueprint(catalog)
+app.register_blueprint(core)
+_missing = object()
 # logging.info(app.url_map)
+
 
 def url_for_other_page(page):
     args = request.args.copy()
