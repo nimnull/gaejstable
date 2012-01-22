@@ -8,13 +8,13 @@
     <h4>All fields are required. Please fill the form with care.</h4>
     <p>
       If you fill yourself as been forgoten your password, proceed to
-      the <a href="{{ url_for('auth.recover_ask') }}">password recover</a>
+      the <a href="{{ url_for('.ask_recovery') }}">password recover</a>
       page.
     </p>
   </div>
   <div class="span12">
     {{ flash_messages() }}
-    {{ render_form(form, 'auth.sign_in', 'Sign In!') }}
+    {{ render_form(form, '.sign_in', 'Sign In!') }}
   </div>
 </div>
 {%- endblock content %}

@@ -18,7 +18,7 @@
         </a>
         <ul class="nav secondary-nav">
           {%- if g.user %}
-          {{ nav_li('auth.profile', 'Visit profile') }}
+          {{ nav_li('auth.view_profile', 'Visit profile') }}
           {{ nav_li('auth.sign_out', 'Sign Out') }}
           {%- else %}
           {{ nav_li('auth.sign_up', 'Sign Up') }}
