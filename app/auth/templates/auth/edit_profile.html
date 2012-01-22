@@ -3,12 +3,8 @@
 {%- set page_title = 'This is your profile' %}
 {%- set page_description = [user.first_name, user.last_name]|join(' ') %}
 {%- block content %}
+{%- include "auth/toolbar.html" %}
 <div class="row">
-  <ul class="pills">
-    <li><a href="{{ url_for('.profile') }}">View</a></li>
-    <li class="active"><a href="{{ url_for('.edit_profile') }}">Edit</a></li>
-    <li><a href="#">Settings</a></li>
-  </ul>
 </div>
 <div class="row">
   <div class="span10">
