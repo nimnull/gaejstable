@@ -14,7 +14,11 @@
 {%- block content %}
 {{ pane() }}
 <div class="row">
-  <div class="span16">
+{%- for category in categories %}
+  <div class="span3">
+    {{ category.l_title }}
   </div>
+{%- endfor %}
 </div>
+{%- include "pagination.html" %}
 {%- endblock content %}
