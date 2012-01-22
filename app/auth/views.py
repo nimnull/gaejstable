@@ -109,7 +109,7 @@ def recover_finish():
     form = PasswordResetForm(len(request.form) and request.form or
             request.args)
     if token is not None and User.validate_token(token):
-        return {'form': form }
+        return {'form': form}
     elif request.method == 'POST' and form.validate():
         session.pop('recover_sent', None)
         user = form.save()
@@ -129,7 +129,7 @@ def profile():
     return {'user': g.user}
 
 
-@auth.route('/profilei/edit', methods=['GET', 'POST'])
+@auth.route('/profile/edit', methods=['GET', 'POST'])
 @login_required
 @render_to()
 def edit_profile():
@@ -139,3 +139,10 @@ def edit_profile():
         g.user.put()
         return redirect(url_for('.profile'))
     return {'user': g.user, 'form': form}
+
+
+@auth.route('/profile/settings')
+@login_required
+@render_to()
+def settings():
+    return {}
