@@ -9,12 +9,12 @@ from settings import SITE_TITLE
 from core.decorators import render_to
 from core import email
 
-from . import auth
-from .decorators import login_required
-from .forms import (SignUpForm, SignInForm, AskRecoverForm,
-    PasswordResetForm, ProfileForm)
-from .models import User
-from .utils import login, logout
+from .. import auth
+from ..decorators import login_required
+from ..forms import (SignUpForm, SignInForm, AskRecoverForm,
+    PasswordResetForm)
+from ..models import User
+from ..utils import login, logout
 
 
 HOSTNAME = app_identity.get_default_version_hostname()
@@ -43,13 +43,13 @@ def sign_up():
 
 @auth.route('/sign_up/activate')
 @render_to()
-def sign_up_activate():
+def activate():
     token = request.args.get('token')
     user = User.validate_token(token)
     if token is not None and user:
         user.is_active = True
         login(user)
-        return redirect(url_for('.profile'))
+        return redirect(url_for('.view_profile'))
     return {}
 
 
@@ -85,7 +85,7 @@ def sign_out():
 
 @auth.route('/recover', methods=['GET', 'POST'])
 @render_to()
-def recover_ask():
+def ask_recovery():
     form = AskRecoverForm(len(request.form) and request.form or None)
     if request.method == 'POST' and form.validate():
         user = form.get_user()
@@ -98,13 +98,13 @@ def recover_ask():
               "the special link for you to reset lost password.".format(
                   user.username), category='success')
         session['recover_sent'] = True
-        return redirect(url_for('.recover_ask'))
+        return redirect(url_for('.ask_recovery'))
     return {'form': form, }
 
 
 @auth.route('/recover/finish', methods=['GET', 'POST'])
 @render_to()
-def recover_finish():
+def finish_recovery():
     token = request.args.get('token')
     form = PasswordResetForm(len(request.form) and request.form or
             request.args)
@@ -115,34 +115,8 @@ def recover_finish():
         user = form.save()
         user.is_active = True
         login(user)
-        return redirect(url_for('.profile'))
+        return redirect(url_for('.view_profile'))
     flash('Your didn\'t provide a token or it is no longer valid. <a '
             'href="{}">Request password recovery</a> again please.'.format(
-                url_for('.recover_ask')), category='warning')
-    return {}
-
-
-@auth.route('/profile')
-@login_required
-@render_to()
-def profile():
-    return {'user': g.user}
-
-
-@auth.route('/profile/edit', methods=['GET', 'POST'])
-@login_required
-@render_to()
-def edit_profile():
-    form = ProfileForm(len(request.form) and request.form or None, obj=g.user)
-    if request.method == 'POST' and form.validate():
-        form.populate_obj(g.user)
-        g.user.put()
-        return redirect(url_for('.profile'))
-    return {'user': g.user, 'form': form}
-
-
-@auth.route('/profile/settings')
-@login_required
-@render_to()
-def settings():
+                url_for('.ask_recovery')), category='warning')
     return {}
