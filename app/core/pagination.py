@@ -1,9 +1,10 @@
 import hashlib
+# import logging
 
+from google.appengine.ext.ndb import tasklets
 from google.appengine.api import memcache, datastore_errors
 from google.appengine.datastore.datastore_query import Cursor
 from flask import request
-from ndb import tasklets
 
 
 class BasePager(object):
@@ -39,6 +40,7 @@ class BasePager(object):
 
 class Pager(BasePager):
     def __init__(self, **kwargs):
+        # logging.info(kwargs)
         self.query = kwargs.pop('query')
         self.lifetime = kwargs.pop('lifetime', 3600)
         super(Pager, self).__init__(**kwargs)
@@ -46,14 +48,14 @@ class Pager(BasePager):
     def paginate(self, page_size=20, **q_options):
         if self.page > 1:
             cursor, more = self._get_from_cache(self.page - 1)
-            if not cursor:
+            if cursor is None:
                 self.page, cursor, _ = self._get_max_avail_page(page_size)
         else:
             cursor = None
 
         res, cursor, more = self._fetch_page(
             page_size, start_cursor=cursor, **q_options)
-        if cursor:
+        if cursor is not None:
             self._add_to_cache(self.page, cursor, more)
         self.has_next = more
 
