@@ -17,6 +17,12 @@
           {{ config.SITE_TITLE }}
         </a>
         <ul class="nav secondary-nav">
+          <li class="dropdown" data-dropdown="dropdown">
+            <a href="#" class="dropdown-toggle">Manage catalog</a>
+            <ul class="dropdown-menu">
+              {{ nav_li('catalog.list_categories', 'Categories') }}
+            </ul>
+          </li>
           {%- if g.user %}
           {{ nav_li('auth.view_profile', 'Visit profile') }}
           {{ nav_li('auth.sign_out', 'Sign Out') }}
