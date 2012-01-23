@@ -31,7 +31,7 @@ def edit_profile():
 @login_required
 @render_to('/auth/profile_setup.html')
 def setup_profile():
-    cats, pager = Category.paginate_categories()
+    cats, pager = Category.paginate(page_size=40)
     return {'categories': cats, 'pager': pager}
 
 
