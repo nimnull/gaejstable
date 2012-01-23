@@ -1,7 +1,7 @@
 import hashlib
 # import logging
 
-from google.appengine.ext.ndb import tasklets
+from ndb import tasklets
 from google.appengine.api import memcache, datastore_errors
 from google.appengine.datastore.datastore_query import Cursor
 from flask import request
