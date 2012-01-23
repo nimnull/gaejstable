@@ -2,7 +2,7 @@
 import urllib
 from flask import Flask, render_template, request
 from flaskext.babel import Babel
-# from flaskext.principal import Principal
+# TODO: from flaskext.principal import Principal
 # from auth.models import User
 # principal = Principal(app)
 app = Flask(__name__)
@@ -25,6 +25,7 @@ js = AppEngineBundle(
     ),
     AppEngineBundle(
         'javascripts/bootstrap-alerts.js',
+        'javascripts/setup.js',
         filters='closure_js',
     ),
     output='gen/packed.js')
@@ -38,8 +39,8 @@ from catalog import catalog
 app.register_blueprint(auth, url_prefix='/auth')
 app.register_blueprint(catalog, url_prefix='/cat')
 app.register_blueprint(core)
-_missing = object()
 # logging.info(app.url_map)
+_missing = object()
 
 
 def url_for_other_page(page):
