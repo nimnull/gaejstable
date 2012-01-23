@@ -6,4 +6,4 @@ from . import core
 @core.route('/')
 @login_required
 def index():
-    return redirect(url_for('catalog.list_categories'))
+    return redirect(url_for('catalog.filtered_records'))
