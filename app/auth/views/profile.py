@@ -1,5 +1,6 @@
-from flask import g, request, redirect, url_for
+from flask import g, jsonify, request, redirect, url_for
 
+from catalog.models import Category, User2Category
 from core.decorators import render_to
 
 from .. import auth
@@ -28,6 +29,25 @@ def edit_profile():
 
 @auth.route('/profile/settings')
 @login_required
-@render_to()
-def profile_settings():
-    return {}
+@render_to('/auth/profile_setup.html')
+def setup_profile():
+    cats, pager = Category.paginate_categories()
+    return {'categories': cats, 'pager': pager}
+
+
+@auth.route('/profile/toggle_cat', methods=['POST'])
+@login_required
+def toggle_category():
+    resp = {'status': 'success'}
+    urlkey = request.args.get('key')
+    category = urlkey and Category.get_by_urlsafe(urlkey) or None
+    user2category = category and User2Category.get(g.user, category) or None
+    if user2category is not None:
+        user2category.key.delete()
+        resp.update({'data': 'deleted'})
+    elif category is not None:
+        User2Category.create(g.user, category)
+        resp.update({'data': 'created'})
+    else:
+        resp['status'] = 'error'
+    return request.is_xhr and jsonify(**resp) or redirect(url_for('.setup_profile'))

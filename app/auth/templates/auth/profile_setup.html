@@ -1,0 +1,19 @@
+{%- extends "base.html" %}
+{%- set page_title="Setup Profile" %}
+{%- set page_description = 'Chose categories for filtering' %}
+
+{%- block content %}
+<ul class="pills setup">
+{%- for category in categories %}
+  <li class="category{% if category.selected %} active{% endif %}">
+    <a href="{{ url_for('.toggle_category', key=category.key.urlsafe() )}}">{{ category.title }}</a>
+  </li>
+{%- endfor %}
+</ul>
+{%- include "pagination.html" %}
+{%- endblock content %}
+{%- block js_extra %}
+  <script type="text/javascript">
+    var profileSetup = new Setup({});
+  </script>
+{%- endblock %}
