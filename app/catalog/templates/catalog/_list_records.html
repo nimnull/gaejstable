@@ -1,0 +1,10 @@
+{%- for record in records %}
+<div class="row">
+  <div class="span13">
+    <h3>{{ record.title }}
+        <small>{{ record.created_at.strftime("%d.%m.%Y") }}</small>
+    </h3>
+    <p>{{ record.description }}</p>
+  </div>
+</div>
+{%- endfor %}

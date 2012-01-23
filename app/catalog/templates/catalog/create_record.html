@@ -1,0 +1,14 @@
+{%- extends "base.html" %}
+{% from "_base_macro.html" import render_form %}
+{%- set page_title = "Create record for '" + category.title + "' category"%}
+{%- set create_record = url_for('.create_record', key=category.key.urlsafe()) %}
+{%- block content %}
+<div class="row">
+  <div class="span6">
+    <p>All fields are required</p>
+  </div>
+  <div class="span10">
+    {{ render_form(form, 'catalog.create_record', 'Save', 'Cancel') }}
+  </div>
+</div>
+{%- endblock content %}

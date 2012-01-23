@@ -1,24 +1,22 @@
 {%- extends "base.html" %}
-{%- set page_title="Categories list" %}
-
-{%- macro pane() %}
-<div class="row">
-  <div class="span16">
-    <a class="btn" href="{{ url_for('catalog.create_category') }}">
-      Add Category
-    </a>
-  </div>
-</div>
-{%- endmacro %}
+{%- set page_title = "Categories list" %}
+{%- set create_category = url_for('catalog.create_category') %}
 
 {%- block content %}
-{{ pane() }}
 <div class="row">
-{%- for category in categories %}
-  <div class="span3">
-    {{ category.title }}
+  <div class="span13">
+    <div class="row categories">
+    {%- for category in categories %}
+      {%- set list_records = url_for('.list_records', key=category.key.urlsafe()) %}
+      <div class="span3">
+        <a href="{{ list_records }}" >{{ category.title }}</a>
+      </div>
+    {%- endfor %}
+    </div>
   </div>
-{%- endfor %}
+  <div class="span3">
+    <a class="btn" href="{{ create_category }}">Add Category</a>
+  </div>
 </div>
 {%- include "pagination.html" %}
 {%- endblock content %}
