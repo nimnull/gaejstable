@@ -25,6 +25,7 @@ js = AppEngineBundle(
     ),
     AppEngineBundle(
         'javascripts/bootstrap-alerts.js',
+        'javascripts/bootstrap-dropdown.js',
         'javascripts/setup.js',
         filters='closure_js',
     ),
