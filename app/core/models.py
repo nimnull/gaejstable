@@ -1,4 +1,4 @@
-from google.appengine.ext.ndb import model
+from ndb import model
 
 from app import app
 

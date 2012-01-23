@@ -1,7 +1,7 @@
 # import logging
 import random
 from datetime import datetime
-from google.appengine.ext.ndb import model
+from ndb import model
 from time import mktime
 
 from .utils import get_hexdigest
