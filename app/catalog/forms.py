@@ -1,6 +1,6 @@
-from wtforms import (Form, TextField, validators)
+from wtforms import (Form, HiddenField, TextAreaField, TextField, validators)
 
-from .models import Category
+from .models import Category, Record
 
 
 class CategoryForm(Form):
@@ -9,3 +9,15 @@ class CategoryForm(Form):
 
     def save(self, request=None):
         return Category.create({'en': self.title.data})
+
+
+class RecordForm(Form):
+    title = TextField('Title', description='enter title for record',
+            validators=[validators.Required()])
+    description = TextAreaField('Description', description='enter title for record',
+            validators=[validators.Required()])
+    category = HiddenField(validators=[validators.Required()])
+
+    def save(self):
+        return Record.create(self.title.data, self.description.data,
+                self.category.data)
