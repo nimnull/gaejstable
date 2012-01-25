@@ -1,3 +1,4 @@
+# import logging
 from flask import g
 from ndb import context, key, model, tasklets
 
@@ -53,7 +54,7 @@ class Category(model.Model):
 
     @property
     def selected(self):
-        return True if User2Category.get(g.user, self) is not None else False
+        return True if User2Category.relations(g.user, self).get() is not None else False
 
     def __getattr__(self, name):
         attr_s = getattr(self, '%s_s' % name)
@@ -70,9 +71,9 @@ class User2Category(model.Model):
         return cls.query(cls.user == user.key)
 
     @classmethod
-    def get(cls, user, category):
+    def relations(cls, user, category):
         return cls.query(cls.user == user.key,
-                         cls.category == category.key).get()
+                         cls.category == category.key)
 
     @classmethod
     def create(cls, user, category):
@@ -105,6 +106,12 @@ class Record(model.Model):
         attr_s = getattr(self, '%s_s' % name)
         lvs = filter(lambda lv: lv.lang == g.lang, attr_s)
         return len(lvs) and lvs[0].value or ''
+
+    @property
+    @context.toplevel
+    def is_marked(self):
+        relations = yield User2Record.relations(g.user, self).get_async()
+        raise tasklets.Return(relations)
 
     @classmethod
     def for_category(cls, category):
@@ -168,9 +175,9 @@ class User2Record(model.Model):
         if record is None:
             return cls.query(cls.user == user)
         else:
-            if isinstance(record, key.Key):
+            if isinstance(record, Record):
                 record = record.key
-            elif isinstance(record, (str, unicode)):
+            elif isinstance(record, unicode):
                 record = key.Key(urlsafe=record)
             return cls.query(cls.user == user, cls.record == record)
 
@@ -182,12 +189,10 @@ class User2Record(model.Model):
     @classmethod
     @tasklets.tasklet
     def _delete(cls, user, record):
-        import logging
         if isinstance(record, Record):
             record = record.key
         elif isinstance(record, unicode):
             record = key.Key(urlsafe=record)
-        logging.info(record)
         if isinstance(user, User):
             user = user.key
         q = cls.query(cls.user == user, cls.record == record)

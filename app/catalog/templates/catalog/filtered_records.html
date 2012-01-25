@@ -10,23 +10,33 @@
 (function($) {
   var baseColor = $(".row.record > div:first-child").css('background-color');
   var t;
+  var actions = {
+    'created': function(linkObj) {
+      $(linkObj).text('unmark');
+    },
+    'deleted': function(linkObj) {
+      $(linkObj).text('mark');
+    }
+  };
+
   $(".record").hover(
     function(evt) {
       $target = $(evt.currentTarget);
       t = setTimeout(function() {
-        $target.find('.mark').fadeIn(500);
+        $target.find('.mark').fadeIn(300);
       }, 600);
     },
     function(evt) {
       clearTimeout(t);
       $target = $(evt.currentTarget);
       $target.find('.mark').fadeOut(500);
-    }
-    );
+    });
 
   $('.row.record > div:first-child .mark a').click(function(evt) {
-    $.get(evt.currentTarget.href, function(data) {
-      console.log(data);
+      $.get(evt.currentTarget.href, function(resp) {
+        if (resp.status == 'success') {
+          actions[resp.data](evt.currentTarget);
+        }
     });
     return false;
   });
