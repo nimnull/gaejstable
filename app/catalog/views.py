@@ -1,4 +1,4 @@
-from flask import g, request, redirect, url_for
+from flask import g, jsonify, request, redirect, url_for
 from ndb import context, tasklets
 
 from auth.decorators import login_required
@@ -6,7 +6,7 @@ from auth.decorators import login_required
 from core.decorators import render_to
 from . import catalog
 from .forms import CategoryForm, RecordForm
-from .models import Category, Record, User2Category
+from .models import Category, Record, User2Category, User2Record
 
 
 @catalog.route('/cats/create', methods=['GET', 'POST'])
@@ -66,5 +66,26 @@ def filtered_records():
     categories = User2Category.get_for_user(user=g.user).map_async(
             lambda u2c: u2c.category)
     categories = yield categories
-    records, pager = Record.paginate(Record.for_categories(categories))
-    raise tasklets.Return({'records': records, 'pager': pager})
+    if len(categories):
+        records, pager = Record.paginate(Record.for_categories(categories))
+        raise tasklets.Return({'records': records, 'pager': pager})
+    raise tasklets.Return({})
+
+
+@catalog.route('/mark')
+@login_required
+@context.toplevel
+def mark_record():
+    key_safe = request.args['key']
+    if key_safe is None:
+        raise tasklets.Return(jsonify({'status': 'error'}))
+    response = {'status': 'success'}
+    q = User2Record.relations(g.user, key_safe)
+    record = yield q.get_async()
+    if record is None:
+        User2Record.create_async(g.user, key_safe)
+        response.update({'data': 'created'})
+    else:
+        User2Record.delete(g.user, key_safe)
+        response.update({'data': 'deleted'})
+    raise tasklets.Return(jsonify(response))

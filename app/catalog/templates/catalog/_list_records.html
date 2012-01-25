@@ -1,9 +1,12 @@
 {%- for record in records %}
-<div class="row">
+<div class="row record">
   <div class="span13">
     <h3>{{ record.title }}
-        <small>{{ record.created_at.strftime("%d.%m.%Y") }}</small>
+      <small>{{ record.created_at.strftime("%d.%m.%Y") }}</small>
     </h3>
+    <div class="mark">
+      <a href="{{ url_for('.mark_record', key=record.key.urlsafe()) }}">mark</a>
+    </div>
     <p>{{ record.description }}</p>
   </div>
 </div>

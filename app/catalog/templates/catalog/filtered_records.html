@@ -4,3 +4,32 @@
 {%- include "catalog/_list_records.html" %}
 {%- include "pagination.html" %}
 {%- endblock content %}
+{%- block js_extra %}
+<script type="text/javascript">
+
+(function($) {
+  var baseColor = $(".row.record > div:first-child").css('background-color');
+  var t;
+  $(".record").hover(
+    function(evt) {
+      $target = $(evt.currentTarget);
+      t = setTimeout(function() {
+        $target.find('.mark').fadeIn(500);
+      }, 600);
+    },
+    function(evt) {
+      clearTimeout(t);
+      $target = $(evt.currentTarget);
+      $target.find('.mark').fadeOut(500);
+    }
+    );
+
+  $('.row.record > div:first-child .mark a').click(function(evt) {
+    $.get(evt.currentTarget.href, function(data) {
+      console.log(data);
+    });
+    return false;
+  });
+})(jQuery);
+</script>
+{% endblock -%}

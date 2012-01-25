@@ -1,7 +1,10 @@
 from flask import g
-from ndb import model, key
+from ndb import context, key, model, tasklets
 
 from app import app
+
+from auth.models import User
+
 from core.models import LangValue, Unique
 from core.pagination import Pager
 from core.slugify import get_unique_slug
@@ -23,7 +26,7 @@ class Category(model.Model):
 
     @classmethod
     def get_async(cls, cat_key):
-        if isinstance(cat_key, (str, unicode)):
+        if isinstance(cat_key, unicode):
             cat_key = key.Key(urlsafe=cat_key)
         return cat_key.get_async()
 
@@ -59,7 +62,6 @@ class Category(model.Model):
 
 
 class User2Category(model.Model):
-    from auth.models import User
     user = model.KeyProperty(kind=User)
     category = model.KeyProperty(kind=Category)
 
@@ -106,7 +108,7 @@ class Record(model.Model):
 
     @classmethod
     def for_category(cls, category):
-        if isinstance(category, (str, unicode)):
+        if isinstance(category, unicode):
             cat_key = key.Key(urlsafe=category)
         elif isinstance(category, Category):
             cat_key = category.key
@@ -129,7 +131,7 @@ class Record(model.Model):
 
     @classmethod
     def create(cls, title, description, category):
-        if isinstance(category, (str, unicode)):
+        if isinstance(category, unicode):
             cat_key = key.Key(urlsafe=category)
         else:
             cat_key = category.key
@@ -137,3 +139,58 @@ class Record(model.Model):
                description_s=[LangValue(lang=g.lang, value=description)],
                category=cat_key)
         return entity.put().get()
+
+
+class User2Record(model.Model):
+    user = model.KeyProperty(kind=User)
+    record = model.KeyProperty(kind=Record)
+
+    @classmethod
+    def _create(cls, user, record):
+        if isinstance(record, Record):
+            record = record.key
+        elif isinstance(record, unicode):
+            record = key.Key(urlsafe=record)
+        if isinstance(user, User):
+            user = user.key
+        return cls(user=user, record=record).put_async()
+
+    create_async = _create
+
+    @classmethod
+    def create(cls, user, record):
+        return cls.create_async(user, record).get_result()
+
+    @classmethod
+    def relations(cls, user, record=None):
+        if isinstance(user, User):
+            user = user.key
+        if record is None:
+            return cls.query(cls.user == user)
+        else:
+            if isinstance(record, key.Key):
+                record = record.key
+            elif isinstance(record, (str, unicode)):
+                record = key.Key(urlsafe=record)
+            return cls.query(cls.user == user, cls.record == record)
+
+    @classmethod
+    @context.toplevel
+    def delete(cls, user, record):
+        raise tasklets.Return(cls._delete(user, record))
+
+    @classmethod
+    @tasklets.tasklet
+    def _delete(cls, user, record):
+        import logging
+        if isinstance(record, Record):
+            record = record.key
+        elif isinstance(record, unicode):
+            record = key.Key(urlsafe=record)
+        logging.info(record)
+        if isinstance(user, User):
+            user = user.key
+        q = cls.query(cls.user == user, cls.record == record)
+        entity = yield q.get_async()
+        if entity is not None:
+            entity.key.delete_async()
