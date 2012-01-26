@@ -4,7 +4,9 @@
 {%- block content %}
 <div class="row">
   <div class="span13">
-    {%- include "catalog/_list_records.html" %}
+    <div class="row">
+      {%- include "catalog/_list_records.html" %}
+    </div>
   </div>
   <div class="span3">
     <a class="btn" href="{{ create_record }}">Add Record</a>

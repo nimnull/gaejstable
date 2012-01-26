@@ -1,4 +1,4 @@
-# import logging
+import logging
 from flask import g, jsonify, request, redirect, url_for
 from ndb import context, tasklets
 
@@ -66,11 +66,13 @@ def list_records(key):
 def filtered_records():
     categories = User2Category.get_for_user(user=g.user).map_async(
             lambda u2c: u2c.category)
+    count = yield User2Record.relations(g.user).count_async(1)
     categories = yield categories
+    response = {'count': count}
     if len(categories):
         records, pager = Record.paginate(Record.for_categories(categories))
-        raise tasklets.Return({'records': records, 'pager': pager})
-    raise tasklets.Return({})
+        response.update({'records': records, 'pager': pager})
+    raise tasklets.Return(response)
 
 
 @catalog.route('/mark')
@@ -81,12 +83,20 @@ def mark_record():
     if key_safe is None:
         raise tasklets.Return(jsonify({'status': 'error'}))
     response = {'status': 'success'}
-    q = User2Record.relations(g.user, key_safe)
-    record = yield q.get_async()
+    record_q = User2Record.relations(g.user, key_safe)
+    count_q = User2Record.relations(g.user)
+    record = yield record_q.get_async()
     if record is None:
-        User2Record.create_async(g.user, key_safe)
-        response.update({'data': 'created'})
+        record_key = yield User2Record.create_async(g.user, key_safe)
+        response.update({
+            'data': {
+                'action': 'created',
+                'record': record_key.urlsafe()
+             }})
     else:
         User2Record.delete(g.user, key_safe)
-        response.update({'data': 'deleted'})
+        response.update({'data': {'action': 'deleted'}})
+    count = yield count_q.count_async(1)
+    logging.info(count)
+    response['data'].update({'count': count})
     raise tasklets.Return(jsonify(response))

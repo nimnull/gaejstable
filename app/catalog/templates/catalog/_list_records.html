@@ -1,14 +1,12 @@
 {%- for record in records %}
-<div class="row record">
-  <div class="span13">
-    <h3>{{ record.title }}
-      <small>{{ record.created_at.strftime("%d.%m.%Y") }}</small>
-    </h3>
-    <div class="mark">
-      <a href="{{ url_for('.mark_record', key=record.key.urlsafe()) }}">
-        {%- if record.is_marked %}unmark{%- else %}mark{%- endif %}</a>
-    </div>
-    <p>{{ record.description }}</p>
+<div class="span13 record">
+  <h3>{{ record.title }}
+    <small>{{ record.created_at.strftime("%d.%m.%Y") }}</small>
+  </h3>
+  <div class="mark">
+    <a href="{{ url_for('.mark_record', key=record.key.urlsafe()) }}">
+      {%- if record.is_marked %}unmark{%- else %}mark{%- endif %}</a>
   </div>
+  <p>{{ record.description }}</p>
 </div>
 {%- endfor %}

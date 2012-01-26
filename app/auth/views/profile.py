@@ -1,4 +1,5 @@
 from flask import g, jsonify, request, redirect, url_for
+from ndb import context, tasklets
 
 from catalog.models import Category, User2Category
 from core.decorators import render_to
@@ -37,17 +38,22 @@ def setup_profile():
 
 @auth.route('/profile/toggle_cat', methods=['POST'])
 @login_required
+@context.toplevel
 def toggle_category():
     resp = {'status': 'success'}
     urlkey = request.args.get('key')
-    category = urlkey and Category.get_by_urlsafe(urlkey) or None
-    user2category = category and User2Category.get(g.user, category) or None
+    if urlkey is None:
+        raise tasklets.Return({'status': 'error'})
+    category = yield Category.get_async(urlkey)
+    u2c_query = User2Category.relations(g.user, category)
+    user2category = yield u2c_query.get_async()
     if user2category is not None:
-        user2category.key.delete()
+        user2category.key.delete_async()
         resp.update({'data': 'deleted'})
     elif category is not None:
-        User2Category.create(g.user, category)
+        User2Category.create_async(g.user, category)
         resp.update({'data': 'created'})
     else:
         resp['status'] = 'error'
-    return request.is_xhr and jsonify(**resp) or redirect(url_for('.setup_profile'))
+    raise tasklets.Return(request.is_xhr and jsonify(**resp) or
+            redirect(url_for('.setup_profile')))

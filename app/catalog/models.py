@@ -77,7 +77,11 @@ class User2Category(model.Model):
 
     @classmethod
     def create(cls, user, category):
-        return cls(user=user.key, category=category.key).put().get()
+        return cls.create_async(user, category).get_result().get()
+
+    @classmethod
+    def create_async(cls, user, category):
+        return cls(user=user.key, category=category.key).put_async()
 
     @classmethod
     def get_or_create(cls, user, category):

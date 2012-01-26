@@ -1,14 +1,23 @@
 {%- extends "base.html" %}
 {%- set page_title = "Records" %}
 {%- block content %}
-{%- include "catalog/_list_records.html" %}
+<div class="row">
+  <div class="span13">
+    <div class="row records">
+      {%- include "catalog/_list_records.html" %}
+    </div>
+  </div>
+  <div class="span3 visit-selected" {%- if count %}style="display:block;"{%- endif %}>
+    <a href="#">View selected records</a>
+  </div>
+</div>
 {%- include "pagination.html" %}
 {%- endblock content %}
 {%- block js_extra %}
 <script type="text/javascript">
 
 (function($) {
-  var baseColor = $(".row.record > div:first-child").css('background-color');
+  var baseColor = $(".row.records > div:first-child").css('background-color');
   var t;
   var actions = {
     'created': function(linkObj) {
@@ -32,11 +41,18 @@
       $target.find('.mark').fadeOut(500);
     });
 
-  $('.row.record > div:first-child .mark a').click(function(evt) {
+  $('.record .mark a').click(function(evt) {
       $.get(evt.currentTarget.href, function(resp) {
         if (resp.status == 'success') {
-          actions[resp.data](evt.currentTarget);
-        }
+          // toggle mark/unmark on recordaction
+          actions[resp.data.action](evt.currentTarget);
+          var selectedBlock = $('.row .visit-selected');
+          if (resp.data.count > 0) {
+            selectedBlock.show()
+          } else {
+            selectedBlock.hide();
+          }
+        };
     });
     return false;
   });
