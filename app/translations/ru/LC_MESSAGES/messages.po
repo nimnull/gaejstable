@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GAEJStable 1.0\n"
 "Report-Msgid-Bugs-To: nimnull@gmail.com\n"
-"POT-Creation-Date: 2012-01-27 17:39+0200\n"
+"POT-Creation-Date: 2012-01-27 23:22+0200\n"
 "PO-Revision-Date: 2012-01-27 15:02+0200\n"
 "Last-Translator: Yegor Nazarkin <nimnull@gmail.com>\n"
 "Language-Team: ru <LL@li.org>\n"
@@ -155,24 +155,7 @@ msgstr "Фамилия:"
 msgid "Last logged in:"
 msgstr "Время последнего входа:"
 
-#: auth/templates/auth/recover_finish.html:3
-msgid "Password recovery"
-msgstr "Восстановление пароля"
-
-#: auth/templates/auth/recover_finish.html:4
-msgid "reset your password here"
-msgstr "здесь можно сбросить забытый пароль"
-
-#: auth/templates/auth/recover_finish.html:8
-#, python-format
-msgid "Choose new password for your account at %(site)s"
-msgstr "Выберите новый пароль для входа в %(site)s"
-
-#: auth/templates/auth/recover_finish.html:14
-msgid "Submit"
-msgstr "Сохранить"
-
-#: auth/templates/auth/sign_in.html:3
+#: auth/templates/auth/sign_in.html:3 core/templates/core/base.html:30
 msgid "Sign In"
 msgstr "Вход"
 
@@ -222,8 +205,9 @@ msgid "Sign Up!"
 msgstr "Регистрироваться!"
 
 #: auth/views/registration.py:37
-msgid "[{}] Account activation"
-msgstr "[{}] Активация учетной записи"
+#, python-format
+msgid "[%s] Account activation"
+msgstr "[%s] Активация учетной записи"
 
 #: auth/views/registration.py:69
 msgid "Please activate your account first"
@@ -234,24 +218,27 @@ msgid "There is no user with provided email or password"
 msgstr "Пользователь с этим email и паролем "
 
 #: auth/views/registration.py:93
-msgid "[{}] Password recovery"
-msgstr "[{}] Восстановление пароля"
+#, python-format
+msgid "[%s] Password recovery"
+msgstr "[%s] Восстановление пароля"
 
-#: auth/views/registration.py:98
+#: auth/views/registration.py:97
+#, python-format
 msgid ""
-"We've just sent an email to <strong>{}</strong> with the special link for"
+"We've just sent an email to <strong>%s</strong> with the special link for"
 " you to reset lost password."
 msgstr ""
-"Мы отправили вам письмо на адрес <strong>{}</strong> со специальной "
+"Мы отправили вам письмо на адрес <strong>%s</strong> со специальной "
 "ссылкой для восстановления пароля."
 
 #: auth/views/registration.py:121
+#, python-format
 msgid ""
 "Your didn't provide a token or it is no longer valid. <a "
-"href=\"{}\">Request password recovery</a> again please."
+"href=\"%s\">Request password recovery</a> again please."
 msgstr ""
 "Секретный ключ не указан или такой ключ больше не действителен. <a "
-"href=\"{}\">Запросите восстановление пароля</a> еще раз."
+"href=\"%s\">Запросите восстановление пароля</a> еще раз."
 
 #: catalog/forms.py:9 catalog/forms.py:17
 msgid "Title"
@@ -329,9 +316,37 @@ msgstr "Выбранные позиции"
 msgid "Invalid email address."
 msgstr "Неправильный адрес электронной почты."
 
+#: core/templates/core/base.html:20
+msgid "Manage catalog"
+msgstr "Управление каталогом"
+
+#: core/templates/core/base.html:22
+msgid "Categories"
+msgstr "Разделы"
+
+#: core/templates/core/base.html:26
+msgid "Profile"
+msgstr "Профиль"
+
+#: core/templates/core/base.html:27
+msgid "Sign Out"
+msgstr "Выход"
+
+#: core/templates/core/base.html:29
+msgid "Sign Up"
+msgstr "Регистрация"
+
+#: core/templates/core/pagination.html:5
+msgid "Prev page"
+msgstr "Назад"
+
+#: core/templates/core/pagination.html:8
+msgid "Next page"
+msgstr "Вперед"
+
 #: lib/argparse.py:313
 msgid "usage: "
-msgstr "использование:"
+msgstr ""
 
 #: lib/argparse.py:821
 msgid ".__call__() not defined"
@@ -514,147 +529,115 @@ msgstr ""
 
 #: lib/wtforms/fields.py:404
 msgid "Invalid Choice: could not coerce"
-msgstr "Непревильный вариант"
+msgstr "Ошибочный вариант"
 
 #: lib/wtforms/fields.py:411 lib/wtforms/ext/appengine/fields.py:74
 #: lib/wtforms/ext/django/fields.py:90
 msgid "Not a valid choice"
-msgstr "Неправильный вариант"
+msgstr "Такой вариант не существует"
 
 #: lib/wtforms/fields.py:437
 msgid "Invalid choice(s): one or more data inputs could not be coerced"
-msgstr "Выбран неправильный вариант(ы)"
+msgstr "Такого(их) варианта(ов) не существует"
 
 #: lib/wtforms/fields.py:444
 #, python-format
 msgid "'%(value)s' is not a valid choice for this field"
-msgstr "Значение '%(value)s' некорректно"
+msgstr "'%(value)s' не подходит для этого поля"
 
 #: lib/wtforms/fields.py:528
 msgid "Not a valid integer value"
-msgstr "Неправильное числовое значение"
+msgstr "Здесь быть число"
 
 #: lib/wtforms/fields.py:573
 msgid "Not a valid decimal value"
-msgstr "Неправильное дробное значение"
+msgstr "Неверное дробное значение"
 
 #: lib/wtforms/fields.py:597
 msgid "Not a valid float value"
-msgstr "Неправильное дробное значение"
+msgstr "Неверное дробное значение"
 
 #: lib/wtforms/validators.py:51
 #, python-format
 msgid "Invalid field name '%s'."
-msgstr "Неправильное название поля '%s'."
+msgstr "Ошибка в поле '%s'"
 
 #: lib/wtforms/validators.py:58
 #, python-format
 msgid "Field must be equal to %(other_name)s."
-msgstr "Это значение и %(other_name)s должны быть равны"
+msgstr "Должно соответствовать полю %(other_name)s"
 
 #: lib/wtforms/validators.py:90
 #, python-format
 msgid "Field must be at least %(min)d character long."
 msgid_plural "Field must be at least %(min)d characters long."
-msgstr[0] "Поле должно быть не короче %(min)d символа"
-msgstr[1] "Поле должно быть не короче %(min)d символов"
-msgstr[2] "Поле должно быть не короче %(min)d символов"
+msgstr[0] "Как минимум %(min)d символ"
+msgstr[1] "Как минимум %(min)d символа"
+msgstr[2] "Как минимум %(min)d символов"
 
 #: lib/wtforms/validators.py:93
 #, python-format
 msgid "Field cannot be longer than %(max)d character."
 msgid_plural "Field cannot be longer than %(max)d characters."
-msgstr[0] "Размер поля не может быть больше %(max)d символа"
-msgstr[1] "Размер поля не может быть больше %(max)d символов"
-msgstr[2] "Размер поля не может быть больше %(max)d символов"
+msgstr[0] "Не длиннее %(max)d символа"
+msgstr[1] "Не длиннее %(max)d символов"
+msgstr[2] "Не длиннее %(max)d символов"
 
 #: lib/wtforms/validators.py:96
 #, python-format
 msgid "Field must be between %(min)d and %(max)d characters long."
-msgstr "Размер поля должен быть от %(min)d до %(max)d символов"
+msgstr "Размер текста должные быть %(min)d от %(max)d до символов"
 
 #: lib/wtforms/validators.py:131
 #, python-format
 msgid "Number must be greater than %(min)s."
-msgstr "Число должно быть больше %(min)s"
+msgstr "Значение должно быть больше %(min)s"
 
 #: lib/wtforms/validators.py:133
 #, python-format
 msgid "Number must be less than %(max)s."
-msgstr "Число должно быть меньше %(max)s"
+msgstr "Значение должно быть меньше %(max)s"
 
 #: lib/wtforms/validators.py:135
 #, python-format
 msgid "Number must be between %(min)s and %(max)s."
-msgstr "Число должно быть от %(min)s до %(max)s."
+msgstr "Значение должно быть между %(min)s и %(max)s."
 
 #: lib/wtforms/validators.py:171
 msgid "This field is required."
-msgstr "Заполнить обязательно."
+msgstr "Это обязательное поле."
 
 #: lib/wtforms/validators.py:199
 msgid "Invalid input."
-msgstr "Неверное значение."
+msgstr "Неправильное значение"
 
 #: lib/wtforms/validators.py:235
 msgid "Invalid IP address."
-msgstr "Неверный IP адрес."
+msgstr "Ошибка в IP аресе."
 
 #: lib/wtforms/validators.py:260
 msgid "Invalid URL."
-msgstr "Неверная ссылка"
+msgstr "Ошибка в ссылке"
 
 #: lib/wtforms/validators.py:287
 #, python-format
 msgid "Invalid value, must be one of: %(values)s."
-msgstr "Неверное значение, ожидается один из вариантов: %(values)s"
+msgstr "Неверное значение, нужно ввести одно из: %(values)s"
 
 #: lib/wtforms/validators.py:314
 #, python-format
 msgid "Invalid value, can't be any of: %(values)s."
-msgstr "Неверное значение, любой вариант кроме: %(values)s"
+msgstr "Неверное значение, не должно совпадать с: %(values)s"
 
 #: lib/wtforms/ext/appengine/fields.py:93
 msgid "Not a valid list"
-msgstr "Неверный список"
+msgstr "Ошибка в списке"
 
 #: lib/wtforms/ext/dateutil/fields.py:48
 msgid "Please input a date/time value"
-msgstr "Введите дату/время"
+msgstr "Пожалуйста, введите дату или время"
 
 #: lib/wtforms/ext/dateutil/fields.py:60
 msgid "Invalid date/time input"
-msgstr "Неверное значение для даты/времени"
-
-#: templates/pagination.html:5
-msgid "Prev page"
-msgstr "Назад"
-
-#: templates/pagination.html:8
-msgid "Next page"
-msgstr "Вперед"
-
-#: templates/base.html:12
-msgid "Manage catalog"
-msgstr "Управление каталогом"
-
-#: templates/base.html:14
-msgid "Categories"
-msgstr "Разделы"
-
-#: templates/base.html:18
-msgid "Profile"
-msgstr "Профиль"
-
-#: templates/base.html:19
-msgid "Sign Out"
-msgstr "Выход"
-
-#: templates/base.html:21
-msgid "Sign Up"
-msgstr "Регистрация"
-
-#: templates/base.html:22
-msgid "Sign In"
-msgstr "Вход"
+msgstr "Неверный формат даты или времени"
 
