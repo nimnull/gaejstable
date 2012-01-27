@@ -1,0 +1,15 @@
+{% if pager %}
+<div class="pagination">
+  <ul>
+    <li class="prev {% if not pager.has_prev %}disabled{% endif%}">
+      <a href="{{ url_for_other_page(pager.prev_page) }}">&larr; {{ _('Prev page') }}</a>
+    </li>
+    <li class="next {% if not pager.has_next %}disabled{% endif%}">
+      <a href="{{ url_for_other_page(pager.next_page) }}">{{ _('Next page') }} &rarr;</a>
+    </li>
+  </ul>
+</div>
+{% endif %}
+{% if undefined %}
+  {% include "core/base.html" %}
+{% endif %}
