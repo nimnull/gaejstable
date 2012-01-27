@@ -1,11 +1,12 @@
 import logging
-from flask import g, request_started, session
+from flask import g, session
 
 from app import app
 from .models import User
 
 
-def populate_current_user(sender, **extra):
+@app.before_request
+def populate_current_user(*args, **kwargs):
     g.user = None
     uid_safe = session.get('uid')
     if uid_safe is None:
@@ -16,5 +17,3 @@ def populate_current_user(sender, **extra):
             g.user = user
     except (AttributeError, TypeError), e:
         logging.info(e)
-
-request_started.connect(populate_current_user, app)
