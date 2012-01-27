@@ -1,6 +1,6 @@
-# import logging
 import uuid
 from flask import flash, g, request, redirect, session, url_for
+from flaskext.babel import lazy_gettext as _
 
 from google.appengine.api import app_identity
 
@@ -34,7 +34,7 @@ def sign_up():
         user = form.save()
         session['uuid'] = str(uuid.uuid1())
         email.send(rcpt=user.username,
-            subject="[{}] Account activation".format(SITE_TITLE),
+            subject=_("[%s] Account activation" % SITE_TITLE),
             template='auth/email/activate.html',
             context={'user': user, 'hostname': HOSTNAME})
         return redirect(url_for('.sign_up', key=session['uuid']))
@@ -66,10 +66,10 @@ def sign_in():
             next_url = session.pop('next', None) or url_for('core.index')
             return redirect(next_url)
         elif user and not user.is_active:
-            flash('Please activate your account first',
+            flash(_('Please activate your account first'),
                         category='warning')
         else:
-            flash('There is no user with provided email or password',
+            flash(_('There is no user with provided email or password'),
                         category='warning')
             return redirect(url_for('.sign_in'))
     return {'form': form}
@@ -84,26 +84,26 @@ def sign_out():
 
 
 @auth.route('/recover', methods=['GET', 'POST'])
-@render_to()
+@render_to('auth/recover_ask.html')
 def ask_recovery():
     form = AskRecoverForm(len(request.form) and request.form or None)
     if request.method == 'POST' and form.validate():
         user = form.get_user()
         email.send(rcpt=user.username,
-            subject="[{}] Password recovery".format(SITE_TITLE),
+            subject=_("[%s] Password recovery" % SITE_TITLE),
             template='auth/email/recovery.html',
             context={'user': user, 'hostname': HOSTNAME}
         )
-        flash("We've just sent an email to <strong>{}</strong> with "
-              "the special link for you to reset lost password.".format(
-                  user.username), category='success')
+        flash(_("We've just sent an email to <strong>%s</strong> with "
+                "the special link for you to reset lost password." %
+                user.username), category='success')
         session['recover_sent'] = True
         return redirect(url_for('.ask_recovery'))
     return {'form': form, }
 
 
 @auth.route('/recover/finish', methods=['GET', 'POST'])
-@render_to()
+@render_to('auth/recover_finish.html')
 def finish_recovery():
     token = request.args.get('token')
     form = PasswordResetForm(len(request.form) and request.form or
@@ -116,7 +116,7 @@ def finish_recovery():
         user.is_active = True
         login(user)
         return redirect(url_for('.view_profile'))
-    flash('Your didn\'t provide a token or it is no longer valid. <a '
-            'href="{}">Request password recovery</a> again please.'.format(
-                url_for('.ask_recovery')), category='warning')
+    flash(_('Your didn\'t provide a token or it is no longer valid. <a '
+            'href="%s">Request password recovery</a> again please.' %
+            url_for('.ask_recovery')), category='warning')
     return {}

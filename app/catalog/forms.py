@@ -1,21 +1,23 @@
+from flask import g
+from flaskext.babel import lazy_gettext as _
 from wtforms import (Form, HiddenField, TextAreaField, TextField, validators)
 
 from .models import Category, Record
 
 
 class CategoryForm(Form):
-    title = TextField('Title', description='category title',
+    title = TextField(_('Title'), description=_('category title'),
             validators=[validators.Required()])
 
     def save(self, request=None):
-        return Category.create({'en': self.title.data})
+        return Category.create({g.lang: self.title.data})
 
 
 class RecordForm(Form):
-    title = TextField('Title', description='enter title for record',
+    title = TextField(_('Title'), description=_('enter title for record'),
             validators=[validators.Required()])
-    description = TextAreaField('Description', description='enter title for record',
-            validators=[validators.Required()])
+    description = TextAreaField(_('Description'), description=_('enter title '
+        'for record'), validators=[validators.Required()])
     category = HiddenField(validators=[validators.Required()])
 
     def save(self):

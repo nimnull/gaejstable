@@ -1,4 +1,3 @@
-import logging
 from flask import g, jsonify, request, redirect, url_for
 from ndb import context, tasklets
 
@@ -75,6 +74,16 @@ def filtered_records():
     raise tasklets.Return(response)
 
 
+@catalog.route('/selected')
+@login_required
+@render_to()
+def selected_records():
+    relations = User2Record.relations(g.user)
+    relations, pager = User2Record.paginate(relations)
+    records = map(lambda rel: rel.record.get(), relations)
+    return {'records': records, 'pager': pager}
+
+
 @catalog.route('/mark')
 @login_required
 @context.toplevel
@@ -97,6 +106,5 @@ def mark_record():
         User2Record.delete(g.user, key_safe)
         response.update({'data': {'action': 'deleted'}})
     count = yield count_q.count_async(1)
-    logging.info(count)
     response['data'].update({'count': count})
     raise tasklets.Return(jsonify(response))
