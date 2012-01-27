@@ -1,6 +1,6 @@
-{% extends "base.html" %}
+{% extends "core/base.html" %}
 {% from "_base_macro.html" import render_form %}
-{%- set page_title = 'This is your profile' %}
+{%- set page_title = _('This is your profile') %}
 {%- set page_description = [user.first_name, user.last_name]|join(' ') %}
 {%- block content %}
 {%- include "auth/profile_toolbar.html" %}
@@ -8,7 +8,7 @@
 </div>
 <div class="row">
   <div class="span10">
-    {{ render_form(form, '.edit_profile', 'Save', 'Cancel') }}
+    {{ render_form(form, '.edit_profile', _('Save'), _('Cancel')) }}
   </div>
 </div>
 {%- endblock content %}

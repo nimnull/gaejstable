@@ -1,0 +1,9 @@
+{%- extends "core/base.html" %}
+{%- from "catalog/_list_records.html" import list_records %}
+{%- set page_title = _("Selected records") %}
+{%- block content %}
+<div class="row">
+  {{ list_records(records, 'span16') }}
+</div>
+{%- include "pagination.html" %}
+{%- endblock content %}

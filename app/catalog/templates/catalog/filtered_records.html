@@ -1,14 +1,15 @@
-{%- extends "base.html" %}
-{%- set page_title = "Records" %}
+{%- extends "core/base.html" %}
+{%- from "catalog/_list_records.html" import list_records %}
+{%- set page_title = _("Records") %}
 {%- block content %}
 <div class="row">
   <div class="span13">
     <div class="row records">
-      {%- include "catalog/_list_records.html" %}
+      {{ list_records(records, 'span13') }}
     </div>
   </div>
   <div class="span3 visit-selected" {%- if count %}style="display:block;"{%- endif %}>
-    <a href="#">View selected records</a>
+    <a href="{{ url_for('.selected_records') }}">{{ _('View selected records') }}</a>
   </div>
 </div>
 {%- include "pagination.html" %}
@@ -21,10 +22,10 @@
   var t;
   var actions = {
     'created': function(linkObj) {
-      $(linkObj).text('unmark');
+      $(linkObj).text({{ _('unmark') }});
     },
     'deleted': function(linkObj) {
-      $(linkObj).text('mark');
+      $(linkObj).text({{ _('mark') }});
     }
   };
 

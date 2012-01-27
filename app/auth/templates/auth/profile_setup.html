@@ -1,8 +1,9 @@
-{%- extends "base.html" %}
-{%- set page_title="Setup Profile" %}
-{%- set page_description = 'Chose categories for filtering' %}
+{%- extends "core/base.html" %}
+{%- set page_title=_('Setup Profile') %}
+{%- set page_description = _('Chose categories for filtering') %}
 
 {%- block content %}
+{%- include "auth/profile_toolbar.html" %}
 <ul class="pills setup">
 {%- for category in categories %}
   <li class="category{% if category.selected %} active{% endif %}">

@@ -1,5 +1,5 @@
-{% extends "base.html" %}
-{%- set page_title = 'This is your profile' %}
+{% extends "core/base.html" %}
+{%- set page_title = _('This is your profile') %}
 {%- set page_description = [user.first_name, user.last_name]|join(' ') %}
 {%- block content %}
 {%- include "auth/profile_toolbar.html" %}
@@ -8,11 +8,11 @@
 <div class="row">
   <div class="span5">
     <dl class="profile-details">
-      <dt>First name:</dt>
+      <dt>{{ _('First name:') }}</dt>
       <dd>{{ user.first_name }}</dd>
-      <dt>Last name:</dt>
+      <dt>{{ _('Last name:') }}</dt>
       <dd>{{ user.last_name }}</dd>
-      <dt>Last logged in:</dt>
+      <dt>{{ _('Last logged in:') }}</dt>
       <dd>{{ user.logged_at.strftime("%Y-%m-%d %H:%M") }}</dd>
     </dl>
 

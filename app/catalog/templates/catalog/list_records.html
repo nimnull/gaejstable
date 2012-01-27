@@ -1,15 +1,16 @@
-{%- extends "base.html" %}
-{%- set page_title = category.title + " records" %}
+{%- extends "core/base.html" %}
+{%- from "catalog/_list_records.html" import list_records %}
+{%- set page_title = _("%(cat)s records", cat=category.title) %}
 {%- set create_record = url_for('.create_record', key=category.key.urlsafe()) %}
 {%- block content %}
 <div class="row">
   <div class="span13">
     <div class="row">
-      {%- include "catalog/_list_records.html" %}
+      {{ list_records(records, 'span13') }}
     </div>
   </div>
   <div class="span3">
-    <a class="btn" href="{{ create_record }}">Add Record</a>
+    <a class="btn" href="{{ create_record }}">{{ _("Add Record") }}</a>
   </div>
 </div>
 {%- include "pagination.html" %}

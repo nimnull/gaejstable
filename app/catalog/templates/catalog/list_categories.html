@@ -1,5 +1,5 @@
-{%- extends "base.html" %}
-{%- set page_title = "Categories list" %}
+{%- extends "core/base.html" %}
+{%- set page_title = _("Categories list") %}
 {%- set create_category = url_for('catalog.create_category') %}
 
 {%- block content %}
@@ -15,7 +15,7 @@
     </div>
   </div>
   <div class="span3">
-    <a class="btn" href="{{ create_category }}">Add Category</a>
+    <a class="btn" href="{{ create_category }}">{{ _('Add Category') }}</a>
   </div>
 </div>
 {%- include "pagination.html" %}

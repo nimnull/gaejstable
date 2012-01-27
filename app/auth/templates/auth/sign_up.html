@@ -1,26 +1,25 @@
-{%- extends "base.html" %}
+{%- extends "core/base.html" %}
 {%- from "_base_macro.html" import render_form %}
-{%- set page_title = 'Sign up please' %}
-{%- set page_description = 'Here you can create your account' %}
+{%- set page_title = _('Sign up please') %}
+{%- set page_description = _('Here you can create your account') %}
 {%- block content %}
 {%- if finished %}
 <div class="row">
   <div class="span16">
-    <h4>Congratulations! You have already registered!</h4>
-    <p>
-    Please check your mailbox for a message with the activation link.
-    After proceeding this link you will be able to login to the
-    {{ config.SITE_TITLE }}.
+    <h4>{{ _('Congratulations! You have already registered!') }}</h4>
+    <p>{{ _('Please check your mailbox for a message with the activation '
+    'link. After proceeding this link you will be able to login to the '
+    '%(site)s')|format(site=config.SITE_TITLE) }}
     </p>
   </div>
 </div>
 {%- else %}
   <div class="row">
     <div class="span4">
-      All fields are required. Please fill the form with care.
+      {{ _('All fields are required. Please fill the form with care.') }}
     </div>
     <div class="span12">
-      {{ render_form(form, '.sign_up', 'Sign Up!', 'Cancel') }}
+      {{ render_form(form, '.sign_up', _('Sign Up!'), _('Cancel')) }}
     </div>
   </div>
 {%- endif %}
