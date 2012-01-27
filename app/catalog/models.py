@@ -11,7 +11,33 @@ from core.pagination import Pager
 from core.slugify import get_unique_slug
 
 
-class Category(model.Model):
+class PagedMixin(object):
+
+    @classmethod
+    def paginate(cls, query, page_size=20):
+        pager = Pager(query=query)
+        entities, _, _ = pager.paginate(page_size)
+        return entities, pager
+
+
+class LocalPagedMixin(PagedMixin):
+
+    @classmethod
+    def get_localized(cls, lang_code):
+        return cls.query(cls.title_s.lang == lang_code)
+
+    @classmethod
+    def paginate(cls, query=None, page_size=20):
+        q = query or cls.get_localized(g.lang)
+        return PagedMixin.paginate(q, page_size)
+
+    def __getattr__(self, name):
+        attr_s = getattr(self, '%s_s' % name)
+        lvs = filter(lambda lv: lv.lang == g.lang, attr_s)
+        return len(lvs) and lvs[0].value or ''
+
+
+class Category(model.Model, LocalPagedMixin):
     slug = model.StringProperty(required=True)
     title_s = model.StructuredProperty(LangValue, repeated=True)
 
@@ -37,29 +63,13 @@ class Category(model.Model):
 
     @classmethod
     def __get_slug(cls, title_dict):
-        title = title_dict.get(app.config['DEFAULT_LANGUAGE']) or \
+        title = title_dict.get(app.config['BABEL_DEFAULT_LOCALE']) or \
             title_dict.keys()[0]
         return get_unique_slug(cls, title, Unique)
-
-    @classmethod
-    def get_localized(cls, lang_code):
-        return cls.query(cls.title_s.lang == lang_code)
-
-    @classmethod
-    def paginate(cls, query=None, page_size=20):
-        q = query or cls.get_localized(g.lang)
-        pager = Pager(query=q)
-        categories, _, _ = pager.paginate(page_size)
-        return categories, pager
 
     @property
     def selected(self):
         return True if User2Category.relations(g.user, self).get() is not None else False
-
-    def __getattr__(self, name):
-        attr_s = getattr(self, '%s_s' % name)
-        lvs = filter(lambda lv: lv.lang == g.lang, attr_s)
-        return len(lvs) and lvs[0].value or ''
 
 
 class User2Category(model.Model):
@@ -100,16 +110,11 @@ class User2Category(model.Model):
         return False
 
 
-class Record(model.Model):
+class Record(model.Model, LocalPagedMixin):
     title_s = model.StructuredProperty(LangValue, repeated=True)
     description_s = model.StructuredProperty(LangValue, repeated=True)
     created_at = model.DateTimeProperty(auto_now_add=True)
     category = model.KeyProperty(kind=Category)
-
-    def __getattr__(self, name):
-        attr_s = getattr(self, '%s_s' % name)
-        lvs = filter(lambda lv: lv.lang == g.lang, attr_s)
-        return len(lvs) and lvs[0].value or ''
 
     @property
     @context.toplevel
@@ -120,25 +125,15 @@ class Record(model.Model):
     @classmethod
     def for_category(cls, category):
         if isinstance(category, unicode):
-            cat_key = key.Key(urlsafe=category)
+            category = key.Key(urlsafe=category)
         elif isinstance(category, Category):
-            cat_key = category.key
-        elif isinstance(category, key.Key):
-            cat_key = category
-        else:
-            raise TypeError("Invalid 'category' argument type")
-        return cls.query(cls.category == cat_key)
+            category = category.key
+        return cls.query(cls.category == category)
 
     @classmethod
     def for_categories(cls, categories):
         return cls.query(cls.category.IN(categories)).order(
                 -cls.key, -cls.created_at)
-
-    @classmethod
-    def paginate(cls, query=None, page_size=20):
-        pager = Pager(query=query)
-        records, _, _ = pager.paginate(page_size)
-        return records, pager
 
     @classmethod
     def create(cls, title, description, category):
@@ -152,7 +147,7 @@ class Record(model.Model):
         return entity.put().get()
 
 
-class User2Record(model.Model):
+class User2Record(model.Model, PagedMixin):
     user = model.KeyProperty(kind=User)
     record = model.KeyProperty(kind=Record)
 
