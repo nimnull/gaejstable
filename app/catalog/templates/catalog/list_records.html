@@ -1,4 +1,4 @@
-{%- extends "core/base.html" %}
+{%- extends "base.html" %}
 {%- from "catalog/_list_records.html" import list_records %}
 {%- set page_title = _("%(cat)s records", cat=category.title) %}
 {%- set create_record = url_for('.create_record', key=category.key.urlsafe()) %}

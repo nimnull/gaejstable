@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GAEJStable 1.0\n"
 "Report-Msgid-Bugs-To: nimnull@gmail.com\n"
-"POT-Creation-Date: 2012-01-27 23:22+0200\n"
+"POT-Creation-Date: 2012-01-28 01:22+0200\n"
 "PO-Revision-Date: 2012-01-27 15:02+0200\n"
 "Last-Translator: Yegor Nazarkin <nimnull@gmail.com>\n"
 "Language-Team: ru <LL@li.org>\n"
@@ -18,91 +18,87 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
 
-#: auth/forms.py:13
+#: auth/forms.py:12
 msgid "First Name"
 msgstr "Имя"
 
-#: auth/forms.py:13
+#: auth/forms.py:12
 msgid "enter your first name here"
 msgstr "введите своё имя"
 
-#: auth/forms.py:15
+#: auth/forms.py:14
 msgid "Last Name"
 msgstr "Фамилия"
 
-#: auth/forms.py:15
+#: auth/forms.py:14
 msgid "enter your last name here"
 msgstr "введите свою фамилию"
 
-#: auth/forms.py:20 auth/forms.py:49
+#: auth/forms.py:19 auth/forms.py:48
 msgid "Email"
 msgstr ""
 
-#: auth/forms.py:20
+#: auth/forms.py:19
 msgid "enter your email address to sign in"
 msgstr "введите адрес email, он будет использоваться как логин"
 
-#: auth/forms.py:22
+#: auth/forms.py:21
 msgid "Password"
 msgstr "Пароль"
 
-#: auth/forms.py:22
+#: auth/forms.py:21
 msgid "provide your password to authenticate yourself"
 msgstr "укажите пароль"
 
-#: auth/forms.py:24
+#: auth/forms.py:23
 msgid "We can't proceed without password"
 msgstr "Мы не сможем продолжить без пароля"
 
-#: auth/forms.py:29
-msgid "Your Email"
-msgstr "Ваш email"
-
-#: auth/forms.py:29
-msgid "email will acts as your login"
-msgstr "email будет использован как логин"
-
-#: auth/forms.py:31 auth/forms.py:61
-msgid "New Password"
-msgstr "Новый пароль"
-
-#: auth/forms.py:31
-msgid "chose a password for signing in"
-msgstr "укажите пароль"
-
-#: auth/forms.py:34
-msgid "Passwords must match"
-msgstr "Пароли должны совпадать"
-
-#: auth/forms.py:35
+#: auth/forms.py:28
 msgid "Confirm Password"
 msgstr "Подтверждение пароля"
 
-#: auth/forms.py:35
+#: auth/forms.py:28
 msgid "repeat your password entered above"
 msgstr "повторите пароль введенный выше"
 
-#: auth/forms.py:40
+#: auth/forms.py:30
+msgid "Passwords must match"
+msgstr "Пароли должны совпадать"
+
+#: auth/forms.py:34
 msgid "this email has already taken"
 msgstr "такой email уже используется"
 
-#: auth/forms.py:49
+#: auth/forms.py:43
+msgid "language"
+msgstr ""
+
+#: auth/forms.py:43
+msgid "select locale"
+msgstr ""
+
+#: auth/forms.py:48
 msgid "enter your email to get password reset link"
 msgstr "введите свой адрес email для получение ссылки на сброс пароля"
 
-#: auth/forms.py:54
+#: auth/forms.py:53
 msgid "This user is not registered"
 msgstr "Такого пользователя не существует"
 
-#: auth/forms.py:61
+#: auth/forms.py:60
+msgid "New Password"
+msgstr "Новый пароль"
+
+#: auth/forms.py:60
 msgid "enter new password"
 msgstr "введите новый пароль"
 
-#: auth/forms.py:64
+#: auth/forms.py:63
 msgid "Confirm New Password"
 msgstr "Подтверждение нового пароля"
 
-#: auth/forms.py:64
+#: auth/forms.py:63
 msgid "repeat password entered above"
 msgstr "повторите пароль введенный выше"
 
@@ -155,7 +151,7 @@ msgstr "Фамилия:"
 msgid "Last logged in:"
 msgstr "Время последнего входа:"
 
-#: auth/templates/auth/sign_in.html:3 core/templates/core/base.html:30
+#: auth/templates/auth/sign_in.html:3 templates/base.html:30
 msgid "Sign In"
 msgstr "Вход"
 
@@ -266,7 +262,7 @@ msgstr "снять отметку"
 msgid "mark"
 msgstr "отметить"
 
-#: catalog/templates/catalog/create_category.html:2
+#: catalog/templates/catalog/create_category.html:3
 msgid "Add New Category"
 msgstr "Добавить раздел"
 
@@ -315,34 +311,6 @@ msgstr "Выбранные позиции"
 #: core/validators.py:26 lib/wtforms/validators.py:218
 msgid "Invalid email address."
 msgstr "Неправильный адрес электронной почты."
-
-#: core/templates/core/base.html:20
-msgid "Manage catalog"
-msgstr "Управление каталогом"
-
-#: core/templates/core/base.html:22
-msgid "Categories"
-msgstr "Разделы"
-
-#: core/templates/core/base.html:26
-msgid "Profile"
-msgstr "Профиль"
-
-#: core/templates/core/base.html:27
-msgid "Sign Out"
-msgstr "Выход"
-
-#: core/templates/core/base.html:29
-msgid "Sign Up"
-msgstr "Регистрация"
-
-#: core/templates/core/pagination.html:5
-msgid "Prev page"
-msgstr "Назад"
-
-#: core/templates/core/pagination.html:8
-msgid "Next page"
-msgstr "Вперед"
 
 #: lib/argparse.py:313
 msgid "usage: "
@@ -640,4 +608,32 @@ msgstr "Пожалуйста, введите дату или время"
 #: lib/wtforms/ext/dateutil/fields.py:60
 msgid "Invalid date/time input"
 msgstr "Неверный формат даты или времени"
+
+#: templates/base.html:20
+msgid "Manage catalog"
+msgstr "Управление каталогом"
+
+#: templates/base.html:22
+msgid "Categories"
+msgstr "Разделы"
+
+#: templates/base.html:26
+msgid "Profile"
+msgstr "Профиль"
+
+#: templates/base.html:27
+msgid "Sign Out"
+msgstr "Выход"
+
+#: templates/base.html:29
+msgid "Sign Up"
+msgstr "Регистрация"
+
+#: templates/pagination.html:5
+msgid "Prev page"
+msgstr "Назад"
+
+#: templates/pagination.html:8
+msgid "Next page"
+msgstr "Вперед"
 

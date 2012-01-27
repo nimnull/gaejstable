@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2012-01-27 23:22+0200\n"
+"POT-Creation-Date: 2012-01-28 01:22+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,91 +17,87 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
 
-#: auth/forms.py:13
+#: auth/forms.py:12
 msgid "First Name"
 msgstr ""
 
-#: auth/forms.py:13
+#: auth/forms.py:12
 msgid "enter your first name here"
 msgstr ""
 
-#: auth/forms.py:15
+#: auth/forms.py:14
 msgid "Last Name"
 msgstr ""
 
-#: auth/forms.py:15
+#: auth/forms.py:14
 msgid "enter your last name here"
 msgstr ""
 
-#: auth/forms.py:20 auth/forms.py:49
+#: auth/forms.py:19 auth/forms.py:48
 msgid "Email"
 msgstr ""
 
-#: auth/forms.py:20
+#: auth/forms.py:19
 msgid "enter your email address to sign in"
 msgstr ""
 
-#: auth/forms.py:22
+#: auth/forms.py:21
 msgid "Password"
 msgstr ""
 
-#: auth/forms.py:22
+#: auth/forms.py:21
 msgid "provide your password to authenticate yourself"
 msgstr ""
 
-#: auth/forms.py:24
+#: auth/forms.py:23
 msgid "We can't proceed without password"
 msgstr ""
 
-#: auth/forms.py:29
-msgid "Your Email"
-msgstr ""
-
-#: auth/forms.py:29
-msgid "email will acts as your login"
-msgstr ""
-
-#: auth/forms.py:31 auth/forms.py:61
-msgid "New Password"
-msgstr ""
-
-#: auth/forms.py:31
-msgid "chose a password for signing in"
-msgstr ""
-
-#: auth/forms.py:34
-msgid "Passwords must match"
-msgstr ""
-
-#: auth/forms.py:35
+#: auth/forms.py:28
 msgid "Confirm Password"
 msgstr ""
 
-#: auth/forms.py:35
+#: auth/forms.py:28
 msgid "repeat your password entered above"
 msgstr ""
 
-#: auth/forms.py:40
+#: auth/forms.py:30
+msgid "Passwords must match"
+msgstr ""
+
+#: auth/forms.py:34
 msgid "this email has already taken"
 msgstr ""
 
-#: auth/forms.py:49
+#: auth/forms.py:43
+msgid "language"
+msgstr ""
+
+#: auth/forms.py:43
+msgid "select locale"
+msgstr ""
+
+#: auth/forms.py:48
 msgid "enter your email to get password reset link"
 msgstr ""
 
-#: auth/forms.py:54
+#: auth/forms.py:53
 msgid "This user is not registered"
 msgstr ""
 
-#: auth/forms.py:61
+#: auth/forms.py:60
+msgid "New Password"
+msgstr ""
+
+#: auth/forms.py:60
 msgid "enter new password"
 msgstr ""
 
-#: auth/forms.py:64
+#: auth/forms.py:63
 msgid "Confirm New Password"
 msgstr ""
 
-#: auth/forms.py:64
+#: auth/forms.py:63
 msgid "repeat password entered above"
 msgstr ""
 
@@ -154,7 +150,7 @@ msgstr ""
 msgid "Last logged in:"
 msgstr ""
 
-#: auth/templates/auth/sign_in.html:3 core/templates/core/base.html:30
+#: auth/templates/auth/sign_in.html:3 templates/base.html:30
 msgid "Sign In"
 msgstr ""
 
@@ -259,7 +255,7 @@ msgstr ""
 msgid "mark"
 msgstr ""
 
-#: catalog/templates/catalog/create_category.html:2
+#: catalog/templates/catalog/create_category.html:3
 msgid "Add New Category"
 msgstr ""
 
@@ -307,34 +303,6 @@ msgstr ""
 
 #: core/validators.py:26 lib/wtforms/validators.py:218
 msgid "Invalid email address."
-msgstr ""
-
-#: core/templates/core/base.html:20
-msgid "Manage catalog"
-msgstr ""
-
-#: core/templates/core/base.html:22
-msgid "Categories"
-msgstr ""
-
-#: core/templates/core/base.html:26
-msgid "Profile"
-msgstr ""
-
-#: core/templates/core/base.html:27
-msgid "Sign Out"
-msgstr ""
-
-#: core/templates/core/base.html:29
-msgid "Sign Up"
-msgstr ""
-
-#: core/templates/core/pagination.html:5
-msgid "Prev page"
-msgstr ""
-
-#: core/templates/core/pagination.html:8
-msgid "Next page"
 msgstr ""
 
 #: lib/argparse.py:313
@@ -630,5 +598,33 @@ msgstr ""
 
 #: lib/wtforms/ext/dateutil/fields.py:60
 msgid "Invalid date/time input"
+msgstr ""
+
+#: templates/base.html:20
+msgid "Manage catalog"
+msgstr ""
+
+#: templates/base.html:22
+msgid "Categories"
+msgstr ""
+
+#: templates/base.html:26
+msgid "Profile"
+msgstr ""
+
+#: templates/base.html:27
+msgid "Sign Out"
+msgstr ""
+
+#: templates/base.html:29
+msgid "Sign Up"
+msgstr ""
+
+#: templates/pagination.html:5
+msgid "Prev page"
+msgstr ""
+
+#: templates/pagination.html:8
+msgid "Next page"
 msgstr ""
 
