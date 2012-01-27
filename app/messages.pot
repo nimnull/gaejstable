@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2012-01-27 17:39+0200\n"
+"POT-Creation-Date: 2012-01-27 23:22+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -154,24 +154,7 @@ msgstr ""
 msgid "Last logged in:"
 msgstr ""
 
-#: auth/templates/auth/recover_finish.html:3
-msgid "Password recovery"
-msgstr ""
-
-#: auth/templates/auth/recover_finish.html:4
-msgid "reset your password here"
-msgstr ""
-
-#: auth/templates/auth/recover_finish.html:8
-#, python-format
-msgid "Choose new password for your account at %(site)s"
-msgstr ""
-
-#: auth/templates/auth/recover_finish.html:14
-msgid "Submit"
-msgstr ""
-
-#: auth/templates/auth/sign_in.html:3
+#: auth/templates/auth/sign_in.html:3 core/templates/core/base.html:30
 msgid "Sign In"
 msgstr ""
 
@@ -219,7 +202,8 @@ msgid "Sign Up!"
 msgstr ""
 
 #: auth/views/registration.py:37
-msgid "[{}] Account activation"
+#, python-format
+msgid "[%s] Account activation"
 msgstr ""
 
 #: auth/views/registration.py:69
@@ -231,19 +215,22 @@ msgid "There is no user with provided email or password"
 msgstr ""
 
 #: auth/views/registration.py:93
-msgid "[{}] Password recovery"
+#, python-format
+msgid "[%s] Password recovery"
 msgstr ""
 
-#: auth/views/registration.py:98
+#: auth/views/registration.py:97
+#, python-format
 msgid ""
-"We've just sent an email to <strong>{}</strong> with the special link for"
+"We've just sent an email to <strong>%s</strong> with the special link for"
 " you to reset lost password."
 msgstr ""
 
 #: auth/views/registration.py:121
+#, python-format
 msgid ""
 "Your didn't provide a token or it is no longer valid. <a "
-"href=\"{}\">Request password recovery</a> again please."
+"href=\"%s\">Request password recovery</a> again please."
 msgstr ""
 
 #: catalog/forms.py:9 catalog/forms.py:17
@@ -320,6 +307,34 @@ msgstr ""
 
 #: core/validators.py:26 lib/wtforms/validators.py:218
 msgid "Invalid email address."
+msgstr ""
+
+#: core/templates/core/base.html:20
+msgid "Manage catalog"
+msgstr ""
+
+#: core/templates/core/base.html:22
+msgid "Categories"
+msgstr ""
+
+#: core/templates/core/base.html:26
+msgid "Profile"
+msgstr ""
+
+#: core/templates/core/base.html:27
+msgid "Sign Out"
+msgstr ""
+
+#: core/templates/core/base.html:29
+msgid "Sign Up"
+msgstr ""
+
+#: core/templates/core/pagination.html:5
+msgid "Prev page"
+msgstr ""
+
+#: core/templates/core/pagination.html:8
+msgid "Next page"
 msgstr ""
 
 #: lib/argparse.py:313
@@ -615,13 +630,5 @@ msgstr ""
 
 #: lib/wtforms/ext/dateutil/fields.py:60
 msgid "Invalid date/time input"
-msgstr ""
-
-#: templates/pagination.html:5
-msgid "Prev page"
-msgstr ""
-
-#: templates/pagination.html:8
-msgid "Next page"
 msgstr ""
 
