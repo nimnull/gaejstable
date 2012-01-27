@@ -1,0 +1,660 @@
+# Russian translations for GAEJStable.
+# Copyright (C) 2012 Ddev
+# This file is distributed under the same license as the GAEJStable project.
+# Yegor Nazarkin <nimnull@gmail>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: GAEJStable 1.0\n"
+"Report-Msgid-Bugs-To: nimnull@gmail.com\n"
+"POT-Creation-Date: 2012-01-27 17:39+0200\n"
+"PO-Revision-Date: 2012-01-27 15:02+0200\n"
+"Last-Translator: Yegor Nazarkin <nimnull@gmail.com>\n"
+"Language-Team: ru <LL@li.org>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 0.9.6\n"
+
+#: auth/forms.py:13
+msgid "First Name"
+msgstr "Имя"
+
+#: auth/forms.py:13
+msgid "enter your first name here"
+msgstr "введите своё имя"
+
+#: auth/forms.py:15
+msgid "Last Name"
+msgstr "Фамилия"
+
+#: auth/forms.py:15
+msgid "enter your last name here"
+msgstr "введите свою фамилию"
+
+#: auth/forms.py:20 auth/forms.py:49
+msgid "Email"
+msgstr ""
+
+#: auth/forms.py:20
+msgid "enter your email address to sign in"
+msgstr "введите адрес email, он будет использоваться как логин"
+
+#: auth/forms.py:22
+msgid "Password"
+msgstr "Пароль"
+
+#: auth/forms.py:22
+msgid "provide your password to authenticate yourself"
+msgstr "укажите пароль"
+
+#: auth/forms.py:24
+msgid "We can't proceed without password"
+msgstr "Мы не сможем продолжить без пароля"
+
+#: auth/forms.py:29
+msgid "Your Email"
+msgstr "Ваш email"
+
+#: auth/forms.py:29
+msgid "email will acts as your login"
+msgstr "email будет использован как логин"
+
+#: auth/forms.py:31 auth/forms.py:61
+msgid "New Password"
+msgstr "Новый пароль"
+
+#: auth/forms.py:31
+msgid "chose a password for signing in"
+msgstr "укажите пароль"
+
+#: auth/forms.py:34
+msgid "Passwords must match"
+msgstr "Пароли должны совпадать"
+
+#: auth/forms.py:35
+msgid "Confirm Password"
+msgstr "Подтверждение пароля"
+
+#: auth/forms.py:35
+msgid "repeat your password entered above"
+msgstr "повторите пароль введенный выше"
+
+#: auth/forms.py:40
+msgid "this email has already taken"
+msgstr "такой email уже используется"
+
+#: auth/forms.py:49
+msgid "enter your email to get password reset link"
+msgstr "введите свой адрес email для получение ссылки на сброс пароля"
+
+#: auth/forms.py:54
+msgid "This user is not registered"
+msgstr "Такого пользователя не существует"
+
+#: auth/forms.py:61
+msgid "enter new password"
+msgstr "введите новый пароль"
+
+#: auth/forms.py:64
+msgid "Confirm New Password"
+msgstr "Подтверждение нового пароля"
+
+#: auth/forms.py:64
+msgid "repeat password entered above"
+msgstr "повторите пароль введенный выше"
+
+#: auth/templates/auth/profile_edit.html:3
+#: auth/templates/auth/profile_view.html:2
+msgid "This is your profile"
+msgstr "Это страничка с вашим профилем"
+
+#: auth/templates/auth/profile_edit.html:11
+#: catalog/templates/catalog/create_category.html:11
+#: catalog/templates/catalog/create_record.html:11
+msgid "Save"
+msgstr "Сохранить"
+
+#: auth/templates/auth/profile_edit.html:11 auth/templates/auth/sign_up.html:22
+#: catalog/templates/catalog/create_category.html:11
+#: catalog/templates/catalog/create_record.html:11
+msgid "Cancel"
+msgstr "Сбросить"
+
+#: auth/templates/auth/profile_setup.html:2
+msgid "Setup Profile"
+msgstr "Настройки профиля"
+
+#: auth/templates/auth/profile_setup.html:3
+msgid "Chose categories for filtering"
+msgstr "Выберите интересующие категории"
+
+#: auth/templates/auth/profile_toolbar.html:3
+msgid "View"
+msgstr "Просмотр"
+
+#: auth/templates/auth/profile_toolbar.html:4
+msgid "Edit"
+msgstr "Редактирование"
+
+#: auth/templates/auth/profile_toolbar.html:5
+msgid "Settings"
+msgstr "Настройки"
+
+#: auth/templates/auth/profile_view.html:11
+msgid "First name:"
+msgstr "Имя:"
+
+#: auth/templates/auth/profile_view.html:13
+msgid "Last name:"
+msgstr "Фамилия:"
+
+#: auth/templates/auth/profile_view.html:15
+msgid "Last logged in:"
+msgstr "Время последнего входа:"
+
+#: auth/templates/auth/recover_finish.html:3
+msgid "Password recovery"
+msgstr "Восстановление пароля"
+
+#: auth/templates/auth/recover_finish.html:4
+msgid "reset your password here"
+msgstr "здесь можно сбросить забытый пароль"
+
+#: auth/templates/auth/recover_finish.html:8
+#, python-format
+msgid "Choose new password for your account at %(site)s"
+msgstr "Выберите новый пароль для входа в %(site)s"
+
+#: auth/templates/auth/recover_finish.html:14
+msgid "Submit"
+msgstr "Сохранить"
+
+#: auth/templates/auth/sign_in.html:3
+msgid "Sign In"
+msgstr "Вход"
+
+#: auth/templates/auth/sign_in.html:4
+msgid "Site entrance is here"
+msgstr "Для продолжения нужно представиться"
+
+#: auth/templates/auth/sign_in.html:9
+msgid "If you fill yourself as been forgoten your password, proceed to the"
+msgstr "Если вы забыли пароль, пожалуйста, перейдите на"
+
+#: auth/templates/auth/sign_in.html:10
+msgid "password recover page"
+msgstr "страницу восстановления пароля"
+
+#: auth/templates/auth/sign_in.html:15
+msgid "Sign In!"
+msgstr "Войти!"
+
+#: auth/templates/auth/sign_up.html:3
+msgid "Sign up please"
+msgstr "Пожалуйста, зарегистрируйтесь"
+
+#: auth/templates/auth/sign_up.html:4
+msgid "Here you can create your account"
+msgstr "Здесь можно создать учетную запись"
+
+#: auth/templates/auth/sign_up.html:9
+msgid "Congratulations! You have already registered!"
+msgstr "Поздравляем! Вы уже зарегистрировались!"
+
+#: auth/templates/auth/sign_up.html:10
+#, python-format
+msgid ""
+"Please check your mailbox for a message with the activation link. After "
+"proceeding this link you will be able to login to the %(site)s"
+msgstr ""
+"На адрес вашей электронной почты отправлена ссылка для активацииучетной "
+"записи. Пройдите по этой ссылке для продолжения работы с %(site)s"
+
+#: auth/templates/auth/sign_up.html:19
+msgid "All fields are required. Please fill the form with care."
+msgstr "Все поля обязательны для заполнения. Пожалуйста, будьте внимательны."
+
+#: auth/templates/auth/sign_up.html:22
+msgid "Sign Up!"
+msgstr "Регистрироваться!"
+
+#: auth/views/registration.py:37
+msgid "[{}] Account activation"
+msgstr "[{}] Активация учетной записи"
+
+#: auth/views/registration.py:69
+msgid "Please activate your account first"
+msgstr "Пожалуйста, активируйте свою учетную запись"
+
+#: auth/views/registration.py:72
+msgid "There is no user with provided email or password"
+msgstr "Пользователь с этим email и паролем "
+
+#: auth/views/registration.py:93
+msgid "[{}] Password recovery"
+msgstr "[{}] Восстановление пароля"
+
+#: auth/views/registration.py:98
+msgid ""
+"We've just sent an email to <strong>{}</strong> with the special link for"
+" you to reset lost password."
+msgstr ""
+"Мы отправили вам письмо на адрес <strong>{}</strong> со специальной "
+"ссылкой для восстановления пароля."
+
+#: auth/views/registration.py:121
+msgid ""
+"Your didn't provide a token or it is no longer valid. <a "
+"href=\"{}\">Request password recovery</a> again please."
+msgstr ""
+"Секретный ключ не указан или такой ключ больше не действителен. <a "
+"href=\"{}\">Запросите восстановление пароля</a> еще раз."
+
+#: catalog/forms.py:9 catalog/forms.py:17
+msgid "Title"
+msgstr "Название"
+
+#: catalog/forms.py:9
+msgid "category title"
+msgstr "название раздела"
+
+#: catalog/forms.py:17 catalog/forms.py:19
+msgid "enter title for record"
+msgstr "введите название позиции"
+
+#: catalog/forms.py:19
+msgid "Description"
+msgstr "Описание"
+
+#: catalog/templates/catalog/_list_records.html:9
+#: catalog/templates/catalog/filtered_records.html:25
+msgid "unmark"
+msgstr "снять отметку"
+
+#: catalog/templates/catalog/_list_records.html:9
+#: catalog/templates/catalog/filtered_records.html:28
+msgid "mark"
+msgstr "отметить"
+
+#: catalog/templates/catalog/create_category.html:2
+msgid "Add New Category"
+msgstr "Добавить раздел"
+
+#: catalog/templates/catalog/create_category.html:8
+msgid "Please, fill the category title with care"
+msgstr "Пожалуйста, заполните название раздела"
+
+#: catalog/templates/catalog/create_record.html:3
+#, python-format
+msgid "Create record for %(cat)s category"
+msgstr "Создать позицию в разделе %(cat)s"
+
+#: catalog/templates/catalog/create_record.html:8
+msgid "All fields are required"
+msgstr "Все поля обязательны к заполнению."
+
+#: catalog/templates/catalog/filtered_records.html:3
+msgid "Records"
+msgstr "Позиции"
+
+#: catalog/templates/catalog/filtered_records.html:12
+msgid "View selected records"
+msgstr "Просмотреть выбранные позиции"
+
+#: catalog/templates/catalog/list_categories.html:2
+msgid "Categories list"
+msgstr "Список разделов"
+
+#: catalog/templates/catalog/list_categories.html:18
+msgid "Add Category"
+msgstr "Добавить раздел"
+
+#: catalog/templates/catalog/list_records.html:3
+#, python-format
+msgid "%(cat)s records"
+msgstr "%(cat)s - позиции"
+
+#: catalog/templates/catalog/list_records.html:13
+msgid "Add Record"
+msgstr "Добавить позицию"
+
+#: catalog/templates/catalog/selected_records.html:3
+msgid "Selected records"
+msgstr "Выбранные позиции"
+
+#: core/validators.py:26 lib/wtforms/validators.py:218
+msgid "Invalid email address."
+msgstr "Неправильный адрес электронной почты."
+
+#: lib/argparse.py:313
+msgid "usage: "
+msgstr "использование:"
+
+#: lib/argparse.py:821
+msgid ".__call__() not defined"
+msgstr ""
+
+#: lib/argparse.py:1105
+#, python-format
+msgid "unknown parser %r (choices: %s)"
+msgstr ""
+
+#: lib/argparse.py:1146
+#, python-format
+msgid "argument \"-\" with mode %r"
+msgstr ""
+
+#: lib/argparse.py:1349
+#, python-format
+msgid "cannot merge actions - two groups are named %r"
+msgstr ""
+
+#: lib/argparse.py:1387
+msgid "'required' is an invalid argument for positionals"
+msgstr ""
+
+#: lib/argparse.py:1407
+#, python-format
+msgid "invalid option string %r: must start with a character %r"
+msgstr ""
+
+#: lib/argparse.py:1428
+#, python-format
+msgid "dest= is required for options like %r"
+msgstr ""
+
+#: lib/argparse.py:1445
+#, python-format
+msgid "invalid conflict_resolution value: %r"
+msgstr ""
+
+#: lib/argparse.py:1463
+#, python-format
+msgid "conflicting option string(s): %s"
+msgstr ""
+
+#: lib/argparse.py:1526
+msgid "mutually exclusive arguments must be optional"
+msgstr ""
+
+#: lib/argparse.py:1596
+msgid "positional arguments"
+msgstr ""
+
+#: lib/argparse.py:1597
+msgid "optional arguments"
+msgstr ""
+
+#: lib/argparse.py:1615
+msgid "show this help message and exit"
+msgstr ""
+
+#: lib/argparse.py:1621
+msgid "show program's version number and exit"
+msgstr ""
+
+#: lib/argparse.py:1653
+msgid "cannot have multiple subparser arguments"
+msgstr ""
+
+#: lib/argparse.py:1705
+#, python-format
+msgid "unrecognized arguments: %s"
+msgstr ""
+
+#: lib/argparse.py:1802
+#, python-format
+msgid "not allowed with argument %s"
+msgstr ""
+
+#: lib/argparse.py:1848 lib/argparse.py:1862
+#, python-format
+msgid "ignored explicit argument %r"
+msgstr ""
+
+#: lib/argparse.py:1952
+msgid "too few arguments"
+msgstr ""
+
+#: lib/argparse.py:1959
+#, python-format
+msgid "argument %s is required"
+msgstr ""
+
+#: lib/argparse.py:1973
+#, python-format
+msgid "one of the arguments %s is required"
+msgstr ""
+
+#: lib/argparse.py:2019
+msgid "expected one argument"
+msgstr ""
+
+#: lib/argparse.py:2020
+msgid "expected at most one argument"
+msgstr ""
+
+#: lib/argparse.py:2021
+msgid "expected at least one argument"
+msgstr ""
+
+#: lib/argparse.py:2023
+#, python-format
+msgid "expected %s argument(s)"
+msgstr ""
+
+#: lib/argparse.py:2080
+#, python-format
+msgid "ambiguous option: %s could match %s"
+msgstr ""
+
+#: lib/argparse.py:2142
+#, python-format
+msgid "unexpected option string: %s"
+msgstr ""
+
+#: lib/argparse.py:2243
+#, python-format
+msgid "%r is not callable"
+msgstr ""
+
+#: lib/argparse.py:2259
+#, python-format
+msgid "invalid %s value: %r"
+msgstr ""
+
+#: lib/argparse.py:2269
+#, python-format
+msgid "invalid choice: %r (choose from %s)"
+msgstr ""
+
+#: lib/argparse.py:2362
+#, python-format
+msgid "%s: error: %s\n"
+msgstr ""
+
+#: lib/flaskext/wtf/recaptcha/widgets.py:67
+msgid "Get a visual challenge"
+msgstr ""
+
+#: lib/flaskext/wtf/recaptcha/widgets.py:68
+msgid "Get an audio challenge"
+msgstr ""
+
+#: lib/flaskext/wtf/recaptcha/widgets.py:69
+msgid "Get a new challenge"
+msgstr ""
+
+#: lib/flaskext/wtf/recaptcha/widgets.py:70
+msgid "Type the two words:"
+msgstr ""
+
+#: lib/flaskext/wtf/recaptcha/widgets.py:71
+msgid "Type what you hear:"
+msgstr ""
+
+#: lib/flaskext/wtf/recaptcha/widgets.py:72
+msgid "Help"
+msgstr ""
+
+#: lib/flaskext/wtf/recaptcha/widgets.py:73
+msgid "Play sound again"
+msgstr ""
+
+#: lib/flaskext/wtf/recaptcha/widgets.py:74
+msgid "Download sound as MP3"
+msgstr ""
+
+#: lib/flaskext/wtf/recaptcha/widgets.py:75
+msgid "Incorrect. Try again."
+msgstr ""
+
+#: lib/wtforms/fields.py:404
+msgid "Invalid Choice: could not coerce"
+msgstr "Непревильный вариант"
+
+#: lib/wtforms/fields.py:411 lib/wtforms/ext/appengine/fields.py:74
+#: lib/wtforms/ext/django/fields.py:90
+msgid "Not a valid choice"
+msgstr "Неправильный вариант"
+
+#: lib/wtforms/fields.py:437
+msgid "Invalid choice(s): one or more data inputs could not be coerced"
+msgstr "Выбран неправильный вариант(ы)"
+
+#: lib/wtforms/fields.py:444
+#, python-format
+msgid "'%(value)s' is not a valid choice for this field"
+msgstr "Значение '%(value)s' некорректно"
+
+#: lib/wtforms/fields.py:528
+msgid "Not a valid integer value"
+msgstr "Неправильное числовое значение"
+
+#: lib/wtforms/fields.py:573
+msgid "Not a valid decimal value"
+msgstr "Неправильное дробное значение"
+
+#: lib/wtforms/fields.py:597
+msgid "Not a valid float value"
+msgstr "Неправильное дробное значение"
+
+#: lib/wtforms/validators.py:51
+#, python-format
+msgid "Invalid field name '%s'."
+msgstr "Неправильное название поля '%s'."
+
+#: lib/wtforms/validators.py:58
+#, python-format
+msgid "Field must be equal to %(other_name)s."
+msgstr "Это значение и %(other_name)s должны быть равны"
+
+#: lib/wtforms/validators.py:90
+#, python-format
+msgid "Field must be at least %(min)d character long."
+msgid_plural "Field must be at least %(min)d characters long."
+msgstr[0] "Поле должно быть не короче %(min)d символа"
+msgstr[1] "Поле должно быть не короче %(min)d символов"
+msgstr[2] "Поле должно быть не короче %(min)d символов"
+
+#: lib/wtforms/validators.py:93
+#, python-format
+msgid "Field cannot be longer than %(max)d character."
+msgid_plural "Field cannot be longer than %(max)d characters."
+msgstr[0] "Размер поля не может быть больше %(max)d символа"
+msgstr[1] "Размер поля не может быть больше %(max)d символов"
+msgstr[2] "Размер поля не может быть больше %(max)d символов"
+
+#: lib/wtforms/validators.py:96
+#, python-format
+msgid "Field must be between %(min)d and %(max)d characters long."
+msgstr "Размер поля должен быть от %(min)d до %(max)d символов"
+
+#: lib/wtforms/validators.py:131
+#, python-format
+msgid "Number must be greater than %(min)s."
+msgstr "Число должно быть больше %(min)s"
+
+#: lib/wtforms/validators.py:133
+#, python-format
+msgid "Number must be less than %(max)s."
+msgstr "Число должно быть меньше %(max)s"
+
+#: lib/wtforms/validators.py:135
+#, python-format
+msgid "Number must be between %(min)s and %(max)s."
+msgstr "Число должно быть от %(min)s до %(max)s."
+
+#: lib/wtforms/validators.py:171
+msgid "This field is required."
+msgstr "Заполнить обязательно."
+
+#: lib/wtforms/validators.py:199
+msgid "Invalid input."
+msgstr "Неверное значение."
+
+#: lib/wtforms/validators.py:235
+msgid "Invalid IP address."
+msgstr "Неверный IP адрес."
+
+#: lib/wtforms/validators.py:260
+msgid "Invalid URL."
+msgstr "Неверная ссылка"
+
+#: lib/wtforms/validators.py:287
+#, python-format
+msgid "Invalid value, must be one of: %(values)s."
+msgstr "Неверное значение, ожидается один из вариантов: %(values)s"
+
+#: lib/wtforms/validators.py:314
+#, python-format
+msgid "Invalid value, can't be any of: %(values)s."
+msgstr "Неверное значение, любой вариант кроме: %(values)s"
+
+#: lib/wtforms/ext/appengine/fields.py:93
+msgid "Not a valid list"
+msgstr "Неверный список"
+
+#: lib/wtforms/ext/dateutil/fields.py:48
+msgid "Please input a date/time value"
+msgstr "Введите дату/время"
+
+#: lib/wtforms/ext/dateutil/fields.py:60
+msgid "Invalid date/time input"
+msgstr "Неверное значение для даты/времени"
+
+#: templates/pagination.html:5
+msgid "Prev page"
+msgstr "Назад"
+
+#: templates/pagination.html:8
+msgid "Next page"
+msgstr "Вперед"
+
+#: templates/base.html:12
+msgid "Manage catalog"
+msgstr "Управление каталогом"
+
+#: templates/base.html:14
+msgid "Categories"
+msgstr "Разделы"
+
+#: templates/base.html:18
+msgid "Profile"
+msgstr "Профиль"
+
+#: templates/base.html:19
+msgid "Sign Out"
+msgstr "Выход"
+
+#: templates/base.html:21
+msgid "Sign Up"
+msgstr "Регистрация"
+
+#: templates/base.html:22
+msgid "Sign In"
+msgstr "Вход"
+
