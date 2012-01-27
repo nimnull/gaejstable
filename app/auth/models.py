@@ -4,10 +4,14 @@ from datetime import datetime
 from ndb import model
 from time import mktime
 
+from app import app
 from .utils import get_hexdigest
 
 
 class User(model.Model):
+    DEFAULT_LOCALE = app.config['BABEL_DEFAULT_LOCALE']
+    DEFAULT_TIMEZONE = app.config['BABEL_DEFAULT_TIMEZONE']
+    LANG_CHOICES = app.config['LANGUAGES'].keys()
     username = model.StringProperty(required=True, indexed=True)
     password = model.StringProperty(required=True)
     first_name = model.StringProperty(required=True)
@@ -15,6 +19,8 @@ class User(model.Model):
     created_at = model.DateTimeProperty(auto_now_add=True)
     logged_at = model.DateTimeProperty()
     is_active = model.BooleanProperty(default=False)
+    locale = model.StringProperty(default=DEFAULT_LOCALE,
+            choices=LANG_CHOICES)
 
     @classmethod
     def create(cls, username, password, first_name, last_name):
