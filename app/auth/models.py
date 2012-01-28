@@ -33,12 +33,12 @@ class User(model.Model):
             return None
 
     @classmethod
-    def check_password(cls, username, raw_password):
+    def check_password(cls, username, password):
         user = cls.query(cls.username == username.lower()).get()
         if user is None:
             return False
         algo, salt, hsh = user.password.split('$')
-        if hsh == get_hexdigest(algo, salt, raw_password):
+        if hsh == get_hexdigest(algo, salt, password):
             return user
         return False
 
