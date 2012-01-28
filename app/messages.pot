@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2012-01-28 01:22+0200\n"
+"POT-Creation-Date: 2012-01-28 17:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -150,6 +150,30 @@ msgstr ""
 msgid "Last logged in:"
 msgstr ""
 
+#: auth/templates/auth/recover_ask.html:3
+msgid "Password recovery"
+msgstr ""
+
+#: auth/templates/auth/recover_ask.html:9
+msgid ""
+"Check your email inbox or try to request password recovery again a bit "
+"later."
+msgstr ""
+
+#: auth/templates/auth/recover_ask.html:13
+msgid "Here you can request a link for password reset."
+msgstr ""
+
+#: auth/templates/auth/recover_ask.html:14
+msgid ""
+"We'll send a special link to the email you provided us with at the "
+"signing up time."
+msgstr ""
+
+#: auth/templates/auth/recover_ask.html:18
+msgid "Confirm"
+msgstr ""
+
 #: auth/templates/auth/sign_in.html:3 templates/base.html:30
 msgid "Sign In"
 msgstr ""
@@ -163,7 +187,7 @@ msgid "If you fill yourself as been forgoten your password, proceed to the"
 msgstr ""
 
 #: auth/templates/auth/sign_in.html:10
-msgid "password recover page"
+msgid "password recovery page"
 msgstr ""
 
 #: auth/templates/auth/sign_in.html:15
@@ -197,6 +221,43 @@ msgstr ""
 msgid "Sign Up!"
 msgstr ""
 
+#: auth/templates/auth/email/activate.html:1
+#, python-format
+msgid ""
+"\n"
+"Hello, %(user)s!\n"
+"\n"
+"You have to confirm your email address to activate your account at "
+"%(site)s.\n"
+"Please, follow this link to do that: http://%(hostname)s%(path)s\n"
+"\n"
+"You don't need to reply on this message. If you have a quesions - follow "
+"the suppor email address listed at %(site)s.\n"
+"\n"
+"--\n"
+"Sincerely yours, %(site)s team."
+msgstr ""
+
+#: auth/templates/auth/email/recovery.html:2
+#, python-format
+msgid ""
+"\n"
+"Hello, %(user)s!\n"
+"\n"
+"You've requested password recovery for %(site)s.\n"
+"If this is not you want or you didn't request recovery, just delete this "
+"message.\n"
+"Elsewere, please follow the link to get the page where you can set a new "
+"password for you account:\n"
+"http://%(hostname)s%(path)s\n"
+"\n"
+"You don't need to reply on this message. If you have a quesions - follow "
+"the suppor email address listed at %(site)s.\n"
+"\n"
+"--\n"
+"Sincerely yours, %(site)s team."
+msgstr ""
+
 #: auth/views/registration.py:37
 #, python-format
 msgid "[%s] Account activation"
@@ -212,17 +273,17 @@ msgstr ""
 
 #: auth/views/registration.py:93
 #, python-format
-msgid "[%s] Password recovery"
+msgid "[%(title)s] Password recovery"
 msgstr ""
 
 #: auth/views/registration.py:97
 #, python-format
 msgid ""
-"We've just sent an email to <strong>%s</strong> with the special link for"
-" you to reset lost password."
+"We've just sent an email to <strong>%(username)s</strong> with the "
+"special link for you to reset lost password."
 msgstr ""
 
-#: auth/views/registration.py:121
+#: auth/views/registration.py:119
 #, python-format
 msgid ""
 "Your didn't provide a token or it is no longer valid. <a "
@@ -265,7 +326,7 @@ msgstr ""
 
 #: catalog/templates/catalog/create_record.html:3
 #, python-format
-msgid "Create record for %(cat)s category"
+msgid "Create record for category %(cat)s"
 msgstr ""
 
 #: catalog/templates/catalog/create_record.html:8
@@ -598,6 +659,14 @@ msgstr ""
 
 #: lib/wtforms/ext/dateutil/fields.py:60
 msgid "Invalid date/time input"
+msgstr ""
+
+#: templates/404.html:3
+msgid "Page Not Found"
+msgstr ""
+
+#: templates/404.html:9
+msgid "We couldn't find the page you requested."
 msgstr ""
 
 #: templates/base.html:20
