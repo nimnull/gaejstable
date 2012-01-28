@@ -136,15 +136,18 @@ class Record(model.Model, LocalPagedMixin):
                 -cls.key, -cls.created_at)
 
     @classmethod
-    def create(cls, title, description, category):
+    def create(cls, locale_dict, category):
         if isinstance(category, unicode):
             cat_key = key.Key(urlsafe=category)
         else:
             cat_key = category.key
-        entity = Record(title_s=[LangValue(lang=g.lang, value=title)],
-               description_s=[LangValue(lang=g.lang, value=description)],
-               category=cat_key)
-        return entity.put().get()
+        kwargs = {'category': cat_key}
+        for lang, values in locale_dict.iteritems():
+            for field, value in values.iteritems():
+                field_list = kwargs.get('%s_s' % field, [])
+                field_list.append(LangValue(lang=lang, value=value))
+                kwargs['%s_s' % field] = field_list
+        return Record(**kwargs).put().get()
 
 
 class User2Record(model.Model, PagedMixin):

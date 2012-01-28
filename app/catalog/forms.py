@@ -21,5 +21,7 @@ class RecordForm(Form):
     category = HiddenField(validators=[validators.Required()])
 
     def save(self):
-        return Record.create(self.title.data, self.description.data,
-                self.category.data)
+        return Record.create({
+            g.lang: {'title': self.title.data,
+                     'description': self.description.data}},
+            self.category.data)
