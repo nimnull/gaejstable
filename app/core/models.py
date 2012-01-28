@@ -1,6 +1,8 @@
+from flask import g
 from ndb import model
 
 from app import app
+from .pagination import Pager
 
 
 LANG_CHOICES = app.config['LANGUAGES']
@@ -28,3 +30,29 @@ class Unique(model.Model):
         entity = cls(key=model.Key(cls, value))
         txn = lambda: entity.put() if not entity.key.get() else None
         return model.transaction(txn) or None
+
+
+class PagedMixin(object):
+
+    @classmethod
+    def paginate(cls, query, page_size=20):
+        pager = Pager(query=query)
+        entities, _, _ = pager.paginate(page_size)
+        return entities, pager
+
+
+class LocalPagedMixin(PagedMixin):
+
+    @classmethod
+    def get_localized(cls, lang_code):
+        return cls.query(cls.title_s.lang == lang_code)
+
+    @classmethod
+    def paginate(cls, query=None, page_size=20):
+        q = query or cls.get_localized(g.lang)
+        return PagedMixin.paginate(q, page_size)
+
+    def __getattr__(self, name):
+        attr_s = getattr(self, '%s_s' % name)
+        lvs = filter(lambda lv: lv.lang == g.lang, attr_s)
+        return len(lvs) and lvs[0].value or ''

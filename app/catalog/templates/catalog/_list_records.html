@@ -8,7 +8,11 @@
       <a href="{{ url_for('.mark_record', key=record.key.urlsafe()) }}">
         {%- if record.is_marked %}{{ _('unmark') }}{%- else %}{{ _('mark') }}{%- endif %}</a>
     </div>
-    <p>{{ record.description }}</p>
+    <p>{{ record.description|safe }}</p>
+    <p>
+      {%- for tag in record.local_tags %}
+      <span class="label"><a href="#">{{ tag }}</a></span>
+      {%- endfor %}
   </div>
   {%- endfor %}
 {%- endmacro %}

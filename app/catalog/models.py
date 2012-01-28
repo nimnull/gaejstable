@@ -6,35 +6,8 @@ from app import app
 
 from auth.models import User
 
-from core.models import LangValue, Unique
-from core.pagination import Pager
+from core.models import LangValue, Unique, PagedMixin, LocalPagedMixin
 from core.slugify import get_unique_slug
-
-
-class PagedMixin(object):
-
-    @classmethod
-    def paginate(cls, query, page_size=20):
-        pager = Pager(query=query)
-        entities, _, _ = pager.paginate(page_size)
-        return entities, pager
-
-
-class LocalPagedMixin(PagedMixin):
-
-    @classmethod
-    def get_localized(cls, lang_code):
-        return cls.query(cls.title_s.lang == lang_code)
-
-    @classmethod
-    def paginate(cls, query=None, page_size=20):
-        q = query or cls.get_localized(g.lang)
-        return PagedMixin.paginate(q, page_size)
-
-    def __getattr__(self, name):
-        attr_s = getattr(self, '%s_s' % name)
-        lvs = filter(lambda lv: lv.lang == g.lang, attr_s)
-        return len(lvs) and lvs[0].value or ''
 
 
 class Category(model.Model, LocalPagedMixin):
@@ -115,6 +88,11 @@ class Record(model.Model, LocalPagedMixin):
     description_s = model.StructuredProperty(LangValue, repeated=True)
     created_at = model.DateTimeProperty(auto_now_add=True)
     category = model.KeyProperty(kind=Category)
+    tags = model.StructuredProperty(LangValue, repeated=True)
+
+    @property
+    def local_tags(self):
+        return [tag.value for tag in self.tags if tag.lang == g.lang]
 
     @property
     @context.toplevel
@@ -136,12 +114,15 @@ class Record(model.Model, LocalPagedMixin):
                 -cls.key, -cls.created_at)
 
     @classmethod
-    def create(cls, locale_dict, category):
+    def create(cls, locale_dict, category, tags_dict):
+        tags = [LangValue(lang=lang, value=tag) for lang, tags
+                in tags_dict.iteritems() for tag in tags]
+
         if isinstance(category, unicode):
             cat_key = key.Key(urlsafe=category)
         else:
             cat_key = category.key
-        kwargs = {'category': cat_key}
+        kwargs = {'category': cat_key, 'tags': tags}
         for lang, values in locale_dict.iteritems():
             for field, value in values.iteritems():
                 field_list = kwargs.get('%s_s' % field, [])

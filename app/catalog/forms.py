@@ -19,9 +19,12 @@ class RecordForm(Form):
     description = TextAreaField(_('Description'), description=_('enter title '
         'for record'), validators=[validators.Required()])
     category = HiddenField(validators=[validators.Required()])
+    tags = TextField(_('Tags', description=_('enter tags separated by '
+        'commas')))
 
     def save(self):
+        tags = [item.strip() for item in  self.tags.data.split(',')]
         return Record.create({
             g.lang: {'title': self.title.data,
                      'description': self.description.data}},
-            self.category.data)
+            self.category.data, tags_dict={g.lang: tags})
