@@ -40,8 +40,8 @@ class SignUpForm(UserBaseForm, SignInForm):
 
 
 class ProfileForm(UserBaseForm):
-    language = SelectField(_('language'), description=_('select '
-        'locale', choice=app.config['LANGUAGES']))
+    locale = SelectField(_('language'), description=_('select '
+        'locale'), choices=app.config['LANGUAGES'].items())
 
 
 class AskRecoverForm(Form):
