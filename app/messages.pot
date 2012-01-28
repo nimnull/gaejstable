@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2012-01-28 18:58+0200\n"
+"POT-Creation-Date: 2012-01-28 19:26+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -112,7 +112,7 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: auth/templates/auth/profile_edit.html:11 auth/templates/auth/sign_up.html:22
+#: auth/templates/auth/profile_edit.html:11 auth/templates/auth/sign_up.html:25
 #: catalog/templates/catalog/create_category.html:11
 #: catalog/templates/catalog/create_record.html:11
 msgid "Cancel"
@@ -206,18 +206,19 @@ msgstr ""
 msgid "Congratulations! You have already registered!"
 msgstr ""
 
-#: auth/templates/auth/sign_up.html:10
+#: auth/templates/auth/sign_up.html:11
 #, python-format
 msgid ""
-"Please check your mailbox for a message with the activation link. After "
-"proceeding this link you will be able to login to the %(site)s"
-msgstr ""
-
-#: auth/templates/auth/sign_up.html:19
-msgid "All fields are required. Please fill the form with care."
+"Please check your mailbox for a message with the activation link.\n"
+"      After proceeding this link you will be able to login to the\n"
+"      %(site)s"
 msgstr ""
 
 #: auth/templates/auth/sign_up.html:22
+msgid "All fields are required. Please fill the form with care."
+msgstr ""
+
+#: auth/templates/auth/sign_up.html:25
 msgid "Sign Up!"
 msgstr ""
 

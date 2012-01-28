@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GAEJStable 1.0\n"
 "Report-Msgid-Bugs-To: nimnull@gmail.com\n"
-"POT-Creation-Date: 2012-01-28 18:58+0200\n"
+"POT-Creation-Date: 2012-01-28 19:26+0200\n"
 "PO-Revision-Date: 2012-01-27 15:02+0200\n"
 "Last-Translator: Yegor Nazarkin <nimnull@gmail.com>\n"
 "Language-Team: ru <LL@li.org>\n"
@@ -113,7 +113,7 @@ msgstr "Это страничка с вашим профилем"
 msgid "Save"
 msgstr "Сохранить"
 
-#: auth/templates/auth/profile_edit.html:11 auth/templates/auth/sign_up.html:22
+#: auth/templates/auth/profile_edit.html:11 auth/templates/auth/sign_up.html:25
 #: catalog/templates/catalog/create_category.html:11
 #: catalog/templates/catalog/create_record.html:11
 msgid "Cancel"
@@ -212,20 +212,21 @@ msgstr "Здесь можно создать учетную запись"
 msgid "Congratulations! You have already registered!"
 msgstr "Поздравляем! Вы уже зарегистрировались!"
 
-#: auth/templates/auth/sign_up.html:10
+#: auth/templates/auth/sign_up.html:11
 #, python-format
 msgid ""
-"Please check your mailbox for a message with the activation link. After "
-"proceeding this link you will be able to login to the %(site)s"
+"Please check your mailbox for a message with the activation link.\n"
+"      After proceeding this link you will be able to login to the\n"
+"      %(site)s"
 msgstr ""
-"На адрес вашей электронной почты отправлена ссылка для активацииучетной "
+"На адрес вашей электронной почты отправлена ссылка для активации учетной "
 "записи. Пройдите по этой ссылке для продолжения работы с %(site)s"
 
-#: auth/templates/auth/sign_up.html:19
+#: auth/templates/auth/sign_up.html:22
 msgid "All fields are required. Please fill the form with care."
 msgstr "Все поля обязательны для заполнения. Пожалуйста, будьте внимательны."
 
-#: auth/templates/auth/sign_up.html:22
+#: auth/templates/auth/sign_up.html:25
 msgid "Sign Up!"
 msgstr "Регистрироваться!"
 

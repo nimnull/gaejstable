@@ -7,9 +7,12 @@
 <div class="row">
   <div class="span16">
     <h4>{{ _('Congratulations! You have already registered!') }}</h4>
-    <p>{{ _('Please check your mailbox for a message with the activation '
-    'link. After proceeding this link you will be able to login to the '
-    '%(site)s')|format(site=config.SITE_TITLE) }}
+    <p>
+      {%- trans site=config.SITE_TITLE -%}
+      Please check your mailbox for a message with the activation link.
+      After proceeding this link you will be able to login to the
+      {{ site }}
+      {%- endtrans -%}
     </p>
   </div>
 </div>
