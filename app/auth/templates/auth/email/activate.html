@@ -1,8 +1,11 @@
-{{ _('Hello') }}, {{ user.first_name }}!
+{% trans site=config.SITE_TITLE, hostname=hostname, path=url_for('auth.activate', token=user.create_token()), user=user.first_name %}
+Hello, {{ user }}!
 
-{{ _('You have to confirm your email address to activate your account at %(site)s')|format(site=SITE_TITLE) }}.
-{{ _('Please, follow this link: http://%(hostname)s%(path)s')|format(hostname=hostname, path=url_for('auth.activate', token=user.create_token())) }}
-{{ _('Please, don't reply this message, follow the suppor email address listed at %(hostname)s')|format(hostname=hostname) }}.
+You have to confirm your email address to activate your account at {{ site }}.
+Please, follow this link to do that: http://{{ hostname }}{{ path }}
+
+You don't need to reply on this message. If you have a quesions - follow the suppor email address listed at {{ site }}.
 
 --
-{{ _('Sincerely yours, %(site)s team.')|format(site=config.SITE_TITLE) }}
+Sincerely yours, {{ site }} team.
+{%- endtrans %}

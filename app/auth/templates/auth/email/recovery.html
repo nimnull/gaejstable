@@ -1,10 +1,14 @@
-{{ _('Hello') }}, {{ user.first_name }}!
+{%- set recover_url = url_for('auth.finish_recovery', token=user.create_token()) %}
+{%- trans site=config.SITE_TITLE, hostname=hostname, path=recover_url, user=user.first_name %}
+Hello, {{ user }}!
 
-{{ _('You've requested password recovery for %(site)s. If this is not you want or you didn't do that, just delete this message.')|format(site=site) }}
-{{ _('Elsewere, please follow the link to get the page where you can set a new password for you account:') }}
-{{ _('http://%(hostname)s%(path)s')|format(hostname=hostname,path=url_for('auth.finish_recovery', token=user.create_token()) }}
+You've requested password recovery for {{  site }}.
+If this is not you want or you didn't request recovery, just delete this message.
+Elsewere, please follow the link to get the page where you can set a new password for you account:
+http://{{ hostname }}{{ path }}
 
-{{ _('Please, don't reply this message, follow the suppor email address listed at %(hostname)s')|format(hostname=hostname) }}.
+You don't need to reply on this message. If you have a quesions - follow the suppor email address listed at {{ site }}.
 
 --
-{{ _('Sincerely yours, %(site)s team.')|format(site=config.SITE_TITLE) }}
+Sincerely yours, {{ site }} team.
+{%- endtrans %}

@@ -5,7 +5,7 @@
   <head>
     <title>{% block title %}{{ page_title }}{% endblock %} - {{ config.SITE_TITLE }}</title>
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
-    {{ css_all }}
+    {{ css_all() }}
     {% block css_extra %}{% endblock -%}
   </head>
   <body>

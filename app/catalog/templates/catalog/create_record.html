@@ -1,6 +1,6 @@
 {%- extends "base.html" %}
 {% from "_base_macro.html" import render_form %}
-{%- set page_title = _("Create record for %(cat)s category")|format(cat=category.title) %}
+{%- set page_title = _("Create record for category %(cat)s", cat=category.title) %}
 {%- set create_record = url_for('.create_record', key=category.key.urlsafe()) %}
 {%- block content %}
 <div class="row">

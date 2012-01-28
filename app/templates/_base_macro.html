@@ -37,8 +37,8 @@
 </form>
 {%- endmacro %}
 {%- macro flash_messages() %}
-  {%- for category, message in get_flashed_messages(with_categories=true) %}
-  <div class="alert-message {{ category }} fade in" data-alert="alert">
+  {%- for type, message in get_flashed_messages(with_categories=true) %}
+  <div class="alert-message {{ type }} fade in" data-alert="alert">
     <a class="close" href="#">×</a>
     <p>{{ message|safe }}</p>
   </div>

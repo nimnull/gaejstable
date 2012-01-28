@@ -1,18 +1,18 @@
 {%- extends "base.html" %}
 {%- from "_base_macro.html" import render_form, flash_messages %}
-{%- set page_title = _('Sign In') %}
-{%- set page_description = _('Site entrance is here') %}
+{%- set page_title = _("Sign In") %}
+{%- set page_description = _("Site entrance is here") %}
 {%- block content %}
 <div class="row">
   <div class="span4">
     <p>
-    {{ _('If you fill yourself as been forgoten your password, proceed to the') }}
-    <a href="{{ url_for('.ask_recovery') }}">{{ _('password recover page') }}</a>.
+    {{ _("If you fill yourself as been forgoten your password, proceed to the") }}
+    <a href="{{ url_for('.ask_recovery') }}">{{ _("password recovery page") }}</a>.
     </p>
   </div>
   <div class="span12">
     {{ flash_messages() }}
-    {{ render_form(form, '.sign_in', _('Sign In!')) }}
+    {{ render_form(form, '.sign_in', _("Sign In!")) }}
   </div>
 </div>
 {%- endblock content %}
