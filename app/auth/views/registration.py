@@ -1,6 +1,6 @@
 import uuid
 from flask import flash, g, request, redirect, session, url_for
-from flaskext.babel import lazy_gettext as _
+from flaskext.babel import gettext as _
 
 from google.appengine.api import app_identity
 
@@ -90,13 +90,13 @@ def ask_recovery():
     if request.method == 'POST' and form.validate():
         user = form.get_user()
         email.send(rcpt=user.username,
-            subject=_("[%s] Password recovery" % SITE_TITLE),
+            subject=_("[%(title)s] Password recovery", title=SITE_TITLE),
             template='auth/email/recovery.html',
             context={'user': user, 'hostname': HOSTNAME}
         )
-        flash(_("We've just sent an email to <strong>%s</strong> with "
-                "the special link for you to reset lost password." %
-                user.username), category='success')
+        flash(_("We've just sent an email to <strong>%(username)s</strong> with "
+                "the special link for you to reset lost password.",
+                username=user.username), category='success')
         session['recover_sent'] = True
         return redirect(url_for('.ask_recovery'))
     return {'form': form, }
@@ -117,6 +117,6 @@ def finish_recovery():
         login(user)
         return redirect(url_for('.view_profile'))
     flash(_('Your didn\'t provide a token or it is no longer valid. <a '
-            'href="%s">Request password recovery</a> again please.' %
-            url_for('.ask_recovery')), category='warning')
+            'href="%s">Request password recovery</a> again please.') %
+            url_for('.ask_recovery'), category='warning')
     return {}
