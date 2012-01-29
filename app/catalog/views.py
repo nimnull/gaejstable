@@ -1,4 +1,6 @@
+from google.appengine.ext import blobstore
 from flask import g, jsonify, request, redirect, url_for
+from flaskext.babel import gettext as _
 from ndb import context, tasklets
 
 from auth.decorators import login_required
@@ -6,7 +8,7 @@ from auth.decorators import login_required
 from core.decorators import render_to
 from . import catalog
 from .forms import CategoryForm, RecordForm
-from .models import Category, Record, User2Category, User2Record
+from .models import Category, Record, User2Category, User2Record, Tag
 
 
 @catalog.route('/cats/create', methods=['GET', 'POST'])
@@ -33,14 +35,20 @@ def list_categories():
 @login_required
 @render_to()
 def create_record(key=None):
+    upload_url = blobstore.create_upload_url(url_for('.create_record'))
     form = RecordForm(len(request.form) and request.form or None,
             category=key)
     if request.method == 'POST' and form.validate():
-        form.save()
+        file_info = len(request.files) and request.files['attachment'] or None
+        if file_info is not None:
+            file_info = file_info.mimetype_params['blob-key']
+        form.save(file_info)
         return redirect(url_for('.list_records', key=form.category.data))
     else:
-        category = Category.get_by_urlsafe(key)
-        return {'form': form, 'category': category}
+        category = Category.get(key)
+        return {'form': form,
+                'category': category,
+                'upload_url': upload_url}
 
 
 @catalog.route('/cats/<key>/records')
@@ -67,7 +75,8 @@ def filtered_records():
             lambda u2c: u2c.category)
     count = yield User2Record.relations(g.user).count_async(1)
     categories = yield categories
-    response = {'count': count}
+    tags, pager = Tag.paginate()
+    response = {'count': count, 'tags': tags}
     if len(categories):
         records, pager = Record.paginate(Record.for_categories(categories))
         response.update({'records': records, 'pager': pager})
@@ -93,7 +102,6 @@ def mark_record():
         raise tasklets.Return(jsonify({'status': 'error'}))
     response = {'status': 'success'}
     record_q = User2Record.relations(g.user, key_safe)
-    count_q = User2Record.relations(g.user)
     record = yield record_q.get_async()
     if record is None:
         record_key = yield User2Record.create_async(g.user, key_safe)
@@ -105,6 +113,26 @@ def mark_record():
     else:
         User2Record.delete(g.user, key_safe)
         response.update({'data': {'action': 'deleted'}})
+    count_q = User2Record.relations(g.user)
     count = yield count_q.count_async(1)
     response['data'].update({'count': count})
     raise tasklets.Return(jsonify(response))
+
+
+@catalog.route('/tag/<tag>')
+@login_required
+@render_to('catalog/filtered_records.html')
+@context.toplevel
+def tagged_records(tag):
+    categories = User2Category.get_for_user(user=g.user).map_async(
+            lambda u2c: u2c.category)
+    categories = yield categories
+    records = Record.for_categories(categories).filter(Record.tags.value
+            == tag)
+    tags, pager = Tag.paginate()
+    records, pager = Record.paginate(records)
+    raise tasklets.Return({
+        'tags': tags,
+        'records': records,
+        'pager': pager,
+        'page_title': _("Records for tag: %(tag)s", tag=tag)})

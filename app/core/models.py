@@ -35,10 +35,12 @@ class Unique(model.Model):
 class PagedMixin(object):
 
     @classmethod
-    def paginate(cls, query, page_size=20):
+    def _paginate(cls, query, page_size=20):
         pager = Pager(query=query)
         entities, _, _ = pager.paginate(page_size)
         return entities, pager
+
+    paginate = _paginate
 
 
 class LocalPagedMixin(PagedMixin):
@@ -50,7 +52,7 @@ class LocalPagedMixin(PagedMixin):
     @classmethod
     def paginate(cls, query=None, page_size=20):
         q = query or cls.get_localized(g.lang)
-        return PagedMixin.paginate(q, page_size)
+        return cls._paginate(q, page_size)
 
     def __getattr__(self, name):
         attr_s = getattr(self, '%s_s' % name)

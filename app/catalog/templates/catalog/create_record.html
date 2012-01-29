@@ -8,7 +8,7 @@
     <p>{{ _('All fields are required') }}</p>
   </div>
   <div class="span10">
-    {{ render_form(form, 'catalog.create_record', _('Save'), _('Cancel')) }}
+    {{ render_form(form, upload_url, _('Save'),  _('Cancel'), True) }}
   </div>
 </div>
 {%- endblock content %}

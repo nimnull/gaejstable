@@ -15,3 +15,15 @@ indexes:
   - name: category
   - name: __key__
     direction: desc
+
+- kind: Record
+  properties:
+  - name: category
+  - name: tags.value
+  - name: __key__
+    direction: desc
+
+- kind: Tag
+  properties:
+  - name: lang
+  - name: value

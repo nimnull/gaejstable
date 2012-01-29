@@ -1,4 +1,5 @@
 # import logging
+from google.appengine.ext import blobstore
 from flask import g
 from ndb import context, key, model, tasklets
 
@@ -8,11 +9,25 @@ from auth.models import User
 
 from core.models import LangValue, Unique, PagedMixin, LocalPagedMixin
 from core.slugify import get_unique_slug
+from core.validators import strip_validator
+
+
+class Tag(LangValue, PagedMixin):
+    # lang = model.StringProperty(required=True,
+    #        choices=app.config['LANGUAGES'].keys())
+    # value = model.StringProperty(required=True)
+
+    @classmethod
+    def paginate(cls, query=None, page_size=50):
+        if query is None:
+            query = cls.query(cls.lang == g.lang).order(cls.value)
+        return cls._paginate(query, page_size)
 
 
 class Category(model.Model, LocalPagedMixin):
     slug = model.StringProperty(required=True)
-    title_s = model.StructuredProperty(LangValue, repeated=True)
+    title_s = model.StructuredProperty(LangValue, repeated=True,
+            validator=strip_validator)
 
     @classmethod
     def create(cls, title_dict):
@@ -22,17 +37,15 @@ class Category(model.Model, LocalPagedMixin):
 
     @classmethod
     def get(cls, key):
-        return cls.get_async(key).get_result()
+        return cls._get(key).get_result()
 
     @classmethod
-    def get_async(cls, cat_key):
+    def _get(cls, cat_key):
         if isinstance(cat_key, unicode):
             cat_key = key.Key(urlsafe=cat_key)
         return cat_key.get_async()
 
-    @classmethod
-    def get_by_urlsafe(cls, urlsafe):
-        return key.Key(urlsafe=urlsafe).get()
+    get_async = _get
 
     @classmethod
     def __get_slug(cls, title_dict):
@@ -76,11 +89,19 @@ class User2Category(model.Model):
 
     @classmethod
     def delete(cls, user, category):
-        entity = cls.get_by_user2cat(user, category)
+        return cls._delete(user, category).get_result()
+
+    @classmethod
+    @tasklets.tasklet
+    def _delete(cls, user, category):
+        response = False
+        entity = yield cls.relations(user, category).get_async()
         if entity is not None:
             entity.key.delete_async()
-            return True
-        return False
+            response = True
+        raise tasklets.Return(response)
+
+    delete_async = _delete
 
 
 class Record(model.Model, LocalPagedMixin):
@@ -89,6 +110,8 @@ class Record(model.Model, LocalPagedMixin):
     created_at = model.DateTimeProperty(auto_now_add=True)
     category = model.KeyProperty(kind=Category)
     tags = model.StructuredProperty(LangValue, repeated=True)
+    attachment = model.BlobKeyProperty()
+    attachment_descr = model.StringProperty()
 
     @property
     def local_tags(self):
@@ -114,15 +137,24 @@ class Record(model.Model, LocalPagedMixin):
                 -cls.key, -cls.created_at)
 
     @classmethod
-    def create(cls, locale_dict, category, tags_dict):
-        tags = [LangValue(lang=lang, value=tag) for lang, tags
+    def create(cls, locale_dict, category, tags_dict, attachment):
+        tags_list = [(lang, tag) for lang, tags
                 in tags_dict.iteritems() for tag in tags]
+        lang_entities = [LangValue(lang=lang, value=tag) for lang, tag in
+                tags_list]
+        tag_entities = [Tag(lang=lang, value=tag) for lang, tag in
+                tags_list]
+        model.put_multi_async(tag_entities)
 
         if isinstance(category, unicode):
             cat_key = key.Key(urlsafe=category)
         else:
             cat_key = category.key
-        kwargs = {'category': cat_key, 'tags': tags}
+        kwargs = {'category': cat_key, 'tags': lang_entities}
+        if attachment is not None:
+            kwargs.update({
+                'attachment': model.BlobKey(attachment),
+                'attachment_descr': blobstore.get(attachment).filename})
         for lang, values in locale_dict.iteritems():
             for field, value in values.iteritems():
                 field_list = kwargs.get('%s_s' % field, [])

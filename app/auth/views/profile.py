@@ -45,10 +45,8 @@ def toggle_category():
     if urlkey is None:
         raise tasklets.Return({'status': 'error'})
     category = yield Category.get_async(urlkey)
-    u2c_query = User2Category.relations(g.user, category)
-    user2category = yield u2c_query.get_async()
-    if user2category is not None:
-        user2category.key.delete_async()
+    u2c = yield User2Category.delete_async(g.user, category)
+    if u2c:
         resp.update({'data': 'deleted'})
     elif category is not None:
         User2Category.create_async(g.user, category)

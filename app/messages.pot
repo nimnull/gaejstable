@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2012-01-28 19:26+0200\n"
+"POT-Creation-Date: 2012-01-29 01:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -307,17 +307,22 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: catalog/forms.py:22
+#: catalog/forms.py:22 catalog/templates/catalog/filtered_records.html:22
 msgid "Tags"
 msgstr ""
 
+#: catalog/views.py:131
+#, python-format
+msgid "Records for tag: %(tag)s"
+msgstr ""
+
 #: catalog/templates/catalog/_list_records.html:9
-#: catalog/templates/catalog/filtered_records.html:25
+#: catalog/templates/catalog/filtered_records.html:41
 msgid "unmark"
 msgstr ""
 
 #: catalog/templates/catalog/_list_records.html:9
-#: catalog/templates/catalog/filtered_records.html:28
+#: catalog/templates/catalog/filtered_records.html:44
 msgid "mark"
 msgstr ""
 
@@ -338,12 +343,13 @@ msgstr ""
 msgid "All fields are required"
 msgstr ""
 
-#: catalog/templates/catalog/filtered_records.html:3
+#: catalog/templates/catalog/filtered_records.html:4
 msgid "Records"
 msgstr ""
 
-#: catalog/templates/catalog/filtered_records.html:12
-msgid "View selected records"
+#: catalog/templates/catalog/filtered_records.html:5
+#, python-format
+msgid "<a href='%(link)s'>selected</a>"
 msgstr ""
 
 #: catalog/templates/catalog/list_categories.html:2
@@ -363,7 +369,7 @@ msgstr ""
 msgid "Add Record"
 msgstr ""
 
-#: catalog/templates/catalog/selected_records.html:3
+#: catalog/templates/catalog/selected_records.html:4
 msgid "Selected records"
 msgstr ""
 

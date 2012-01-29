@@ -1,6 +1,8 @@
 {%- extends "base.html" %}
 {%- from "catalog/_list_records.html" import list_records %}
-{%- set page_title = _("Selected records") %}
+{%- if not page_title %}
+  {%- set page_title = _("Selected records") %}
+{%- endif %}
 {%- block content %}
 <div class="row">
   {{ list_records(records, 'span16') }}

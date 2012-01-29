@@ -1,15 +1,31 @@
 {%- extends "base.html" %}
 {%- from "catalog/_list_records.html" import list_records %}
-{%- set page_title = _("Records") %}
+{%- if not page_title %}
+  {%- set page_title = _("Records") %}
+  {%- set page_description = _("<a href='%(link)s'>selected</a>", link=url_for('.selected_records')) %}
+{%- endif %}
 {%- block content %}
 <div class="row">
-  <div class="span13">
+  <div class="span12">
     <div class="row records">
-      {{ list_records(records, 'span13') }}
+      {{ list_records(records, 'span12') }}
     </div>
   </div>
-  <div class="span3 visit-selected" {%- if count %}style="display:block;"{%- endif %}>
-    <a href="{{ url_for('.selected_records') }}">{{ _('View selected records') }}</a>
+  <div class="span4"> {#
+    <div class="row">
+      <div class="span4 visit-selected" {%- if count %}style="display:block;"{%- endif %}>
+        <a href="{{ url_for('.selected_records') }}">{{ _('View selected records') }}</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="span4"> #}
+        <h3>{{ _("Tags") }}:</h3>
+        {%- for tag in tags %}
+        <a class="tag" href="{{ url_for('.tagged_records', tag=tag.value) }}">
+          {{ tag.value }}</a>{%- if not loop.last %}, {% endif %}
+        {%- endfor %}{#
+      </div>
+    </div> #}
   </div>
 </div>
 {%- include "pagination.html" %}
@@ -47,12 +63,13 @@
         if (resp.status == 'success') {
           // toggle mark/unmark on recordaction
           actions[resp.data.action](evt.currentTarget);
-          var selectedBlock = $('.row .visit-selected');
-          if (resp.data.count > 0) {
-            selectedBlock.show()
-          } else {
-            selectedBlock.hide();
-          }
+//          var selectedBlock = $('.row .visit-selected');
+//          console.log(selectedBlock);
+//          if (resp.data.count > 0) {
+//            selectedBlock.show()
+//          } else {
+//            selectedBlock.hide();
+//          }
         };
     });
     return false;

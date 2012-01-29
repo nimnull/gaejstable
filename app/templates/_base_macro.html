@@ -6,8 +6,13 @@
   {%- endif -%}
 <li {{ class }}><a href="{{ url_for(endpoint) }}">{{ title }}</a></li>
 {%- endmacro -%}
-{%- macro render_form(form, action, submit_text, reset_text) -%}
-<form action="{{ url_for(action) }}" class="form-stacked" method="POST">
+{%- macro render_form(form, action, submit_text, reset_text, multipart=False) -%}
+<form class="form-stacked" method="POST"
+{%- if multipart %}
+      action="{{ action }}" enctype="multipart/form-data"
+{%- else %}
+      action="{{ url_for(action) }}"
+{%- endif %}>
   <fieldset>
     <!-- <legend>Fill the form fields:</legend> -->
     {%- for field in form %}

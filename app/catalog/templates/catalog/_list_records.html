@@ -9,9 +9,16 @@
         {%- if record.is_marked %}{{ _('unmark') }}{%- else %}{{ _('mark') }}{%- endif %}</a>
     </div>
     <p>{{ record.description|safe }}</p>
+    {%- if record.attachment %}
+    <p>
+    <a href="{{ url_for('core.serve', key=record.attachment) }}">
+      {{ record.attachment_descr }}
+    </a>
+    </p>
+    {%- endif %}
     <p>
       {%- for tag in record.local_tags %}
-      <span class="label"><a href="#">{{ tag }}</a></span>
+      <span class="label"><a href="{{ url_for('.tagged_records', tag=tag) }}">{{ tag }}</a></span>
       {%- endfor %}
   </div>
   {%- endfor %}

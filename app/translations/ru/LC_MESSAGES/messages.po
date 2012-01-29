@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GAEJStable 1.0\n"
 "Report-Msgid-Bugs-To: nimnull@gmail.com\n"
-"POT-Creation-Date: 2012-01-28 19:26+0200\n"
+"POT-Creation-Date: 2012-01-29 01:03+0200\n"
 "PO-Revision-Date: 2012-01-27 15:02+0200\n"
 "Last-Translator: Yegor Nazarkin <nimnull@gmail.com>\n"
 "Language-Team: ru <LL@li.org>\n"
@@ -72,11 +72,11 @@ msgstr "такой email уже используется"
 
 #: auth/forms.py:43
 msgid "language"
-msgstr ""
+msgstr "язык"
 
 #: auth/forms.py:43
 msgid "select locale"
-msgstr ""
+msgstr "Выберите язык"
 
 #: auth/forms.py:48
 msgid "enter your email to get password reset link"
@@ -348,17 +348,22 @@ msgstr "введите название позиции"
 msgid "Description"
 msgstr "Описание"
 
-#: catalog/forms.py:22
+#: catalog/forms.py:22 catalog/templates/catalog/filtered_records.html:22
 msgid "Tags"
 msgstr "Метки"
 
+#: catalog/views.py:131
+#, python-format
+msgid "Records for tag: %(tag)s"
+msgstr "Позиции с меткой &laquo;%(tag)s&raquo;"
+
 #: catalog/templates/catalog/_list_records.html:9
-#: catalog/templates/catalog/filtered_records.html:25
+#: catalog/templates/catalog/filtered_records.html:41
 msgid "unmark"
 msgstr "снять отметку"
 
 #: catalog/templates/catalog/_list_records.html:9
-#: catalog/templates/catalog/filtered_records.html:28
+#: catalog/templates/catalog/filtered_records.html:44
 msgid "mark"
 msgstr "отметить"
 
@@ -379,13 +384,14 @@ msgstr "Создать позицию в разделе %(cat)s"
 msgid "All fields are required"
 msgstr "Все поля обязательны к заполнению."
 
-#: catalog/templates/catalog/filtered_records.html:3
+#: catalog/templates/catalog/filtered_records.html:4
 msgid "Records"
 msgstr "Позиции"
 
-#: catalog/templates/catalog/filtered_records.html:12
-msgid "View selected records"
-msgstr "Просмотреть выбранные позиции"
+#: catalog/templates/catalog/filtered_records.html:5
+#, python-format
+msgid "<a href='%(link)s'>selected</a>"
+msgstr "<a href='%(link)s'>выбранные</a>"
 
 #: catalog/templates/catalog/list_categories.html:2
 msgid "Categories list"
@@ -404,7 +410,7 @@ msgstr "%(cat)s - позиции"
 msgid "Add Record"
 msgstr "Добавить позицию"
 
-#: catalog/templates/catalog/selected_records.html:3
+#: catalog/templates/catalog/selected_records.html:4
 msgid "Selected records"
 msgstr "Выбранные позиции"
 
@@ -744,4 +750,7 @@ msgstr "Назад"
 #: templates/pagination.html:8
 msgid "Next page"
 msgstr "Вперед"
+
+#~ msgid "View selected records"
+#~ msgstr "Просмотреть выбранные позиции"
 
