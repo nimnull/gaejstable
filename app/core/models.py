@@ -21,7 +21,7 @@ LANG_CHOICES = app.config['LANGUAGES']
 class LangValue(model.Model):
     lang = model.StringProperty(required=True,
             choices=LANG_CHOICES.keys())
-    value = model.StringProperty(required=True,
+    tevalue = model.TextProperty(required=True,
             validator=strip_validator)
 
 
