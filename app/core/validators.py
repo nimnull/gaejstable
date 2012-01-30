@@ -26,4 +26,6 @@ class Email(Regexp):
             self.message = field.gettext(u'Invalid email address.')
         super(Email, self).__call__(form, field)
 
-strip_validator = lambda x: x.strip()
+
+def strip_validator(prop, value):
+    return value.strip()

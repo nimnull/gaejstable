@@ -3,6 +3,7 @@ from ndb import model
 
 from app import app
 from .pagination import Pager
+from .validators import strip_validator
 
 
 LANG_CHOICES = app.config['LANGUAGES']
@@ -20,7 +21,8 @@ LANG_CHOICES = app.config['LANGUAGES']
 class LangValue(model.Model):
     lang = model.StringProperty(required=True,
             choices=LANG_CHOICES.keys())
-    value = model.StringProperty(required=True)
+    value = model.StringProperty(required=True,
+            validator=strip_validator)
 
 
 class Unique(model.Model):

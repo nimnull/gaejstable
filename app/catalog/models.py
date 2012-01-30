@@ -1,15 +1,11 @@
-# import logging
 from google.appengine.ext import blobstore
 from flask import g
 from ndb import context, key, model, tasklets
-
-from app import app
 
 from auth.models import User
 
 from core.models import LangValue, Unique, PagedMixin, LocalPagedMixin
 from core.slugify import get_unique_slug
-from core.validators import strip_validator
 
 
 class Tag(LangValue, PagedMixin):
@@ -27,13 +23,14 @@ class Tag(LangValue, PagedMixin):
 class Category(model.Model, LocalPagedMixin):
     slug = model.StringProperty(required=True)
     title_s = model.StructuredProperty(LangValue, repeated=True,
-            validator=strip_validator)
+            )
 
     @classmethod
     def create(cls, title_dict):
         title_set = [LangValue(lang=lang_code, value=value)
             for lang_code, value in title_dict.items()]
-        return cls(title_s=title_set, slug=cls.__get_slug(title_dict)).put().get()
+        entity = cls(title_s=title_set, slug=cls.__get_slug(title_dict))
+        return entity.put().get()
 
     @classmethod
     def get(cls, key):
@@ -49,8 +46,7 @@ class Category(model.Model, LocalPagedMixin):
 
     @classmethod
     def __get_slug(cls, title_dict):
-        title = title_dict.get(app.config['BABEL_DEFAULT_LOCALE']) or \
-            title_dict.keys()[0]
+        title = title_dict.get(g.lang, title_dict.values()[0])
         return get_unique_slug(cls, title, Unique)
 
     @property
