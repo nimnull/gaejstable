@@ -5,7 +5,7 @@ from ndb import context, key, model, tasklets
 from auth.models import User
 
 from core.models import LangValue, Unique, PagedMixin, LocalPagedMixin
-from core.slugify import get_unique_slug
+from core.slugify import get_unique_slug, slugify
 
 
 class Tag(LangValue, PagedMixin):
@@ -14,10 +14,21 @@ class Tag(LangValue, PagedMixin):
     # value = model.StringProperty(required=True)
 
     @classmethod
-    def paginate(cls, query=None, page_size=50):
+    def paginate(cls, query=None, page_size=1000):
         if query is None:
             query = cls.query(cls.lang == g.lang).order(cls.value)
         return cls._paginate(query, page_size)
+
+    @classmethod
+    @tasklets.tasklet
+    def get_or_insert_multy(cls, values):
+        response = {}
+        for lang, tag in values:
+            if tag not in response:
+                key_name = "%s_%s" % (slugify(tag), lang)
+                entity = yield cls.get_or_insert_async(key_name, lang=lang, value=tag)
+                response.update({tag: entity})
+        raise tasklets.Return(response.values())
 
 
 class Category(model.Model, LocalPagedMixin):
@@ -133,20 +144,18 @@ class Record(model.Model, LocalPagedMixin):
                 -cls.key, -cls.created_at)
 
     @classmethod
+    @context.toplevel
     def create(cls, locale_dict, category, tags_dict, attachment):
         tags_list = [(lang, tag) for lang, tags
-                in tags_dict.iteritems() for tag in tags]
-        lang_entities = [LangValue(lang=lang, value=tag) for lang, tag in
-                tags_list]
-        tag_entities = [Tag(lang=lang, value=tag) for lang, tag in
-                tags_list]
-        model.put_multi_async(tag_entities)
+                in tags_dict.iteritems() for tag in tags if tag != '']
+
+        tags = yield Tag.get_or_insert_multy(tags_list)
 
         if isinstance(category, unicode):
             cat_key = key.Key(urlsafe=category)
         else:
             cat_key = category.key
-        kwargs = {'category': cat_key, 'tags': lang_entities}
+        kwargs = {'category': cat_key, 'tags': tags}
         if attachment is not None:
             kwargs.update({
                 'attachment': model.BlobKey(attachment),
@@ -156,7 +165,9 @@ class Record(model.Model, LocalPagedMixin):
                 field_list = kwargs.get('%s_s' % field, [])
                 field_list.append(LangValue(lang=lang, value=value))
                 kwargs['%s_s' % field] = field_list
-        return Record(**kwargs).put().get()
+        record_key = yield cls(**kwargs).put_async()
+        record = yield record_key.get_async()
+        raise tasklets.Return(record)
 
 
 class User2Record(model.Model, PagedMixin):
