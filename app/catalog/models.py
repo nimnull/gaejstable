@@ -2,16 +2,17 @@ from google.appengine.ext import blobstore
 from flask import g
 from ndb import context, key, model, tasklets
 
+from app import app
 from auth.models import User
 
 from core.models import LangValue, Unique, PagedMixin, LocalPagedMixin
 from core.slugify import get_unique_slug, slugify
 
 
-class Tag(LangValue, PagedMixin):
-    # lang = model.StringProperty(required=True,
-    #        choices=app.config['LANGUAGES'].keys())
-    # value = model.StringProperty(required=True)
+class Tag(model.Model, PagedMixin):
+    lang = model.StringProperty(required=True,
+            choices=app.config['LANGUAGES'].keys())
+    value = model.StringProperty(required=True)
 
     @classmethod
     def paginate(cls, query=None, page_size=1000):
@@ -38,8 +39,8 @@ class Category(model.Model, LocalPagedMixin):
 
     @classmethod
     def create(cls, title_dict):
-        title_set = [LangValue(lang=lang_code, value=value)
-            for lang_code, value in title_dict.items()]
+        title_set = [LangValue(lang=lang_code, value=title)
+            for lang_code, title in title_dict.items()]
         entity = cls(title_s=title_set, slug=cls.__get_slug(title_dict))
         return entity.put().get()
 
@@ -116,7 +117,7 @@ class Record(model.Model, LocalPagedMixin):
     description_s = model.StructuredProperty(LangValue, repeated=True)
     created_at = model.DateTimeProperty(auto_now_add=True)
     category = model.KeyProperty(kind=Category)
-    tags = model.StructuredProperty(LangValue, repeated=True)
+    tags = model.StructuredProperty(Tag, repeated=True)
     attachment = model.BlobKeyProperty()
     attachment_descr = model.StringProperty()
 
