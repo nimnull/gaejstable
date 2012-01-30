@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GAEJStable 1.0\n"
 "Report-Msgid-Bugs-To: nimnull@gmail.com\n"
-"POT-Creation-Date: 2012-01-29 01:03+0200\n"
+"POT-Creation-Date: 2012-01-30 14:00+0200\n"
 "PO-Revision-Date: 2012-01-27 15:02+0200\n"
 "Last-Translator: Yegor Nazarkin <nimnull@gmail.com>\n"
 "Language-Team: ru <LL@li.org>\n"
@@ -332,27 +332,31 @@ msgstr ""
 "Секретный ключ не указан или такой ключ больше не действителен. <a "
 "href=\"%s\">Запросите восстановление пароля</a> еще раз."
 
-#: catalog/forms.py:9 catalog/forms.py:17
+#: catalog/forms.py:10 catalog/forms.py:18
 msgid "Title"
 msgstr "Название"
 
-#: catalog/forms.py:9
+#: catalog/forms.py:10
 msgid "category title"
 msgstr "название раздела"
 
-#: catalog/forms.py:17 catalog/forms.py:19
+#: catalog/forms.py:18 catalog/forms.py:20
 msgid "enter title for record"
 msgstr "введите название позиции"
 
-#: catalog/forms.py:19
+#: catalog/forms.py:20
 msgid "Description"
 msgstr "Описание"
 
-#: catalog/forms.py:22 catalog/templates/catalog/filtered_records.html:22
+#: catalog/forms.py:23 catalog/templates/catalog/filtered_records.html:22
 msgid "Tags"
 msgstr "Метки"
 
-#: catalog/views.py:131
+#: catalog/forms.py:25
+msgid "Atachment"
+msgstr "Вложение"
+
+#: catalog/views.py:138
 #, python-format
 msgid "Records for tag: %(tag)s"
 msgstr "Позиции с меткой &laquo;%(tag)s&raquo;"
@@ -750,7 +754,4 @@ msgstr "Назад"
 #: templates/pagination.html:8
 msgid "Next page"
 msgstr "Вперед"
-
-#~ msgid "View selected records"
-#~ msgstr "Просмотреть выбранные позиции"
 

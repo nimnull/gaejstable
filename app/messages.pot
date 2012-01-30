@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2012-01-29 01:03+0200\n"
+"POT-Creation-Date: 2012-01-30 14:00+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -291,27 +291,31 @@ msgid ""
 "href=\"%s\">Request password recovery</a> again please."
 msgstr ""
 
-#: catalog/forms.py:9 catalog/forms.py:17
+#: catalog/forms.py:10 catalog/forms.py:18
 msgid "Title"
 msgstr ""
 
-#: catalog/forms.py:9
+#: catalog/forms.py:10
 msgid "category title"
 msgstr ""
 
-#: catalog/forms.py:17 catalog/forms.py:19
+#: catalog/forms.py:18 catalog/forms.py:20
 msgid "enter title for record"
 msgstr ""
 
-#: catalog/forms.py:19
+#: catalog/forms.py:20
 msgid "Description"
 msgstr ""
 
-#: catalog/forms.py:22 catalog/templates/catalog/filtered_records.html:22
+#: catalog/forms.py:23 catalog/templates/catalog/filtered_records.html:22
 msgid "Tags"
 msgstr ""
 
-#: catalog/views.py:131
+#: catalog/forms.py:25
+msgid "Atachment"
+msgstr ""
+
+#: catalog/views.py:138
 #, python-format
 msgid "Records for tag: %(tag)s"
 msgstr ""
