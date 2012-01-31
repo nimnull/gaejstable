@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GAEJStable 1.0\n"
 "Report-Msgid-Bugs-To: nimnull@gmail.com\n"
-"POT-Creation-Date: 2012-01-31 17:06+0200\n"
+"POT-Creation-Date: 2012-02-01 01:16+0200\n"
 "PO-Revision-Date: 2012-01-27 15:02+0200\n"
 "Last-Translator: Yegor Nazarkin <nimnull@gmail.com>\n"
 "Language-Team: ru <LL@li.org>\n"
@@ -17,6 +17,10 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
+
+#: settings.py:41 core/views.py:20
+msgid "Main"
+msgstr "Главная"
 
 #: auth/forms.py:12
 msgid "First Name"
@@ -109,13 +113,13 @@ msgstr "Это страничка с вашим профилем"
 
 #: auth/templates/auth/profile_edit.html:11
 #: catalog/templates/catalog/create_category.html:11
-#: catalog/templates/catalog/create_record.html:11
+#: catalog/templates/catalog/create_record.html:12
 msgid "Save"
 msgstr "Сохранить"
 
 #: auth/templates/auth/profile_edit.html:11 auth/templates/auth/sign_up.html:25
 #: catalog/templates/catalog/create_category.html:11
-#: catalog/templates/catalog/create_record.html:11
+#: catalog/templates/catalog/create_record.html:12
 msgid "Cancel"
 msgstr "Сбросить"
 
@@ -127,26 +131,15 @@ msgstr "Настройки профиля"
 msgid "Chose categories for filtering"
 msgstr "Выберите интересующие категории"
 
-#: auth/templates/auth/profile_toolbar.html:4
-#: catalog/templates/catalog/filtered_records.html:8
-#: catalog/templates/catalog/filtered_records.html:15
-#: catalog/templates/catalog/selected_records.html:9
-msgid "Main"
-msgstr "Главная"
-
-#: auth/templates/auth/profile_toolbar.html:5 templates/base.html:26
-msgid "Profile"
-msgstr "Профиль"
-
-#: auth/templates/auth/profile_toolbar.html:8
+#: auth/templates/auth/profile_toolbar.html:3
 msgid "View"
 msgstr "Просмотр"
 
-#: auth/templates/auth/profile_toolbar.html:9
+#: auth/templates/auth/profile_toolbar.html:4 auth/views/profile.py:36
 msgid "Edit"
 msgstr "Редактирование"
 
-#: auth/templates/auth/profile_toolbar.html:10
+#: auth/templates/auth/profile_toolbar.html:5 auth/views/profile.py:47
 msgid "Settings"
 msgstr "Настройки"
 
@@ -191,7 +184,8 @@ msgstr ""
 msgid "Confirm"
 msgstr "Подтвердить"
 
-#: auth/templates/auth/sign_in.html:3 templates/base.html:30
+#: auth/templates/auth/sign_in.html:3 auth/views/registration.py:86
+#: templates/base.html:32
 msgid "Sign In"
 msgstr "Вход"
 
@@ -307,25 +301,37 @@ msgstr ""
 "--\n"
 "С уважением, команда сайта %(site)s."
 
-#: auth/views/registration.py:37
+#: auth/views/profile.py:21 templates/base.html:28
+msgid "Profile"
+msgstr "Профиль"
+
+#: auth/views/registration.py:38
 #, python-format
 msgid "[%s] Account activation"
 msgstr "[%s] Активация учетной записи"
 
-#: auth/views/registration.py:69
+#: auth/views/registration.py:45 templates/base.html:31
+msgid "Sign Up"
+msgstr "Регистрация"
+
+#: auth/views/registration.py:60
+msgid "Activate account"
+msgstr "Активация"
+
+#: auth/views/registration.py:77
 msgid "Please activate your account first"
 msgstr "Пожалуйста, активируйте свою учетную запись"
 
-#: auth/views/registration.py:72
+#: auth/views/registration.py:80
 msgid "There is no user with provided email or password"
 msgstr "Пользователь с этим email и паролем "
 
-#: auth/views/registration.py:93
+#: auth/views/registration.py:104
 #, python-format
 msgid "[%(title)s] Password recovery"
 msgstr "[%(title)s] Восстановление пароля"
 
-#: auth/views/registration.py:97
+#: auth/views/registration.py:108
 #, python-format
 msgid ""
 "We've just sent an email to <strong>%(username)s</strong> with the "
@@ -334,7 +340,11 @@ msgstr ""
 "Мы отправили вам письмо на адрес <strong>%(username)s</strong> со "
 "специальной ссылкой для восстановления пароля."
 
-#: auth/views/registration.py:119
+#: auth/views/registration.py:116
+msgid "Recover lost password"
+msgstr "Восстановление пароля"
+
+#: auth/views/registration.py:133
 #, python-format
 msgid ""
 "Your didn't provide a token or it is no longer valid. <a "
@@ -342,6 +352,10 @@ msgid ""
 msgstr ""
 "Секретный ключ не указан или такой ключ больше не действителен. <a "
 "href=\"%s\">Запросите восстановление пароля</a> еще раз."
+
+#: auth/views/registration.py:139
+msgid "Reset password"
+msgstr "Сброс пароля"
 
 #: catalog/forms.py:10 catalog/forms.py:18
 msgid "Title"
@@ -359,7 +373,7 @@ msgstr "введите название позиции"
 msgid "Description"
 msgstr "Описание"
 
-#: catalog/forms.py:23 catalog/templates/catalog/filtered_records.html:36
+#: catalog/forms.py:23 catalog/templates/catalog/filtered_records.html:22
 msgid "Tags"
 msgstr "Метки"
 
@@ -367,18 +381,47 @@ msgstr "Метки"
 msgid "Atachment"
 msgstr "Вложение"
 
-#: catalog/views.py:138
+#: catalog/views.py:25
+msgid "Create category"
+msgstr "Создание раздела"
+
+#: catalog/views.py:36 catalog/templates/catalog/list_categories.html:2
+msgid "Categories list"
+msgstr "Список разделов"
+
+#: catalog/views.py:44
+msgid "Create position"
+msgstr "Создание позиции"
+
+#: catalog/views.py:67
+msgid "List positions"
+msgstr "Список разделов"
+
+#: catalog/views.py:96
+msgid "Positions"
+msgstr "Список позиций"
+
+#: catalog/views.py:109
+msgid "Selected"
+msgstr "Выбранные"
+
+#: catalog/views.py:144
+#, python-format
+msgid "With tag \"%(tag)s\""
+msgstr "С меткой \"%(tag)s\""
+
+#: catalog/views.py:157
 #, python-format
 msgid "Records for tag: %(tag)s"
 msgstr "Позиции с меткой &laquo;%(tag)s&raquo;"
 
 #: catalog/templates/catalog/_list_records.html:9
-#: catalog/templates/catalog/filtered_records.html:55
+#: catalog/templates/catalog/filtered_records.html:41
 msgid "unmark"
 msgstr "снять отметку"
 
 #: catalog/templates/catalog/_list_records.html:9
-#: catalog/templates/catalog/filtered_records.html:58
+#: catalog/templates/catalog/filtered_records.html:44
 msgid "mark"
 msgstr "отметить"
 
@@ -395,31 +438,18 @@ msgstr "Пожалуйста, заполните название раздела
 msgid "Create record for category %(cat)s"
 msgstr "Создать позицию в разделе %(cat)s"
 
-#: catalog/templates/catalog/create_record.html:8
+#: catalog/templates/catalog/create_record.html:9
 msgid "All fields are required"
 msgstr "Все поля обязательны к заполнению."
 
-#: catalog/templates/catalog/filtered_records.html:5
+#: catalog/templates/catalog/filtered_records.html:4
 msgid "Records"
 msgstr "Позиции"
 
-#: catalog/templates/catalog/filtered_records.html:6
+#: catalog/templates/catalog/filtered_records.html:5
 #, python-format
 msgid "<a href='%(link)s'>selected</a>"
 msgstr "<a href='%(link)s'>выбранные</a>"
-
-#: catalog/templates/catalog/filtered_records.html:9
-#: catalog/templates/catalog/filtered_records.html:16
-msgid "Postitions List"
-msgstr "Список позиций"
-
-#: catalog/templates/catalog/filtered_records.html:17
-msgid "Tagged Positions"
-msgstr "Позиции с тегом"
-
-#: catalog/templates/catalog/list_categories.html:2
-msgid "Categories list"
-msgstr "Список разделов"
 
 #: catalog/templates/catalog/list_categories.html:18
 msgid "Add Category"
@@ -436,14 +466,6 @@ msgstr "Добавить позицию"
 
 #: catalog/templates/catalog/selected_records.html:4
 msgid "Selected records"
-msgstr "Выбранные позиции"
-
-#: catalog/templates/catalog/selected_records.html:10
-msgid "Positions List"
-msgstr "Список позиций"
-
-#: catalog/templates/catalog/selected_records.html:11
-msgid "Selected Positions"
 msgstr "Выбранные позиции"
 
 #: core/validators.py:26 lib/wtforms/validators.py:218
@@ -755,21 +777,17 @@ msgstr "Страница не найдена"
 msgid "We couldn't find the page you requested."
 msgstr "Нам не удалось найти запрошенную страницу."
 
-#: templates/base.html:20
+#: templates/base.html:21
 msgid "Manage catalog"
 msgstr "Управление каталогом"
 
-#: templates/base.html:22
+#: templates/base.html:23
 msgid "Categories"
 msgstr "Разделы"
 
-#: templates/base.html:27
+#: templates/base.html:29
 msgid "Sign Out"
 msgstr "Выход"
-
-#: templates/base.html:29
-msgid "Sign Up"
-msgstr "Регистрация"
 
 #: templates/pagination.html:5
 msgid "Prev page"

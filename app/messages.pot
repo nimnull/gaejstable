@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2012-01-31 17:06+0200\n"
+"POT-Creation-Date: 2012-02-01 01:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,10 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
+
+#: settings.py:41 core/views.py:20
+msgid "Main"
+msgstr ""
 
 #: auth/forms.py:12
 msgid "First Name"
@@ -108,13 +112,13 @@ msgstr ""
 
 #: auth/templates/auth/profile_edit.html:11
 #: catalog/templates/catalog/create_category.html:11
-#: catalog/templates/catalog/create_record.html:11
+#: catalog/templates/catalog/create_record.html:12
 msgid "Save"
 msgstr ""
 
 #: auth/templates/auth/profile_edit.html:11 auth/templates/auth/sign_up.html:25
 #: catalog/templates/catalog/create_category.html:11
-#: catalog/templates/catalog/create_record.html:11
+#: catalog/templates/catalog/create_record.html:12
 msgid "Cancel"
 msgstr ""
 
@@ -126,26 +130,15 @@ msgstr ""
 msgid "Chose categories for filtering"
 msgstr ""
 
-#: auth/templates/auth/profile_toolbar.html:4
-#: catalog/templates/catalog/filtered_records.html:8
-#: catalog/templates/catalog/filtered_records.html:15
-#: catalog/templates/catalog/selected_records.html:9
-msgid "Main"
-msgstr ""
-
-#: auth/templates/auth/profile_toolbar.html:5 templates/base.html:26
-msgid "Profile"
-msgstr ""
-
-#: auth/templates/auth/profile_toolbar.html:8
+#: auth/templates/auth/profile_toolbar.html:3
 msgid "View"
 msgstr ""
 
-#: auth/templates/auth/profile_toolbar.html:9
+#: auth/templates/auth/profile_toolbar.html:4 auth/views/profile.py:36
 msgid "Edit"
 msgstr ""
 
-#: auth/templates/auth/profile_toolbar.html:10
+#: auth/templates/auth/profile_toolbar.html:5 auth/views/profile.py:47
 msgid "Settings"
 msgstr ""
 
@@ -185,7 +178,8 @@ msgstr ""
 msgid "Confirm"
 msgstr ""
 
-#: auth/templates/auth/sign_in.html:3 templates/base.html:30
+#: auth/templates/auth/sign_in.html:3 auth/views/registration.py:86
+#: templates/base.html:32
 msgid "Sign In"
 msgstr ""
 
@@ -270,36 +264,56 @@ msgid ""
 "Sincerely yours, %(site)s team."
 msgstr ""
 
-#: auth/views/registration.py:37
+#: auth/views/profile.py:21 templates/base.html:28
+msgid "Profile"
+msgstr ""
+
+#: auth/views/registration.py:38
 #, python-format
 msgid "[%s] Account activation"
 msgstr ""
 
-#: auth/views/registration.py:69
+#: auth/views/registration.py:45 templates/base.html:31
+msgid "Sign Up"
+msgstr ""
+
+#: auth/views/registration.py:60
+msgid "Activate account"
+msgstr ""
+
+#: auth/views/registration.py:77
 msgid "Please activate your account first"
 msgstr ""
 
-#: auth/views/registration.py:72
+#: auth/views/registration.py:80
 msgid "There is no user with provided email or password"
 msgstr ""
 
-#: auth/views/registration.py:93
+#: auth/views/registration.py:104
 #, python-format
 msgid "[%(title)s] Password recovery"
 msgstr ""
 
-#: auth/views/registration.py:97
+#: auth/views/registration.py:108
 #, python-format
 msgid ""
 "We've just sent an email to <strong>%(username)s</strong> with the "
 "special link for you to reset lost password."
 msgstr ""
 
-#: auth/views/registration.py:119
+#: auth/views/registration.py:116
+msgid "Recover lost password"
+msgstr ""
+
+#: auth/views/registration.py:133
 #, python-format
 msgid ""
 "Your didn't provide a token or it is no longer valid. <a "
 "href=\"%s\">Request password recovery</a> again please."
+msgstr ""
+
+#: auth/views/registration.py:139
+msgid "Reset password"
 msgstr ""
 
 #: catalog/forms.py:10 catalog/forms.py:18
@@ -318,7 +332,7 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: catalog/forms.py:23 catalog/templates/catalog/filtered_records.html:36
+#: catalog/forms.py:23 catalog/templates/catalog/filtered_records.html:22
 msgid "Tags"
 msgstr ""
 
@@ -326,18 +340,47 @@ msgstr ""
 msgid "Atachment"
 msgstr ""
 
-#: catalog/views.py:138
+#: catalog/views.py:25
+msgid "Create category"
+msgstr ""
+
+#: catalog/views.py:36 catalog/templates/catalog/list_categories.html:2
+msgid "Categories list"
+msgstr ""
+
+#: catalog/views.py:44
+msgid "Create position"
+msgstr ""
+
+#: catalog/views.py:67
+msgid "List positions"
+msgstr ""
+
+#: catalog/views.py:96
+msgid "Positions"
+msgstr ""
+
+#: catalog/views.py:109
+msgid "Selected"
+msgstr ""
+
+#: catalog/views.py:144
+#, python-format
+msgid "With tag \"%(tag)s\""
+msgstr ""
+
+#: catalog/views.py:157
 #, python-format
 msgid "Records for tag: %(tag)s"
 msgstr ""
 
 #: catalog/templates/catalog/_list_records.html:9
-#: catalog/templates/catalog/filtered_records.html:55
+#: catalog/templates/catalog/filtered_records.html:41
 msgid "unmark"
 msgstr ""
 
 #: catalog/templates/catalog/_list_records.html:9
-#: catalog/templates/catalog/filtered_records.html:58
+#: catalog/templates/catalog/filtered_records.html:44
 msgid "mark"
 msgstr ""
 
@@ -354,30 +397,17 @@ msgstr ""
 msgid "Create record for category %(cat)s"
 msgstr ""
 
-#: catalog/templates/catalog/create_record.html:8
+#: catalog/templates/catalog/create_record.html:9
 msgid "All fields are required"
 msgstr ""
 
-#: catalog/templates/catalog/filtered_records.html:5
+#: catalog/templates/catalog/filtered_records.html:4
 msgid "Records"
 msgstr ""
 
-#: catalog/templates/catalog/filtered_records.html:6
+#: catalog/templates/catalog/filtered_records.html:5
 #, python-format
 msgid "<a href='%(link)s'>selected</a>"
-msgstr ""
-
-#: catalog/templates/catalog/filtered_records.html:9
-#: catalog/templates/catalog/filtered_records.html:16
-msgid "Postitions List"
-msgstr ""
-
-#: catalog/templates/catalog/filtered_records.html:17
-msgid "Tagged Positions"
-msgstr ""
-
-#: catalog/templates/catalog/list_categories.html:2
-msgid "Categories list"
 msgstr ""
 
 #: catalog/templates/catalog/list_categories.html:18
@@ -395,14 +425,6 @@ msgstr ""
 
 #: catalog/templates/catalog/selected_records.html:4
 msgid "Selected records"
-msgstr ""
-
-#: catalog/templates/catalog/selected_records.html:10
-msgid "Positions List"
-msgstr ""
-
-#: catalog/templates/catalog/selected_records.html:11
-msgid "Selected Positions"
 msgstr ""
 
 #: core/validators.py:26 lib/wtforms/validators.py:218
@@ -712,20 +734,16 @@ msgstr ""
 msgid "We couldn't find the page you requested."
 msgstr ""
 
-#: templates/base.html:20
+#: templates/base.html:21
 msgid "Manage catalog"
 msgstr ""
 
-#: templates/base.html:22
+#: templates/base.html:23
 msgid "Categories"
 msgstr ""
 
-#: templates/base.html:27
-msgid "Sign Out"
-msgstr ""
-
 #: templates/base.html:29
-msgid "Sign Up"
+msgid "Sign Out"
 msgstr ""
 
 #: templates/pagination.html:5
