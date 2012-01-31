@@ -1,6 +1,8 @@
 from google.appengine.ext import blobstore
+
 from flask import g, jsonify, request, redirect, url_for
 from flaskext.babel import gettext as _
+
 from ndb import context, tasklets
 
 from auth.decorators import login_required

@@ -20,6 +20,10 @@
       {%- for tag in record.local_tags %}
       <span class="label"><a href="{{ url_for('.tagged_records', tag=tag) }}">{{ tag }}</a></span>
       {%- endfor %}
+    </div>
+  {%- else %}
+  <div class="{{ span }}">
+    <h3>{{ _('Sorry, but there are no records found for now') }}.</h3>
   </div>
   {%- endfor %}
 {%- endmacro %}

@@ -53,7 +53,10 @@ class LocalPagedMixin(PagedMixin):
 
     @classmethod
     def paginate(cls, query=None, page_size=20):
-        q = query or cls.get_localized(g.lang)
+        if query is not None:
+            q = query.filter(cls.title_s.lang == g.lang)
+        else:
+            q = cls.get_localized(g.lang)
         return cls._paginate(q, page_size)
 
     def __getattr__(self, name):

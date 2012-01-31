@@ -23,6 +23,13 @@ indexes:
   - name: __key__
     direction: desc
 
+- kind: Record
+  properties:
+  - name: category
+  - name: title_s.lang
+  - name: __key__
+    direction: desc
+
 - kind: Tag
   properties:
   - name: lang
