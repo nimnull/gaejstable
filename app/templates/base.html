@@ -1,4 +1,4 @@
-{% from "_base_macro.html" import nav_li with context -%}
+{% from "_base_macro.html" import nav_li, breadcrumbs with context -%}
 {% from "_assets.html" import css_all, js_all -%}
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
@@ -16,12 +16,14 @@
             {{ config.SITE_TITLE }}
           </a>
           <ul class="nav secondary-nav">
+            {% if g.user.username in config.ADMINS %}
             <li class="dropdown" data-dropdown="dropdown">
             <a href="#" class="dropdown-toggle">{{ _('Manage catalog') }}</a>
               <ul class="dropdown-menu">
                 {{ nav_li('catalog.list_categories', _("Categories")) }}
               </ul>
             </li>
+            {% endif %}
             {%- if g.user %}
             {{ nav_li('auth.view_profile', _("Profile")) }}
             {{ nav_li('auth.sign_out', _("Sign Out")) }}
@@ -36,6 +38,7 @@
     <div class="content">
       {%- block content_wrapper %}
       <div class="container">
+        {{ breadcrumbs(request.endpoint) }}
         {%- block content_title %}
         <div class="page-header">
           <h1>{{ page_title|safe }} <small>{{ page_description }}</small></h1>

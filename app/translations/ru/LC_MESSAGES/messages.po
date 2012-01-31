@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GAEJStable 1.0\n"
 "Report-Msgid-Bugs-To: nimnull@gmail.com\n"
-"POT-Creation-Date: 2012-01-30 14:00+0200\n"
+"POT-Creation-Date: 2012-01-31 17:06+0200\n"
 "PO-Revision-Date: 2012-01-27 15:02+0200\n"
 "Last-Translator: Yegor Nazarkin <nimnull@gmail.com>\n"
 "Language-Team: ru <LL@li.org>\n"
@@ -127,15 +127,26 @@ msgstr "Настройки профиля"
 msgid "Chose categories for filtering"
 msgstr "Выберите интересующие категории"
 
-#: auth/templates/auth/profile_toolbar.html:3
+#: auth/templates/auth/profile_toolbar.html:4
+#: catalog/templates/catalog/filtered_records.html:8
+#: catalog/templates/catalog/filtered_records.html:15
+#: catalog/templates/catalog/selected_records.html:9
+msgid "Main"
+msgstr "Главная"
+
+#: auth/templates/auth/profile_toolbar.html:5 templates/base.html:26
+msgid "Profile"
+msgstr "Профиль"
+
+#: auth/templates/auth/profile_toolbar.html:8
 msgid "View"
 msgstr "Просмотр"
 
-#: auth/templates/auth/profile_toolbar.html:4
+#: auth/templates/auth/profile_toolbar.html:9
 msgid "Edit"
 msgstr "Редактирование"
 
-#: auth/templates/auth/profile_toolbar.html:5
+#: auth/templates/auth/profile_toolbar.html:10
 msgid "Settings"
 msgstr "Настройки"
 
@@ -348,7 +359,7 @@ msgstr "введите название позиции"
 msgid "Description"
 msgstr "Описание"
 
-#: catalog/forms.py:23 catalog/templates/catalog/filtered_records.html:22
+#: catalog/forms.py:23 catalog/templates/catalog/filtered_records.html:36
 msgid "Tags"
 msgstr "Метки"
 
@@ -362,12 +373,12 @@ msgid "Records for tag: %(tag)s"
 msgstr "Позиции с меткой &laquo;%(tag)s&raquo;"
 
 #: catalog/templates/catalog/_list_records.html:9
-#: catalog/templates/catalog/filtered_records.html:41
+#: catalog/templates/catalog/filtered_records.html:55
 msgid "unmark"
 msgstr "снять отметку"
 
 #: catalog/templates/catalog/_list_records.html:9
-#: catalog/templates/catalog/filtered_records.html:44
+#: catalog/templates/catalog/filtered_records.html:58
 msgid "mark"
 msgstr "отметить"
 
@@ -388,14 +399,23 @@ msgstr "Создать позицию в разделе %(cat)s"
 msgid "All fields are required"
 msgstr "Все поля обязательны к заполнению."
 
-#: catalog/templates/catalog/filtered_records.html:4
+#: catalog/templates/catalog/filtered_records.html:5
 msgid "Records"
 msgstr "Позиции"
 
-#: catalog/templates/catalog/filtered_records.html:5
+#: catalog/templates/catalog/filtered_records.html:6
 #, python-format
 msgid "<a href='%(link)s'>selected</a>"
 msgstr "<a href='%(link)s'>выбранные</a>"
+
+#: catalog/templates/catalog/filtered_records.html:9
+#: catalog/templates/catalog/filtered_records.html:16
+msgid "Postitions List"
+msgstr "Список позиций"
+
+#: catalog/templates/catalog/filtered_records.html:17
+msgid "Tagged Positions"
+msgstr "Позиции с тегом"
 
 #: catalog/templates/catalog/list_categories.html:2
 msgid "Categories list"
@@ -416,6 +436,14 @@ msgstr "Добавить позицию"
 
 #: catalog/templates/catalog/selected_records.html:4
 msgid "Selected records"
+msgstr "Выбранные позиции"
+
+#: catalog/templates/catalog/selected_records.html:10
+msgid "Positions List"
+msgstr "Список позиций"
+
+#: catalog/templates/catalog/selected_records.html:11
+msgid "Selected Positions"
 msgstr "Выбранные позиции"
 
 #: core/validators.py:26 lib/wtforms/validators.py:218
@@ -734,10 +762,6 @@ msgstr "Управление каталогом"
 #: templates/base.html:22
 msgid "Categories"
 msgstr "Разделы"
-
-#: templates/base.html:26
-msgid "Profile"
-msgstr "Профиль"
 
 #: templates/base.html:27
 msgid "Sign Out"

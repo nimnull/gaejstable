@@ -49,3 +49,17 @@
   </div>
   {%- endfor %}
 {%- endmacro %}
+
+{% macro breadcrumbs(endpoint) %}
+  {% if breadcrumb(endpoint) %}
+  <ul class="breadcrumb">
+  {% for title, endpoint in breadcrumb(endpoint) %}
+    {% if loop.last %}
+      <li class="active">{{ title }}</li>
+      {% else %}
+      <li><a href="{{ endpoint }}">{{ title }}</a> <span class="divider">/</span></li>
+    {% endif %}
+  {% endfor %}
+  </ul>
+  {% endif %}
+{% endmacro %}

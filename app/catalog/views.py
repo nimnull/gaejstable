@@ -6,6 +6,7 @@ from ndb import context, tasklets
 from auth.decorators import login_required
 
 from core.decorators import render_to
+from core.sitemap import sitemap
 from . import catalog
 from .forms import CategoryForm, RecordForm
 from .models import Category, Record, User2Category, User2Record, Tag
@@ -21,6 +22,9 @@ def create_category():
         return redirect(url_for('.list_categories'))
     return {'form': form}
 
+sitemap.register('catalog.create_category', _('Create category'),
+        child_of='catalog.list_categories')
+
 
 @catalog.route('/cats')
 @login_required
@@ -29,12 +33,16 @@ def list_categories():
     cats, pager = Category.paginate()
     return {'pager': pager, 'categories': cats}
 
+sitemap.register('catalog.list_categories', _('Categories list'))
+
 
 @catalog.route('/cats/<key>/records/create', methods=['GET'])
 @catalog.route('/records/create', methods=['POST'])
 @login_required
 @render_to()
 def create_record(key=None):
+    sitemap.register('catalog.create_record', _('Create position'),
+            child_of='catalog.list_records', args={'key': key})
     upload_url = blobstore.create_upload_url(url_for('.create_record'))
     form = RecordForm(len(request.form) and request.form or None,
             category=key)
@@ -56,6 +64,8 @@ def create_record(key=None):
 @render_to()
 @context.toplevel
 def list_records(key):
+    sitemap.register('catalog.list_records', _('List positions'),
+            child_of='catalog.list_categories', args={'key': key})
     category = yield Category.get_async(key)
     records, pager = Record.paginate(Record.for_category(key),
             page_size=10)
@@ -66,7 +76,7 @@ def list_records(key):
     })
 
 
-@catalog.route('/')
+@catalog.route('/records')
 @login_required
 @render_to()
 @context.toplevel
@@ -83,7 +93,10 @@ def filtered_records():
     raise tasklets.Return(response)
 
 
-@catalog.route('/selected')
+sitemap.register('catalog.filtered_records', _('Positions'))
+
+
+@catalog.route('/records/selected')
 @login_required
 @render_to()
 def selected_records():
@@ -93,7 +106,11 @@ def selected_records():
     return {'records': records, 'pager': pager}
 
 
-@catalog.route('/mark')
+sitemap.register('catalog.selected_records', _('Selected'),
+        child_of='catalog.filtered_records')
+
+
+@catalog.route('/records/mark')
 @login_required
 @context.toplevel
 def mark_record():
@@ -119,11 +136,13 @@ def mark_record():
     raise tasklets.Return(jsonify(response))
 
 
-@catalog.route('/tag/<tag>')
+@catalog.route('/tags/<tag>')
 @login_required
 @render_to('catalog/filtered_records.html')
 @context.toplevel
 def tagged_records(tag):
+    sitemap.register('catalog.tagged_records', _('With tag "%(tag)s"',
+        tag=tag), child_of='catalog.filtered_records', args={'tag': tag})
     categories = User2Category.get_for_user(user=g.user).map_async(
             lambda u2c: u2c.category)
     categories = yield categories

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2012-01-30 14:00+0200\n"
+"POT-Creation-Date: 2012-01-31 17:06+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -126,15 +126,26 @@ msgstr ""
 msgid "Chose categories for filtering"
 msgstr ""
 
-#: auth/templates/auth/profile_toolbar.html:3
+#: auth/templates/auth/profile_toolbar.html:4
+#: catalog/templates/catalog/filtered_records.html:8
+#: catalog/templates/catalog/filtered_records.html:15
+#: catalog/templates/catalog/selected_records.html:9
+msgid "Main"
+msgstr ""
+
+#: auth/templates/auth/profile_toolbar.html:5 templates/base.html:26
+msgid "Profile"
+msgstr ""
+
+#: auth/templates/auth/profile_toolbar.html:8
 msgid "View"
 msgstr ""
 
-#: auth/templates/auth/profile_toolbar.html:4
+#: auth/templates/auth/profile_toolbar.html:9
 msgid "Edit"
 msgstr ""
 
-#: auth/templates/auth/profile_toolbar.html:5
+#: auth/templates/auth/profile_toolbar.html:10
 msgid "Settings"
 msgstr ""
 
@@ -307,7 +318,7 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: catalog/forms.py:23 catalog/templates/catalog/filtered_records.html:22
+#: catalog/forms.py:23 catalog/templates/catalog/filtered_records.html:36
 msgid "Tags"
 msgstr ""
 
@@ -321,12 +332,12 @@ msgid "Records for tag: %(tag)s"
 msgstr ""
 
 #: catalog/templates/catalog/_list_records.html:9
-#: catalog/templates/catalog/filtered_records.html:41
+#: catalog/templates/catalog/filtered_records.html:55
 msgid "unmark"
 msgstr ""
 
 #: catalog/templates/catalog/_list_records.html:9
-#: catalog/templates/catalog/filtered_records.html:44
+#: catalog/templates/catalog/filtered_records.html:58
 msgid "mark"
 msgstr ""
 
@@ -347,13 +358,22 @@ msgstr ""
 msgid "All fields are required"
 msgstr ""
 
-#: catalog/templates/catalog/filtered_records.html:4
+#: catalog/templates/catalog/filtered_records.html:5
 msgid "Records"
 msgstr ""
 
-#: catalog/templates/catalog/filtered_records.html:5
+#: catalog/templates/catalog/filtered_records.html:6
 #, python-format
 msgid "<a href='%(link)s'>selected</a>"
+msgstr ""
+
+#: catalog/templates/catalog/filtered_records.html:9
+#: catalog/templates/catalog/filtered_records.html:16
+msgid "Postitions List"
+msgstr ""
+
+#: catalog/templates/catalog/filtered_records.html:17
+msgid "Tagged Positions"
 msgstr ""
 
 #: catalog/templates/catalog/list_categories.html:2
@@ -375,6 +395,14 @@ msgstr ""
 
 #: catalog/templates/catalog/selected_records.html:4
 msgid "Selected records"
+msgstr ""
+
+#: catalog/templates/catalog/selected_records.html:10
+msgid "Positions List"
+msgstr ""
+
+#: catalog/templates/catalog/selected_records.html:11
+msgid "Selected Positions"
 msgstr ""
 
 #: core/validators.py:26 lib/wtforms/validators.py:218
@@ -690,10 +718,6 @@ msgstr ""
 
 #: templates/base.html:22
 msgid "Categories"
-msgstr ""
-
-#: templates/base.html:26
-msgid "Profile"
 msgstr ""
 
 #: templates/base.html:27

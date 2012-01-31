@@ -1,14 +1,23 @@
 from google.appengine.ext import blobstore
 from google.appengine.api.blobstore import BlobNotFoundError
+
 from flask import abort, redirect, url_for, Response
+from flaskext.babel import gettext as _
+
 from auth.decorators import login_required
+
+
 from . import core
+from .sitemap import sitemap
 
 
 @core.route('/')
 @login_required
 def index():
     return redirect(url_for('catalog.filtered_records'))
+
+
+sitemap.register('core.index', _('Main'), root=True)
 
 
 @core.route('/serve/<key>')

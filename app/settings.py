@@ -1,4 +1,5 @@
 import os
+_ = lambda s: s
 
 DIRNAME = os.path.dirname(__file__)
 
@@ -32,4 +33,44 @@ DEFAULT_LANGUAGE = BABEL_DEFAULT_LOCALE
 LANGUAGES = {
         'en': 'English',
         'ru': 'Russian'
+}
+ADMINS = ['nimnull@gmail.com', 'd.fedorishev@gmail.com']
+
+SITEMAP = {
+    'core.index': {
+        'title': _('Main'),
+        'children': {
+            'catalog.list_categories': {
+                'children': {
+                    'catalog.create_category': {},
+                    'catalog.create_record': {},
+                    'catalog.list_records': {},
+                }
+            },
+            'catalog.filtered_records': {
+                'children': {
+                    'catalog.selected_records': {},
+                    'catalog.tagged_records': {},
+                }
+            },
+            'auth.profile': {
+                'children': {
+                    'auth.edit_profile': {},
+                    'auth.setup_profile': {},
+                }
+            },
+            'auth.sign_up': {
+                'children': {
+                    'auth.activate': {}
+                }
+            },
+            'auth.sign_in': {},
+            'auth.sign_out': {},
+            'auth.ask_recovery': {
+                'children': {
+                    'auth.finish_recovery': {}
+                }
+            },
+        },
+    }
 }

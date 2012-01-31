@@ -7,6 +7,7 @@ from google.appengine.api import app_identity
 from settings import SITE_TITLE
 
 from core.decorators import render_to
+from core.sitemap import sitemap
 from core import email
 
 from .. import auth
@@ -41,6 +42,9 @@ def sign_up():
     return {'form': form}
 
 
+sitemap.register('auth.sign_up', _('Sign Up'))
+
+
 @auth.route('/sign_up/activate')
 @render_to()
 def activate():
@@ -51,6 +55,10 @@ def activate():
         login(user)
         return redirect(url_for('.view_profile'))
     return {}
+
+
+sitemap.register('auth.activate', _('Activate account'),
+        child_of='auth.sign_up')
 
 
 @auth.route('/sign_in', methods=['GET', 'POST'])
@@ -73,6 +81,9 @@ def sign_in():
                         category='warning')
             return redirect(url_for('.sign_in'))
     return {'form': form}
+
+
+sitemap.register('auth.sign_in', _('Sign In'))
 
 
 @auth.route('/sign_out')
@@ -102,6 +113,9 @@ def ask_recovery():
     return {'form': form, }
 
 
+sitemap.register('auth.ask_recovery', _('Recover lost password'))
+
+
 @auth.route('/recover/finish', methods=['GET', 'POST'])
 @render_to('auth/recover_finish.html')
 def finish_recovery():
@@ -120,3 +134,6 @@ def finish_recovery():
             'href="%s">Request password recovery</a> again please.') %
             url_for('.ask_recovery'), category='warning')
     return {}
+
+
+sitemap.register('auth.finish_recovery', _('Reset password'))
