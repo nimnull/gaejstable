@@ -18,7 +18,7 @@ def view_profile():
     return {'user': g.user}
 
 
-sitemap.register('auth.profile', _('Profile'))
+sitemap.register('auth.view_profile', _('Profile'))
 
 
 @auth.route('/profile/edit', methods=['GET', 'POST'])
@@ -33,7 +33,7 @@ def edit_profile():
     return {'user': g.user, 'form': form}
 
 
-sitemap.register('auth.edit_profile', _('Edit'), child_of='auth.profile')
+sitemap.register('auth.edit_profile', _('Edit'), child_of='auth.view_profile')
 
 
 @auth.route('/profile/settings')
@@ -44,7 +44,8 @@ def setup_profile():
     return {'categories': cats, 'pager': pager}
 
 
-sitemap.register('auth.setup_profile', _('Settings'), child_of='auth.profile')
+sitemap.register('auth.setup_profile', _('Settings'),
+        child_of='auth.view_profile')
 
 
 @auth.route('/profile/toggle_cat', methods=['POST'])
