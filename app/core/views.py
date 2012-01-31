@@ -32,7 +32,13 @@ def serve(key):
         blob_info = blobstore.get(key)
     except BlobNotFoundError:
         abort(404)
-    return Response(_reader(blob_info), mimetype=blob_info.content_type)
+
+    response = Response(mimetype=blob_info.content_type, headers={
+        'content-length': blob_info.size,
+        'Content-Disposition': "attachment; filename=%s" % blob_info.filename
+        })
+    response.stream.writelines(_reader(blob_info))
+    return response
 
 
 def _reader(blob_info, chunk_size=1024):
