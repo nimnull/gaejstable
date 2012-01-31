@@ -5,14 +5,13 @@ api_version: 1
 threadsafe: yes
 
 builtins:
-- appstats: on
+# - appstats: on
 - deferred: on
-- datastore_admin: on
 - remote_api: on
 
 inbound_services:
 - warmup
-- channel_presence
+# - channel_presence
 
 error_handlers:
 - file: templates/error_handlers/default_error.html
