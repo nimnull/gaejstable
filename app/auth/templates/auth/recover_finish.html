@@ -1,16 +1,12 @@
 {%- extends "base.html" %}
 {%- from "_base_macro.html" import render_form, flash_messages %}
-{%- set page_title=_('Setup Profile') %}
-{%- set page_description = _('Chose categories for filtering') %}
-
-{%- block content %}
 {%- set page_title = _('Password recovery') %}
 {%- set page_description = _('reset your password here') %}
+
 {%- block content %}
 <div class="row">
   <div class="span4">
-    <p>{{ _('Choose new password for your account at '
-            '%(site)s')|format(site=config.SITE_TITLE) }}</p>
+    <p>{{ _('Choose new password for your account at %(site)s')|format(site=config.SITE_TITLE) }}</p>
   </div>
   <div class="span12">
     {{ flash_messages() }}

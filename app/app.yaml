@@ -1,5 +1,5 @@
 application: gaejstable
-version: 0-3a
+version: 0-4
 runtime: python27
 api_version: 1
 threadsafe: yes

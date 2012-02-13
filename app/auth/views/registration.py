@@ -131,8 +131,8 @@ def finish_recovery():
         login(user)
         return redirect(url_for('.view_profile'))
     flash(_('Your didn\'t provide a token or it is no longer valid. <a '
-            'href="%s">Request password recovery</a> again please.') %
-            url_for('.ask_recovery'), category='warning')
+            'href="%(url)s">Request password recovery</a> again please.',
+            url=url_for('.ask_recovery')), category='warning')
     return {}
 
 
