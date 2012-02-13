@@ -6,12 +6,12 @@
 {%- block content %}
 <div class="row">
   <div class="span4">
-    <p>{{ _('Choose new password for your account at %(site)s')|format(site=config.SITE_TITLE) }}</p>
+    <p>{{ _("Choose new password for your account at %(site)s", site=config.SITE_TITLE) }}</p>
   </div>
   <div class="span12">
     {{ flash_messages() }}
     {%- if form %}
-    {{ render_form(form, 'auth.recover_finish', _('Submit')) }}
+    {{ render_form(form, 'auth.finish_recovery', _('Submit')) }}
     {% endif %}
   </div>
 </div>

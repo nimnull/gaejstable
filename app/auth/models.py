@@ -74,11 +74,7 @@ class User(model.Model):
         """ creates a unique token based on user last login time and
         urlsafe encoded user key
         """
-        if self.logged_at is None:
-            ts_datetime = self.created_at
-        else:
-            self.update_login_time()
-            ts_datetime = self.logged_at
+        ts_datetime = self.logged_at or self.created_at
         ts = int(mktime(ts_datetime.timetuple()))
         base = "{}{}".format(self.key.urlsafe(), ts)
         algo, salt, pass_hash = self.password.split('$')

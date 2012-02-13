@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2012-02-01 01:16+0200\n"
+"POT-Creation-Date: 2012-02-13 18:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -155,6 +155,7 @@ msgid "Last logged in:"
 msgstr ""
 
 #: auth/templates/auth/recover_ask.html:3
+#: auth/templates/auth/recover_finish.html:3
 msgid "Password recovery"
 msgstr ""
 
@@ -176,6 +177,19 @@ msgstr ""
 
 #: auth/templates/auth/recover_ask.html:18
 msgid "Confirm"
+msgstr ""
+
+#: auth/templates/auth/recover_finish.html:4
+msgid "reset your password here"
+msgstr ""
+
+#: auth/templates/auth/recover_finish.html:9
+#, python-format
+msgid "Choose new password for your account at %(site)s"
+msgstr ""
+
+#: auth/templates/auth/recover_finish.html:14
+msgid "Submit"
 msgstr ""
 
 #: auth/templates/auth/sign_in.html:3 auth/views/registration.py:86
@@ -305,11 +319,11 @@ msgstr ""
 msgid "Recover lost password"
 msgstr ""
 
-#: auth/views/registration.py:133
+#: auth/views/registration.py:135
 #, python-format
 msgid ""
 "Your didn't provide a token or it is no longer valid. <a "
-"href=\"%s\">Request password recovery</a> again please."
+"href=\"%(url)s\">Request password recovery</a> again please."
 msgstr ""
 
 #: auth/views/registration.py:139
@@ -340,36 +354,36 @@ msgstr ""
 msgid "Atachment"
 msgstr ""
 
-#: catalog/views.py:25
+#: catalog/views.py:27
 msgid "Create category"
 msgstr ""
 
-#: catalog/views.py:36 catalog/templates/catalog/list_categories.html:2
+#: catalog/views.py:38 catalog/templates/catalog/list_categories.html:2
 msgid "Categories list"
 msgstr ""
 
-#: catalog/views.py:44
+#: catalog/views.py:46
 msgid "Create position"
 msgstr ""
 
-#: catalog/views.py:67
+#: catalog/views.py:69
 msgid "List positions"
 msgstr ""
 
-#: catalog/views.py:96
+#: catalog/views.py:98
 msgid "Positions"
 msgstr ""
 
-#: catalog/views.py:109
+#: catalog/views.py:111
 msgid "Selected"
 msgstr ""
 
-#: catalog/views.py:144
+#: catalog/views.py:146
 #, python-format
 msgid "With tag \"%(tag)s\""
 msgstr ""
 
-#: catalog/views.py:157
+#: catalog/views.py:159
 #, python-format
 msgid "Records for tag: %(tag)s"
 msgstr ""
@@ -382,6 +396,10 @@ msgstr ""
 #: catalog/templates/catalog/_list_records.html:9
 #: catalog/templates/catalog/filtered_records.html:44
 msgid "mark"
+msgstr ""
+
+#: catalog/templates/catalog/_list_records.html:26
+msgid "Sorry, but there are no records found for now"
 msgstr ""
 
 #: catalog/templates/catalog/create_category.html:3
